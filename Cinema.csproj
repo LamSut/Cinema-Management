@@ -46,14 +46,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Login.cs">
+    <Compile Include="AdminFilmsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Login.Designer.cs">
-      <DependentUpon>Login.cs</DependentUpon>
+    <Compile Include="AdminFilmsForm.Designer.cs">
+      <DependentUpon>AdminFilmsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminMainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminMainForm.Designer.cs">
+      <DependentUpon>AdminMainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AdminShowsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminShowsForm.Designer.cs">
+      <DependentUpon>AdminShowsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Database.cs" />
+    <Compile Include="LoginForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LoginForm.Designer.cs">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SeatsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SeatsForm.Designer.cs">
+      <DependentUpon>SeatsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ShowsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ShowsForm.Designer.cs">
+      <DependentUpon>ShowsForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
