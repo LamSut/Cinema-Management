@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Cinema
 {
-    public partial class Login: Form
+    public partial class AdminFilmsForm: Form
     {
-        public Login()
+        public AdminFilmsForm()
         {
             InitializeComponent();
         }
