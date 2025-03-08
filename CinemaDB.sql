@@ -15,7 +15,6 @@ GO
 USE CinemaDB;
 GO
 
--- Bảng PHIM
 CREATE TABLE Movie (
     MovieID NVARCHAR(10) PRIMARY KEY,
     Title NVARCHAR(100) NOT NULL,
@@ -29,7 +28,6 @@ CREATE TABLE Movie (
 );
 GO
 
--- Bảng PHÒNG CHIẾU
 CREATE TABLE Theater (
     TheaterID NVARCHAR(10) PRIMARY KEY,
     TheaterName NVARCHAR(50) NOT NULL,
@@ -37,7 +35,6 @@ CREATE TABLE Theater (
     TheaterType NVARCHAR(20) DEFAULT 'Standard'
 );
 
--- Bảng SUẤT CHIẾU
 CREATE TABLE Show (
     ShowID NVARCHAR(10) PRIMARY KEY,
     MovieID NVARCHAR(10) NOT NULL,
@@ -49,14 +46,12 @@ CREATE TABLE Show (
     FOREIGN KEY (TheaterID) REFERENCES Theater(TheaterID)
 );
 
--- Bảng LOẠI GHẾ
 CREATE TABLE SeatCategory (
     CategoryID NVARCHAR(10) PRIMARY KEY,
     CategoryName NVARCHAR(50) NOT NULL,
     PriceMultiplier DECIMAL(3,2) DEFAULT 1.00
 );
 
--- Bảng GHẾ NGỒI
 CREATE TABLE Seat (
     SeatID NVARCHAR(10) PRIMARY KEY,
     TheaterID NVARCHAR(10) NOT NULL,
@@ -67,7 +62,6 @@ CREATE TABLE Seat (
     FOREIGN KEY (CategoryID) REFERENCES SeatCategory(CategoryID)
 );
 
--- Bảng LOẠI GIẢM GIÁ
 CREATE TABLE Discount (
     DiscountID NVARCHAR(10) PRIMARY KEY,
     DiscountName NVARCHAR(50) NOT NULL,
@@ -75,13 +69,11 @@ CREATE TABLE Discount (
     Description NVARCHAR(200)
 );
 
--- Bảng PHƯƠNG THỨC THANH TOÁN
 CREATE TABLE PaymentMethod (
     PaymentMethodID NVARCHAR(10) PRIMARY KEY,
     MethodName NVARCHAR(50) NOT NULL
 );
 
--- Bảng KHÁCH HÀNG
 CREATE TABLE Customer (
     CustomerID NVARCHAR(10) PRIMARY KEY,
     Name NVARCHAR(100) NOT NULL,
@@ -90,7 +82,6 @@ CREATE TABLE Customer (
     RegistrationDate DATE DEFAULT GETDATE()
 );
 
--- Bảng ĐẶT VÉ
 CREATE TABLE Booking (
     BookingID NVARCHAR(15) PRIMARY KEY,
     ShowID NVARCHAR(10) NOT NULL,
@@ -106,7 +97,6 @@ CREATE TABLE Booking (
     FOREIGN KEY (PaymentMethodID) REFERENCES PaymentMethod(PaymentMethodID)
 );
 
--- Bảng ĐẶT GHẾ
 CREATE TABLE SeatBooking (
     BookingID NVARCHAR(15) NOT NULL,
     SeatID NVARCHAR(10) NOT NULL,
@@ -114,6 +104,13 @@ CREATE TABLE SeatBooking (
     PRIMARY KEY (BookingID, SeatID),
     FOREIGN KEY (BookingID) REFERENCES Booking(BookingID),
     FOREIGN KEY (SeatID) REFERENCES Seat(SeatID)
+);
+
+CREATE TABLE Employee (
+    EmployeeID NVARCHAR(50) PRIMARY KEY,
+    Password NVARCHAR(255) NOT NULL,
+    FullName NVARCHAR(255) NOT NULL,
+    Role BIT NOT NULL -- 0: nhân viên, 1: admin
 );
 
 INSERT INTO Movie (MovieID, Title, Genre, Duration, Description, Director, ReleaseDate, PosterURL, Status)
@@ -193,6 +190,15 @@ VALUES
 ('PM006', N'Cinema Points');
 
 
+INSERT INTO Employee (EmployeeID, Password, FullName, Role)
+VALUES
+('E001', 'password123', 'Nguyen Van A', 0),
+('E002', 'password456', 'Tran Thi B', 1),
+('E003', 'password789', 'Le Minh C', 0),
+('E004', 'admin123', 'Pham Thanh D', 1),
+('E005', 'password000', 'Hoang Thi E', 0);
+
+
 -- Thêm dữ liệu mẫu cho Customer
 INSERT INTO Customer (CustomerID, Name, Phone, Email, RegistrationDate)
 VALUES 
@@ -211,10 +217,8 @@ VALUES
 -- Hàng A (Premium)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('A01', 'T001', 'A', 1, 'SC002'),
 ('A02', 'T001', 'A', 2, 'SC002'),
--- Phân khu giữa
 ('A03', 'T001', 'A', 3, 'SC002'),
 ('A04', 'T001', 'A', 4, 'SC002'),
 ('A05', 'T001', 'A', 5, 'SC002'),
@@ -227,17 +231,14 @@ VALUES
 ('A12', 'T001', 'A', 12, 'SC002'),
 ('A13', 'T001', 'A', 13, 'SC002'),
 ('A14', 'T001', 'A', 14, 'SC002'),
--- Phân khu bên phải
 ('A15', 'T001', 'A', 15, 'SC002'),
 ('A16', 'T001', 'A', 16, 'SC002');
 
 -- Hàng B (Premium)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('B01', 'T001', 'B', 1, 'SC002'),
 ('B02', 'T001', 'B', 2, 'SC002'),
--- Phân khu giữa
 ('B03', 'T001', 'B', 3, 'SC002'),
 ('B04', 'T001', 'B', 4, 'SC002'),
 ('B05', 'T001', 'B', 5, 'SC002'),
@@ -250,17 +251,13 @@ VALUES
 ('B12', 'T001', 'B', 12, 'SC002'),
 ('B13', 'T001', 'B', 13, 'SC002'),
 ('B14', 'T001', 'B', 14, 'SC002'),
--- Phân khu bên phải
 ('B15', 'T001', 'B', 15, 'SC002'),
 ('B16', 'T001', 'B', 16, 'SC002');
 
--- Hàng C (Premium)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('C01', 'T001', 'C', 1, 'SC002'),
 ('C02', 'T001', 'C', 2, 'SC002'),
--- Phân khu giữa
 ('C03', 'T001', 'C', 3, 'SC002'),
 ('C04', 'T001', 'C', 4, 'SC002'),
 ('C05', 'T001', 'C', 5, 'SC002'),
@@ -273,17 +270,13 @@ VALUES
 ('C12', 'T001', 'C', 12, 'SC002'),
 ('C13', 'T001', 'C', 13, 'SC002'),
 ('C14', 'T001', 'C', 14, 'SC002'),
--- Phân khu bên phải
 ('C15', 'T001', 'C', 15, 'SC002'),
 ('C16', 'T001', 'C', 16, 'SC002');
 
--- Hàng D (Standard)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('D01', 'T001', 'D', 1, 'SC001'),
 ('D02', 'T001', 'D', 2, 'SC001'),
--- Phân khu giữa
 ('D03', 'T001', 'D', 3, 'SC001'),
 ('D04', 'T001', 'D', 4, 'SC001'),
 ('D05', 'T001', 'D', 5, 'SC001'),
@@ -296,17 +289,13 @@ VALUES
 ('D12', 'T001', 'D', 12, 'SC001'),
 ('D13', 'T001', 'D', 13, 'SC001'),
 ('D14', 'T001', 'D', 14, 'SC001'),
--- Phân khu bên phải
 ('D15', 'T001', 'D', 15, 'SC001'),
 ('D16', 'T001', 'D', 16, 'SC001');
 
--- Hàng E (Standard)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('E01', 'T001', 'E', 1, 'SC001'),
 ('E02', 'T001', 'E', 2, 'SC001'),
--- Phân khu giữa
 ('E03', 'T001', 'E', 3, 'SC001'),
 ('E04', 'T001', 'E', 4, 'SC001'),
 ('E05', 'T001', 'E', 5, 'SC001'),
@@ -319,17 +308,13 @@ VALUES
 ('E12', 'T001', 'E', 12, 'SC001'),
 ('E13', 'T001', 'E', 13, 'SC001'),
 ('E14', 'T001', 'E', 14, 'SC001'),
--- Phân khu bên phải
 ('E15', 'T001', 'E', 15, 'SC001'),
 ('E16', 'T001', 'E', 16, 'SC001');
 
--- Hàng F (Standard)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('F01', 'T001', 'F', 1, 'SC001'),
 ('F02', 'T001', 'F', 2, 'SC001'),
--- Phân khu giữa
 ('F03', 'T001', 'F', 3, 'SC001'),
 ('F04', 'T001', 'F', 4, 'SC001'),
 ('F05', 'T001', 'F', 5, 'SC001'),
@@ -342,17 +327,13 @@ VALUES
 ('F12', 'T001', 'F', 12, 'SC001'),
 ('F13', 'T001', 'F', 13, 'SC001'),
 ('F14', 'T001', 'F', 14, 'SC001'),
--- Phân khu bên phải
 ('F15', 'T001', 'F', 15, 'SC001'),
 ('F16', 'T001', 'F', 16, 'SC001');
 
--- Hàng G (Standard)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('G01', 'T001', 'G', 1, 'SC001'),
 ('G02', 'T001', 'G', 2, 'SC001'),
--- Phân khu giữa
 ('G03', 'T001', 'G', 3, 'SC001'),
 ('G04', 'T001', 'G', 4, 'SC001'),
 ('G05', 'T001', 'G', 5, 'SC001'),
@@ -365,17 +346,13 @@ VALUES
 ('G12', 'T001', 'G', 12, 'SC001'),
 ('G13', 'T001', 'G', 13, 'SC001'),
 ('G14', 'T001', 'G', 14, 'SC001'),
--- Phân khu bên phải
 ('G15', 'T001', 'G', 15, 'SC001'),
 ('G16', 'T001', 'G', 16, 'SC001');
 
--- Hàng H (Standard)
 INSERT INTO Seat (SeatID, TheaterID, SeatRow, SeatNumber, CategoryID)
 VALUES 
--- Phân khu bên trái
 ('H01', 'T001', 'H', 1, 'SC001'),
 ('H02', 'T001', 'H', 2, 'SC001'),
--- Phân khu giữa
 ('H03', 'T001', 'H', 3, 'SC001'),
 ('H04', 'T001', 'H', 4, 'SC001'),
 ('H05', 'T001', 'H', 5, 'SC001'),
@@ -388,7 +365,6 @@ VALUES
 ('H12', 'T001', 'H', 12, 'SC001'),
 ('H13', 'T001', 'H', 13, 'SC001'),
 ('H14', 'T001', 'H', 14, 'SC001'),
--- Phân khu bên phải
 ('H15', 'T001', 'H', 15, 'SC001'),
 ('H16', 'T001', 'H', 16, 'SC001');
 
@@ -435,44 +411,25 @@ GO
 -- Khởi tạo dữ liệu mẫu cho bảng SeatBooking
 INSERT INTO SeatBooking (BookingID, SeatID, Price)
 VALUES 
--- Booking 1: S001 - 2 ghế ở hàng A - Premium
 ('B20250310001', 'A03', 10.00),
 ('B20250310001', 'A04', 10.00),
-
--- Booking 2: S002 - 2 ghế ở hàng B - Premium
 ('B20250310002', 'B05', 12.50),
 ('B20250310002', 'B06', 12.50),
-
--- Booking 3: S003 - 2 ghế ở hàng C - Premium
 ('B20250310003', 'C07', 15.00),
 ('B20250310003', 'C08', 15.00),
-
--- Booking 4: S004 - 2 ghế ở hàng D - Standard
 ('B20250310004', 'D09', 10.00),
 ('B20250310004', 'D10', 10.00),
-
--- Booking 5: S005 - 3 ghế ở hàng E - Standard
 ('B20250310005', 'E03', 12.50),
 ('B20250310005', 'E04', 12.50),
 ('B20250310005', 'E05', 12.50),
-
--- Booking 6: S006 - 1 ghế ở hàng F - Standard
 ('B20250310006', 'F11', 15.00),
-
--- Booking 7: S007 - 2 ghế ở hàng A - Premium
 ('B20250310007', 'A12', 15.00),
 ('B20250310007', 'A13', 15.00),
-
--- Booking 8: S008 - 2 ghế ở hàng B - Premium
 ('B20250310008', 'B14', 17.50),
 ('B20250310008', 'B15', 17.50),
-
--- Booking 9: S009 - 3 ghế ở hàng C - Premium
 ('B20250310009', 'C04', 20.00),
 ('B20250310009', 'C05', 20.00),
 ('B20250310009', 'C06', 20.00),
-
--- Booking 10: S010 - 3 ghế ở hàng D - Standard
 ('B20250310010', 'D03', 18.00),
 ('B20250310010', 'D04', 18.00),
 ('B20250310010', 'D05', 18.00);
@@ -491,23 +448,14 @@ GO
 -- Thêm ghế cho các booking mới
 INSERT INTO SeatBooking (BookingID, SeatID, Price)
 VALUES 
--- Booking B20250311001: S012 - 2 ghế ở hàng G - Standard
 ('B20250311001', 'G01', 22.00),
 ('B20250311001', 'G02', 22.00),
-
--- Booking B20250311002: S014 - 2 ghế ở hàng F - Standard
 ('B20250311002', 'F15', 12.50),
 ('B20250311002', 'F16', 12.50),
-
--- Booking B20250311003: S015 - 2 ghế ở hàng B - Premium
 ('B20250311003', 'B01', 15.00),
 ('B20250311003', 'B02', 15.00),
-
--- Booking B20250311004: S016 - 2 ghế ở hàng C - Premium
 ('B20250311004', 'C09', 15.00),
 ('B20250311004', 'C10', 15.00),
-
--- Booking B20250311005: S018 - 2 ghế ở hàng D - Standard
 ('B20250311005', 'D11', 20.00),
 ('B20250311005', 'D12', 20.00);
 GO
@@ -536,14 +484,9 @@ GO
 -- Thêm ghế cho các đơn đặt vé đã hủy/hoàn thành
 INSERT INTO SeatBooking (BookingID, SeatID, Price)
 VALUES 
--- Booking B20250312001: S001 - 1 ghế đã hủy
 ('B20250312001', 'A01', 10.00),
-
--- Booking B20250312002: S003 - 2 ghế đã hoàn thành
 ('B20250312002', 'E13', 15.00),
 ('B20250312002', 'E14', 15.00),
-
--- Booking B20250312003: S005 - 3 ghế đã hoàn thành
 ('B20250312003', 'B08', 12.50),
 ('B20250312003', 'B09', 12.50),
 ('B20250312003', 'B10', 12.50);
@@ -560,13 +503,10 @@ WHERE BookingID IN ('B20250312001', 'B20250312002', 'B20250312003');
 GO
 
 
--- Check the number of Bookings created
 SELECT 'Total Bookings: ' + CAST(COUNT(*) AS NVARCHAR) AS BookingCount FROM Booking;
 
--- Check the number of seats booked
 SELECT 'Total Seats Booked: ' + CAST(COUNT(*) AS NVARCHAR) AS SeatCount FROM SeatBooking;
 
--- Check if the stored procedure already exists and drop it if needed
 IF EXISTS (SELECT * FROM sys.objects WHERE type = 'P' AND name = 'Book_Seat')
     DROP PROCEDURE Book_Seat
 GO
@@ -578,23 +518,19 @@ CREATE PROCEDURE Book_Seat
     @Price DECIMAL(10,2)
 AS
 BEGIN
-    -- Check if the seat is already booked
     DECLARE @ShowID NVARCHAR(10)
     SELECT @ShowID = ShowID FROM Booking WHERE BookingID = @BookingID
     
-    -- Check if the seat is already booked for this showtime
     IF EXISTS (
         SELECT 1 FROM SeatBooking sb
         JOIN Booking b ON sb.BookingID = b.BookingID
         WHERE b.ShowID = @ShowID AND sb.SeatID = @SeatID AND b.Status = 'Active'
     )
     BEGIN
-        -- Seat is already booked, return error
         RETURN -1
     END
     ELSE
     BEGIN
-        -- Seat is available, proceed with booking
         INSERT INTO SeatBooking (BookingID, SeatID, Price)
         VALUES (@BookingID, @SeatID, @Price)
         RETURN 0
@@ -602,7 +538,6 @@ BEGIN
 END
 GO
 
--- Check if view already exists and drop it if needed
 IF EXISTS (SELECT * FROM sys.views WHERE name = 'vw_ShowDetails')
     DROP VIEW vw_ShowDetails
 GO
@@ -626,7 +561,6 @@ JOIN Movie m ON s.MovieID = m.MovieID
 JOIN Theater t ON s.TheaterID = t.TheaterID;
 GO
 
--- Check if view already exists and drop it if needed
 IF EXISTS (SELECT * FROM sys.views WHERE name = 'vw_BookingDetails')
     DROP VIEW vw_BookingDetails
 GO
@@ -665,7 +599,6 @@ GROUP BY
     b.TotalAmount, b.Status;
 GO
 
--- Check if view already exists and drop it if needed
 IF EXISTS (SELECT * FROM sys.views WHERE name = 'vw_BookedSeats')
     DROP VIEW vw_BookedSeats
 GO
