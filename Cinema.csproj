@@ -106,8 +106,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="ShowsForm.resx">
-      <DependentUpon>ShowsForm.cs</DependentUpon>
+    <EmbeddedResource Include="SeatsForm.resx">
+      <DependentUpon>SeatsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
