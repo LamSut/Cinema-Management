@@ -85,6 +85,15 @@
     <Compile Include="ShowsForm.Designer.cs">
       <DependentUpon>ShowsForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminFilmsForm.resx">
+      <DependentUpon>AdminFilmsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminMainForm.resx">
+      <DependentUpon>AdminMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminShowsForm.resx">
+      <DependentUpon>AdminShowsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
