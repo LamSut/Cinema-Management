@@ -9,6 +9,12 @@ GO
 USE CinemaDB;
 GO
 
+SELECT * FROM Employee;
+SELECT * FROM Booking;
+SELECT * FROM Movie;
+SELECT * FROM Show;
+SELECT * FROM SeatBooking;
+
 -- NHÂN VIÊN
 CREATE TABLE Employee (
     EmployeeID NVARCHAR(50) PRIMARY KEY,
