@@ -1,17 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cinema
 {
-    public partial class LoginForm: Form
+    public partial class LoginForm : Form
     {
         public LoginForm()
         {
@@ -19,20 +13,26 @@ namespace Cinema
         }
 
         private string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=CinemaDB;Trusted_Connection=True;";
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string empID = txtEmpID.Text.Trim();
             string password = txtPass.Text.Trim();
 
-            if (AuthenticateUser(empID, password))
+            int role = GetUserRole(empID, password);
+
+            if (role == 0)
             {
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                // Open Show form
                 ShowsForm showForm = new ShowsForm();
                 showForm.Show();
-
-                // Hide the login window
+                this.Hide();
+            }
+            else if (role == 1)
+            {
+                MessageBox.Show("Admin login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                AdminMainForm adminForm = new AdminMainForm();
+                adminForm.Show();
                 this.Hide();
             }
             else
@@ -41,11 +41,11 @@ namespace Cinema
             }
         }
 
-        private bool AuthenticateUser(string empID, string password)
+        private int GetUserRole(string empID, string password)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                string query = "SELECT COUNT(*) FROM Employee WHERE EmployeeID = @EmployeeID AND Password = @Password";
+                string query = "SELECT Role FROM Employee WHERE EmployeeID = @EmployeeID AND Password = @Password";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -53,16 +53,16 @@ namespace Cinema
                     cmd.Parameters.Add("@Password", SqlDbType.VarChar, 50).Value = password;
 
                     conn.Open();
-                    int count = Convert.ToInt32(cmd.ExecuteScalar());
+                    object result = cmd.ExecuteScalar();
 
-                    return count > 0;
+                    return result != null ? Convert.ToInt32(result) : -1;
                 }
             }
         }
+
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
-
     }
 }
