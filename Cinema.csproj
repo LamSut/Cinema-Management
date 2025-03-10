@@ -79,21 +79,15 @@
     <Compile Include="SeatsForm.Designer.cs">
       <DependentUpon>SeatsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ShowsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ShowsForm.Designer.cs">
-      <DependentUpon>ShowsForm.cs</DependentUpon>
-    </Compile>
     <EmbeddedResource Include="AdminFilmsForm.resx">
-       <DependentUpon>AdminFilmsForm.cs</DependentUpon>
-     </EmbeddedResource>
-     <EmbeddedResource Include="AdminMainForm.resx">
-       <DependentUpon>AdminMainForm.cs</DependentUpon>
-     </EmbeddedResource>
-     <EmbeddedResource Include="AdminShowsForm.resx">
-       <DependentUpon>AdminShowsForm.cs</DependentUpon>
-     </EmbeddedResource>
+      <DependentUpon>AdminFilmsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminMainForm.resx">
+      <DependentUpon>AdminMainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AdminShowsForm.resx">
+      <DependentUpon>AdminShowsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -109,9 +103,6 @@
     </Compile>
     <EmbeddedResource Include="SeatsForm.resx">
       <DependentUpon>SeatsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ShowsForm.resx">
-      <DependentUpon>ShowsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\ShowsForm.datasource" />
     <None Include="Properties\Settings.settings">

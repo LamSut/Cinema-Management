@@ -24,8 +24,10 @@ namespace Cinema
             if (role == 0)
             {
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowsForm showForm = new ShowsForm();
-                showForm.Show();
+                //ShowsForm showForm = new ShowsForm();
+                SeatsForm seatsForm = new SeatsForm();
+                //showForm.Show();
+                seatsForm.Show();
                 this.Hide();
             }
             else if (role == 1)
