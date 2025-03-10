@@ -9,7 +9,6 @@ BEGIN
 END
 GO
 
--- Create the new database
 CREATE DATABASE CinemaDB;
 GO
 USE CinemaDB;
@@ -116,23 +115,14 @@ CREATE TABLE Employee (
 INSERT INTO Movie (MovieID, Title, Genre, Duration, Description, Director, ReleaseDate, PosterURL, Status)
 VALUES 
 ('M001', N'Inception', N'Science Fiction, Action', 148, N'A thief who steals corporate secrets through dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.', N'Christopher Nolan', '2010-07-16', 'https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg', 'Active'),
-
 ('M002', N'Avatar: The Way of Water', N'Adventure, Sci-Fi', 192, N'Jake Sully lives with his newfound family formed on the extrasolar moon Pandora. Once a familiar threat returns to finish what was previously started, Jake must work with Neytiri and the army of the Na''vi race to protect their home.', N'James Cameron', '2022-12-16', 'https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg', 'Active'),
-
 ('M003', N'The Batman', N'Action, Crime, Drama', 176, N'When the Riddler, a sadistic serial killer, begins murdering key political figures in Gotham, Batman is forced to investigate the city''s hidden corruption and question his family''s involvement.', N'Matt Reeves', '2022-03-04', 'https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg', 'Active'),
-
 ('M004', N'Interstellar', N'Adventure, Drama, Sci-Fi', 169, N'A team of explorers travel through a wormhole in space in an attempt to ensure humanity''s survival.', N'Christopher Nolan', '2014-11-07', 'https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg', 'Active'),
-
 ('M005', N'John Wick: Chapter 4', N'Action, Crime, Thriller', 169, N'John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, he must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.', N'Chad Stahelski', '2023-03-24', 'https://image.tmdb.org/t/p/w500/vZloFAK7NmvMGKE7VkF5UHaz0I.jpg', 'Active'),
-
 ('M006', N'Everything Everywhere All at Once', N'Adventure, Comedy, Sci-Fi', 139, N'An aging Chinese immigrant is swept up in an insane adventure, where she alone can save the world by exploring other universes connecting with the lives she could have led.', N'Daniel Kwan, Daniel Scheinert', '2022-03-25', 'https://image.tmdb.org/t/p/w500/w3LxiVYdWWRvEVdn5RYq6jIqkb1.jpg', 'Active'),
-
 ('M007', N'Parasite', N'Drama, Thriller', 132, N'Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan.', N'Bong Joon Ho', '2019-05-30', 'https://image.tmdb.org/t/p/w500/7IiTTgloJzvGI1TAYymCfbfl3vT.jpg', 'Active'),
-
 ('M008', N'Top Gun: Maverick', N'Action, Drama', 130, N'After more than thirty years of service as one of the Navy''s top aviators, Pete Mitchell is where he belongs, pushing the envelope as a courageous test pilot and dodging the advancement in rank that would ground him.', N'Joseph Kosinski', '2022-05-27', 'https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg', 'Active'),
-
 ('M009', N'Spider-Man: No Way Home', N'Action, Adventure, Fantasy', 148, N'With Spider-Man''s identity now revealed, Peter asks Doctor Strange for help. When a spell goes wrong, dangerous foes from other worlds start to appear, forcing Peter to discover what it truly means to be Spider-Man.', N'Jon Watts', '2021-12-17', 'https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg', 'Active'),
-
 ('M010', N'The Shawshank Redemption', N'Drama', 142, N'Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.', N'Frank Darabont', '1994-10-14', 'https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg', 'Active');
 
 
@@ -192,11 +182,11 @@ VALUES
 
 INSERT INTO Employee (EmployeeID, Password, FullName, Role)
 VALUES
-('E001', 'password123', 'Nguyen Van A', 0),
-('E002', 'password456', 'Tran Thi B', 1),
-('E003', 'password789', 'Le Minh C', 0),
-('E004', 'admin123', 'Pham Thanh D', 1),
-('E005', 'password000', 'Hoang Thi E', 0);
+('E001', '001', 'Nguyen Van A', 0),
+('E002', '002', 'Tran Thi B', 1),
+('E003', '003', 'Le Minh C', 0),
+('E004', '004', 'Pham Thanh D', 1),
+('E005', '005', 'Hoang Thi E', 0);
 
 
 -- Thêm dữ liệu mẫu cho Customer
