@@ -252,10 +252,6 @@ namespace Cinema
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
         private void btnEditFilm_Click(object sender, EventArgs e)
         {
         }

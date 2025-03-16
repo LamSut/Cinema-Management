@@ -282,6 +282,25 @@ namespace Cinema
                 }
             }
         }
-       
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void dateTimePickerShowTime_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPrice_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxMovieID_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

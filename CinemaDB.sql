@@ -1,7 +1,7 @@
 ﻿USE master;
 GO
 
--- Close all existing connections to the database
+-- Đóng kết nối nếu có
 IF EXISTS (SELECT name FROM sys.databases WHERE name = 'CinemaDB')
 BEGIN
     ALTER DATABASE CinemaDB SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
