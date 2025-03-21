@@ -79,6 +79,12 @@
     <Compile Include="SeatsForm.Designer.cs">
       <DependentUpon>SeatsForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TicketForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TicketForm.Designer.cs">
+      <DependentUpon>TicketForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="AdminFilmsForm.resx">
       <DependentUpon>AdminFilmsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -103,6 +109,9 @@
     </Compile>
     <EmbeddedResource Include="SeatsForm.resx">
       <DependentUpon>SeatsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TicketForm.resx">
+      <DependentUpon>TicketForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\DataSources\ShowsForm.datasource" />
     <None Include="Properties\Settings.settings">
