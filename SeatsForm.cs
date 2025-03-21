@@ -1293,8 +1293,8 @@ namespace Cinema
                         string discountID = "D00" + (cboDiscount.SelectedIndex + 1);
 
                         string insertBookingQuery = @"
-                   INSERT INTO Booking (BookingID, ShowID, BookingTime, DiscountID, PaymentMethodID, TotalAmount)
-                   VALUES (@BookingID, @ShowID, @BookingTime, @DiscountID, @PaymentMethodID, @TotalAmount)";
+           INSERT INTO Booking (BookingID, ShowID, BookingTime, DiscountID, PaymentMethodID, TotalAmount)
+           VALUES (@BookingID, @ShowID, @BookingTime, @DiscountID, @PaymentMethodID, @TotalAmount)";
 
                         SqlCommand cmdBooking = new SqlCommand(insertBookingQuery, conn, transaction);
                         cmdBooking.Parameters.AddWithValue("@BookingID", bookingID);
@@ -1326,8 +1326,8 @@ namespace Cinema
 
                         transaction.Commit();
 
-                        MessageBox.Show("Booking successful! Your booking ID is: " + bookingID,
-                            "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        TicketForm ticketForm = new TicketForm(bookingID);
+                        ticketForm.ShowDialog();
 
                         ResetSelectedSeats();
                         LoadBookedSeats(selectedShowID);
@@ -1356,6 +1356,7 @@ namespace Cinema
                 ResetSelectedSeats();
             }
         }
+
 
         public class WebClientWithTimeout : WebClient
         {
