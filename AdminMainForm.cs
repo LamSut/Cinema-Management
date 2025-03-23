@@ -15,6 +15,28 @@ namespace Cinema
             InitializeComponent();
             this.Size = new Size(1100, 600);
             this.IsMdiContainer = true;
+            this.Load += AdminMainForm_Load; 
+        }
+
+        private void AdminMainForm_Load(object sender, EventArgs e)
+        {
+            ShowDashboardForm();
+        }
+
+        private void ShowDashboardForm()
+        {
+            if (dashboardForm == null || dashboardForm.IsDisposed)
+            {
+                dashboardForm = new AdminDashboardForm();
+                dashboardForm.FormClosed += DashboardForm_FormClosed;
+                dashboardForm.MdiParent = this;
+                dashboardForm.Dock = DockStyle.Fill;
+                dashboardForm.Show();
+            }
+            else
+            {
+                dashboardForm.Activate();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -66,18 +88,7 @@ namespace Cinema
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            if (dashboardForm == null || dashboardForm.IsDisposed)
-            {
-                dashboardForm = new AdminDashboardForm();
-                dashboardForm.FormClosed += DashboardForm_FormClosed;
-                dashboardForm.MdiParent = this;
-                dashboardForm.Dock = DockStyle.Fill;
-                dashboardForm.Show();
-            }
-            else
-            {
-                dashboardForm.Activate();
-            }
+            ShowDashboardForm();
         }
 
         private void DashboardForm_FormClosed(object sender, FormClosedEventArgs e)

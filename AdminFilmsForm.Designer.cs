@@ -60,7 +60,7 @@
             // 
             this.btnAddMovie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
             this.btnAddMovie.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddMovie.Location = new System.Drawing.Point(31, 725);
+            this.btnAddMovie.Location = new System.Drawing.Point(29, 735);
             this.btnAddMovie.Name = "btnAddMovie";
             this.btnAddMovie.Size = new System.Drawing.Size(220, 60);
             this.btnAddMovie.TabIndex = 1;
@@ -127,7 +127,7 @@
             // txtGenre
             // 
             this.txtGenre.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.txtGenre.Location = new System.Drawing.Point(11, 515);
+            this.txtGenre.Location = new System.Drawing.Point(11, 528);
             this.txtGenre.Name = "txtGenre";
             this.txtGenre.Size = new System.Drawing.Size(164, 39);
             this.txtGenre.TabIndex = 8;
@@ -157,7 +157,7 @@
             // txtDescription
             // 
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.txtDescription.Location = new System.Drawing.Point(11, 577);
+            this.txtDescription.Location = new System.Drawing.Point(11, 596);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(286, 103);

@@ -38,6 +38,7 @@
             this.comboBoxMovieID = new System.Windows.Forms.ComboBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtShowID = new System.Windows.Forms.TextBox();
+            this.comboBoxTheaterID = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShows)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             // 
             this.btnAddShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
             this.btnAddShow.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddShow.Location = new System.Drawing.Point(22, 549);
+            this.btnAddShow.Location = new System.Drawing.Point(22, 626);
             this.btnAddShow.Name = "btnAddShow";
             this.btnAddShow.Size = new System.Drawing.Size(220, 54);
             this.btnAddShow.TabIndex = 2;
@@ -102,7 +103,7 @@
             // dateTimePickerShowTime
             // 
             this.dateTimePickerShowTime.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerShowTime.Location = new System.Drawing.Point(22, 378);
+            this.dateTimePickerShowTime.Location = new System.Drawing.Point(22, 459);
             this.dateTimePickerShowTime.Name = "dateTimePickerShowTime";
             this.dateTimePickerShowTime.Size = new System.Drawing.Size(368, 33);
             this.dateTimePickerShowTime.TabIndex = 7;
@@ -122,7 +123,7 @@
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(22, 465);
+            this.txtPrice.Location = new System.Drawing.Point(22, 549);
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(290, 39);
             this.txtPrice.TabIndex = 9;
@@ -139,12 +140,22 @@
             this.txtShowID.Size = new System.Drawing.Size(218, 39);
             this.txtShowID.TabIndex = 10;
             // 
+            // comboBoxTheaterID
+            // 
+            this.comboBoxTheaterID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.comboBoxTheaterID.FormattingEnabled = true;
+            this.comboBoxTheaterID.Location = new System.Drawing.Point(22, 389);
+            this.comboBoxTheaterID.Name = "comboBoxTheaterID";
+            this.comboBoxTheaterID.Size = new System.Drawing.Size(290, 40);
+            this.comboBoxTheaterID.TabIndex = 11;
+            // 
             // AdminShowsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
             this.ClientSize = new System.Drawing.Size(1369, 780);
+            this.Controls.Add(this.comboBoxTheaterID);
             this.Controls.Add(this.txtShowID);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.comboBoxMovieID);
@@ -174,5 +185,6 @@
         private System.Windows.Forms.ComboBox comboBoxMovieID;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtShowID;
+        private System.Windows.Forms.ComboBox comboBoxTheaterID;
     }
 }
