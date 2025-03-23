@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,13 @@ namespace Cinema
                 try
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Show";
+                    //Title,Genre,Duration,TheaterName, ShowTime,Price, 
+                    string query = @"
+                        SELECT s.ShowID, m.MovieId, m.Title,m.Genre, m.Duration, t.TheaterName, s.ShowTime, s.Price, s.Status 
+                        FROM Show s
+                        JOIN Movie m ON s.MovieID = m.MovieID
+                        JOIN Theater t ON s.TheaterID = t.TheaterID";
+
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -74,12 +81,13 @@ namespace Cinema
                     dataGridViewShows.DefaultCellStyle.SelectionForeColor = Color.White;
 
                     // Chỉnh tên cột hiển thị
-                    dataGridViewShows.Columns["MovieID"].HeaderText = "Title";
+                    //dataGridViewShows.Columns["MovieID"].HeaderText = "Title";
                     dataGridViewShows.Columns["Title"].HeaderText = "Tên Phim";
                     dataGridViewShows.Columns["Genre"].HeaderText = "Genre";
 
                     // Ẩn cột ID không cần thiết
                     dataGridViewShows.Columns["MovieID"].Visible = false;
+                    dataGridViewShows.Columns["ShowID"].Visible = false;
 
                     // Cho phép sắp xếp cột
                     foreach (DataGridViewColumn col in dataGridViewShows.Columns)
@@ -98,6 +106,7 @@ namespace Cinema
         {
             dataGridViewShows.CellEndEdit += dataGridViewShows_CellEndEdit;
             LoadMovieIDs();
+            LoadTheaterIDs();
             GenerateNewShowID();
         }
 
@@ -106,21 +115,43 @@ namespace Cinema
             try
             {
                 string columnName = dataGridViewShows.Columns[e.ColumnIndex].Name;
-                if (columnName == "ShowID") return; // Không cho phép chỉnh sửa MovieID
+                if (columnName == "ShowID") return; 
 
-                string newValue = dataGridViewShows.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-                string showID = dataGridViewShows.Rows[e.RowIndex].Cells["ShowID"].Value.ToString();
+                string newValue = dataGridViewShows.Rows[e.RowIndex].Cells[e.ColumnIndex].Value?.ToString();
+                string showID = dataGridViewShows.Rows[e.RowIndex].Cells["ShowID"].Value?.ToString();
+
+                if (string.IsNullOrWhiteSpace(newValue) || string.IsNullOrWhiteSpace(showID))
+                {
+                    MessageBox.Show("Invalid data!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
-                    string query = $"UPDATE Show SET {columnName} = @Value WHERE showID = @ShowID";
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+
+                    SqlCommand cmd = new SqlCommand($"UPDATE Show SET {columnName} = @Value WHERE ShowID = @ShowID", conn);
+
+                    // Kiểm tra kiểu dữ liệu cho Price
+                    if (columnName == "Price")
+                    {
+                        if (decimal.TryParse(newValue, out decimal price))
+                        {
+                            cmd.Parameters.AddWithValue("@Value", price);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please enter a valid decimal number for Price.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+                    else
                     {
                         cmd.Parameters.AddWithValue("@Value", newValue);
-                        cmd.Parameters.AddWithValue("@ShowID", showID);
-                        cmd.ExecuteNonQuery();
                     }
+
+                    cmd.Parameters.AddWithValue("@ShowID", showID);
+                    cmd.ExecuteNonQuery();
                 }
 
                 MessageBox.Show("Show updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -130,6 +161,8 @@ namespace Cinema
                 MessageBox.Show("Error: " + ex.Message, "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
@@ -214,6 +247,28 @@ namespace Cinema
                 }
             }
         }
+        private void LoadTheaterIDs()
+        {
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT TheaterID FROM Theater";
+                    SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+
+                    comboBoxTheaterID.DataSource = dt;
+                    comboBoxTheaterID.DisplayMember = "TheaterID";
+                    comboBoxTheaterID.ValueMember = "TheaterID";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
 
         private void GenerateNewShowID()
         {
@@ -239,49 +294,61 @@ namespace Cinema
 
         private void btnAddFilm_Click(object sender, EventArgs e)
         {
+            string showID = txtShowID.Text.Trim();
+            string movieID = comboBoxMovieID.SelectedValue?.ToString();
+            string theaterID = comboBoxTheaterID.SelectedValue?.ToString();
+            DateTime showTime = dateTimePickerShowTime.Value;
+            string priceText = txtPrice.Text.Trim();
+            decimal price;
+
+            // Kiểm tra dữ liệu hợp lệ
+            //if (string.IsNullOrWhiteSpace(showID) || string.IsNullOrWhiteSpace(movieID) ||
+            //    string.IsNullOrWhiteSpace(theaterID) || string.IsNullOrWhiteSpace(priceText))
+            //{
+            //    MessageBox.Show("Please fill in all required fields!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //    return;
+            //}
+
+            if (!decimal.TryParse(priceText, out price))
             {
-                string showID = txtShowID.Text;
-                string movieID = comboBoxMovieID.SelectedValue.ToString();
-                string showTime = dateTimePickerShowTime.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                string price = txtPrice.Text;
+                MessageBox.Show("Please enter a valid price!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
-                if (string.IsNullOrWhiteSpace(price))
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
                 {
-                    MessageBox.Show("Please enter a price!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
+                    conn.Open();
+                    string query = @"INSERT INTO Show (ShowID, MovieID, TheaterID, ShowTime, Price, Status) 
+                             VALUES (@ShowID, @MovieID, @TheaterID, @ShowTime, @Price, @Status)";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@ShowID", showID);
+                    cmd.Parameters.AddWithValue("@MovieID", movieID);
+                    cmd.Parameters.AddWithValue("@TheaterID", theaterID);
+                    cmd.Parameters.AddWithValue("@ShowTime", showTime);
+                    cmd.Parameters.AddWithValue("@Price", price);
+                    cmd.Parameters.AddWithValue("@Status", "Active");  
+
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Show added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadShowData();  
+                        GenerateNewShowID();  
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed to add show.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                catch (Exception ex)
                 {
-                    try
-                    {
-                        conn.Open();
-                        string query = "INSERT INTO Show (ShowID, MovieID, ShowTime, Price) VALUES (@ShowID, @MovieID, @ShowTime, @Price)";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-                        cmd.Parameters.AddWithValue("@ShowID", showID);
-                        cmd.Parameters.AddWithValue("@MovieID", movieID);
-                        cmd.Parameters.AddWithValue("@ShowTime", showTime);
-                        cmd.Parameters.AddWithValue("@Price", price);
-
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        if (rowsAffected > 0)
-                        {
-                            MessageBox.Show("Show added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            LoadShowData(); // Refresh bảng DataGridView
-                            GenerateNewShowID(); // Tạo ShowID mới
-                        }
-                        else
-                        {
-                            MessageBox.Show("Failed to add show.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {

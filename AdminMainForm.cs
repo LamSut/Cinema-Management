@@ -1,52 +1,54 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cinema
 {
-    public partial class AdminMainForm: Form
+    public partial class AdminMainForm : Form
     {
         AdminFilmsForm filmsForm;
         AdminShowsForm showsForm;
-        AdminMainForm homeForm;
+        AdminDashboardForm dashboardForm;
 
         public AdminMainForm()
         {
             InitializeComponent();
+            this.Size = new Size(1100, 600);
             this.IsMdiContainer = true;
+            this.Load += AdminMainForm_Load; 
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void AdminMainForm_Load(object sender, EventArgs e)
         {
-             
+            ShowDashboardForm();
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void ShowDashboardForm()
         {
-
-        }
-
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
+            if (dashboardForm == null || dashboardForm.IsDisposed)
+            {
+                dashboardForm = new AdminDashboardForm();
+                dashboardForm.FormClosed += DashboardForm_FormClosed;
+                dashboardForm.MdiParent = this;
+                dashboardForm.Dock = DockStyle.Fill;
+                dashboardForm.Show();
+            }
+            else
+            {
+                dashboardForm.Activate();
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (filmsForm == null)
+            if (filmsForm == null || filmsForm.IsDisposed)
             {
                 filmsForm = new AdminFilmsForm();
                 filmsForm.FormClosed += FilmsForm_FormClosed;
-                filmsForm.MdiParent = this; 
+                filmsForm.MdiParent = this;
                 filmsForm.Dock = DockStyle.Fill;
                 filmsForm.Show();
-            } 
+            }
             else
             {
                 filmsForm.Activate();
@@ -60,10 +62,8 @@ namespace Cinema
 
         private void btnShow_Click(object sender, EventArgs e)
         {
-            if (showsForm == null)
+            if (showsForm == null || showsForm.IsDisposed)
             {
-              
-                //filmsForm.Close();s
                 showsForm = new AdminShowsForm();
                 showsForm.FormClosed += ShowsForm_FormClosed;
                 showsForm.MdiParent = this;
@@ -88,22 +88,12 @@ namespace Cinema
 
         private void btnDashboard_Click(object sender, EventArgs e)
         {
-            if (homeForm == null)
-            {
-                homeForm = new AdminMainForm();
-                homeForm.FormClosed += HomeForm_FormClosed;
-                homeForm.MdiParent = this;
-                homeForm.Show();
-            } 
-            else
-            {
-                homeForm.Activate();
-            }
+            ShowDashboardForm();
         }
 
-        private void HomeForm_FormClosed(object sender, FormClosedEventArgs e)
+        private void DashboardForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            homeForm = null;
+            dashboardForm = null;
         }
     }
 }
