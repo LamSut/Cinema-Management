@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -27,7 +28,13 @@ namespace Cinema
                 try
                 {
                     conn.Open();
-                    string query = "SELECT * FROM Show";
+                    //Title,Genre,Duration,TheaterName, ShowTime,Price, 
+                    string query = @"
+                        SELECT s.ShowID, m.MovieId, m.Title,m.Genre, m.Duration, t.TheaterName, s.ShowTime, s.Price, s.Status 
+                        FROM Show s
+                        JOIN Movie m ON s.MovieID = m.MovieID
+                        JOIN Theater t ON s.TheaterID = t.TheaterID";
+
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
@@ -74,12 +81,13 @@ namespace Cinema
                     dataGridViewShows.DefaultCellStyle.SelectionForeColor = Color.White;
 
                     // Chỉnh tên cột hiển thị
-                    dataGridViewShows.Columns["MovieID"].HeaderText = "Title";
+                    //dataGridViewShows.Columns["MovieID"].HeaderText = "Title";
                     dataGridViewShows.Columns["Title"].HeaderText = "Tên Phim";
                     dataGridViewShows.Columns["Genre"].HeaderText = "Genre";
 
                     // Ẩn cột ID không cần thiết
                     dataGridViewShows.Columns["MovieID"].Visible = false;
+                    dataGridViewShows.Columns["ShowID"].Visible = false;
 
                     // Cho phép sắp xếp cột
                     foreach (DataGridViewColumn col in dataGridViewShows.Columns)

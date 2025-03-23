@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AdminDashboardForm.Designer.cs">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AdminFilmsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +91,9 @@
     <Compile Include="TicketForm.Designer.cs">
       <DependentUpon>TicketForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AdminDashboardForm.resx">
+      <DependentUpon>AdminDashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AdminFilmsForm.resx">
       <DependentUpon>AdminFilmsForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,6 +115,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SeatsForm.resx">
       <DependentUpon>SeatsForm.cs</DependentUpon>
@@ -113,6 +123,7 @@
     <EmbeddedResource Include="TicketForm.resx">
       <DependentUpon>TicketForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include=".editorconfig" />
     <None Include="Properties\DataSources\ShowsForm.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -129,6 +140,10 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Properties\DataSources\placeholder_image.png" />
+    <None Include="Resources\background_manager.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

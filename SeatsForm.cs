@@ -109,7 +109,7 @@ namespace Cinema
         {
             foreach (Control ctrl in panelMovieInfo.Controls)
             {
-                if (ctrl != pictureBoxPoster)  
+                if (ctrl != pictureBoxPoster)
                 {
                     panelMovieInfo.Controls.Remove(ctrl);
                 }
@@ -442,7 +442,7 @@ namespace Cinema
                     using (WebClientWithTimeout client = new WebClientWithTimeout())
                     {
                         client.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36");
-                        client.Timeout = 10000; 
+                        client.Timeout = 10000;
 
                         byte[] data = client.DownloadData(posterURL);
                         Console.WriteLine($"Downloaded {data.Length} bytes of poster data");
@@ -605,7 +605,7 @@ namespace Cinema
             moviesTable.Rows.Add("M003", "The Batman");
             moviesTable.Rows.Add("M004", "Interstellar");
             moviesTable.Rows.Add("M005", "John Wick: Chapter 4");
-            moviesTable.Rows.Add("M007", "Parasite"); 
+            moviesTable.Rows.Add("M007", "Parasite");
 
             cboMovies.DataSource = moviesTable;
             cboMovies.DisplayMember = "Title";
@@ -706,7 +706,7 @@ namespace Cinema
                 movieDescription = "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.";
                 moviePosterURL = "https://image.tmdb.org/t/p/w500/gEU2QniE6E77NI6lCU6MxlNBvIx.jpg";
             }
-            else if (movieID == "M007") 
+            else if (movieID == "M007")
             {
                 movieTitle = "Parasite";
                 movieGenre = "Drama, Thriller";
@@ -1019,16 +1019,16 @@ namespace Cinema
             decimal discountPercent = 0;
             switch (cboDiscount.SelectedIndex)
             {
-                case 1: 
+                case 1:
                     discountPercent = 0.10m;
                     break;
-                case 2: 
+                case 2:
                     discountPercent = 0.15m;
                     break;
-                case 3: 
+                case 3:
                     discountPercent = 0.20m;
                     break;
-                default: 
+                default:
                     discountPercent = 0;
                     break;
             }
@@ -1360,7 +1360,7 @@ namespace Cinema
 
         public class WebClientWithTimeout : WebClient
         {
-            private int _timeout = 10000; 
+            private int _timeout = 10000;
 
             public int Timeout
             {
