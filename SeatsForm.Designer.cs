@@ -31,6 +31,8 @@
             this.panelHeader = new System.Windows.Forms.Panel();
             this.lblHeader = new System.Windows.Forms.Label();
             this.panelMovieSelection = new System.Windows.Forms.Panel();
+            this.lblTheater = new System.Windows.Forms.Label();
+            this.cboTheaters = new System.Windows.Forms.ComboBox();
             this.lblPriceValue = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -42,6 +44,10 @@
             this.lblScreen = new System.Windows.Forms.Label();
             this.panelSeats = new System.Windows.Forms.Panel();
             this.panelLegend = new System.Windows.Forms.Panel();
+            this.panelSeatCategories = new System.Windows.Forms.Panel();
+            this.lblSeatCategory = new System.Windows.Forms.Label();
+            this.cboSeatCategory = new System.Windows.Forms.ComboBox();
+            this.chkShowAllCategories = new System.Windows.Forms.CheckBox();
             this.panelSelectedSeats = new System.Windows.Forms.Panel();
             this.lblTotalPriceValue = new System.Windows.Forms.Label();
             this.lblTotalPrice = new System.Windows.Forms.Label();
@@ -56,6 +62,7 @@
             this.panelHeader.SuspendLayout();
             this.panelMovieSelection.SuspendLayout();
             this.panelScreen.SuspendLayout();
+            this.panelSeatCategories.SuspendLayout();
             this.panelSelectedSeats.SuspendLayout();
             this.panelButtons.SuspendLayout();
             this.panelMovieInfo.SuspendLayout();
@@ -87,6 +94,8 @@
             // panelMovieSelection
             // 
             this.panelMovieSelection.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
+            this.panelMovieSelection.Controls.Add(this.lblTheater);
+            this.panelMovieSelection.Controls.Add(this.cboTheaters);
             this.panelMovieSelection.Controls.Add(this.lblPriceValue);
             this.panelMovieSelection.Controls.Add(this.lblPrice);
             this.panelMovieSelection.Controls.Add(this.btnRefresh);
@@ -100,6 +109,31 @@
             this.panelMovieSelection.Padding = new System.Windows.Forms.Padding(20);
             this.panelMovieSelection.Size = new System.Drawing.Size(1200, 120);
             this.panelMovieSelection.TabIndex = 1;
+            // 
+            // lblTheater
+            // 
+            this.lblTheater.AutoSize = true;
+            this.lblTheater.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTheater.ForeColor = System.Drawing.Color.White;
+            this.lblTheater.Location = new System.Drawing.Point(640, 29);
+            this.lblTheater.Name = "lblTheater";
+            this.lblTheater.Size = new System.Drawing.Size(80, 32);
+            this.lblTheater.TabIndex = 7;
+            this.lblTheater.Text = "Theater:";
+            // 
+            // cboTheaters
+            // 
+            this.cboTheaters.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(50)))), ((int)(((byte)(80)))));
+            this.cboTheaters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTheaters.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboTheaters.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboTheaters.ForeColor = System.Drawing.Color.White;
+            this.cboTheaters.FormattingEnabled = true;
+            this.cboTheaters.Location = new System.Drawing.Point(730, 25);
+            this.cboTheaters.Name = "cboTheaters";
+            this.cboTheaters.Size = new System.Drawing.Size(250, 40);
+            this.cboTheaters.TabIndex = 8;
+            this.cboTheaters.SelectedIndexChanged += new System.EventHandler(this.cboTheaters_SelectedIndexChanged);
             // 
             // lblPriceValue
             // 
@@ -195,7 +229,7 @@
             this.panelScreen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(20)))), ((int)(((byte)(40)))));
             this.panelScreen.Controls.Add(this.lblScreen);
             this.panelScreen.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panelScreen.Location = new System.Drawing.Point(0, 180);
+            this.panelScreen.Location = new System.Drawing.Point(0, 220);
             this.panelScreen.Name = "panelScreen";
             this.panelScreen.Size = new System.Drawing.Size(900, 60);
             this.panelScreen.TabIndex = 2;
@@ -212,15 +246,67 @@
             this.lblScreen.Text = "SCREEN";
             this.lblScreen.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // panelSeatCategories
+            // 
+            this.panelSeatCategories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(35)))), ((int)(((byte)(65)))));
+            this.panelSeatCategories.Controls.Add(this.lblSeatCategory);
+            this.panelSeatCategories.Controls.Add(this.cboSeatCategory);
+            this.panelSeatCategories.Controls.Add(this.chkShowAllCategories);
+            this.panelSeatCategories.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panelSeatCategories.Location = new System.Drawing.Point(0, 180);
+            this.panelSeatCategories.Name = "panelSeatCategories";
+            this.panelSeatCategories.Size = new System.Drawing.Size(1200, 40);
+            this.panelSeatCategories.TabIndex = 8;
+            // 
+            // lblSeatCategory
+            // 
+            this.lblSeatCategory.AutoSize = true;
+            this.lblSeatCategory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSeatCategory.ForeColor = System.Drawing.Color.White;
+            this.lblSeatCategory.Location = new System.Drawing.Point(20, 7);
+            this.lblSeatCategory.Name = "lblSeatCategory";
+            this.lblSeatCategory.Size = new System.Drawing.Size(133, 28);
+            this.lblSeatCategory.TabIndex = 0;
+            this.lblSeatCategory.Text = "Seat Category:";
+            // 
+            // cboSeatCategory
+            // 
+            this.cboSeatCategory.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(50)))), ((int)(((byte)(80)))));
+            this.cboSeatCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboSeatCategory.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.cboSeatCategory.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cboSeatCategory.ForeColor = System.Drawing.Color.White;
+            this.cboSeatCategory.FormattingEnabled = true;
+            this.cboSeatCategory.Location = new System.Drawing.Point(160, 4);
+            this.cboSeatCategory.Name = "cboSeatCategory";
+            this.cboSeatCategory.Size = new System.Drawing.Size(240, 36);
+            this.cboSeatCategory.TabIndex = 1;
+            this.cboSeatCategory.SelectedIndexChanged += new System.EventHandler(this.cboSeatCategory_SelectedIndexChanged);
+            // 
+            // chkShowAllCategories
+            // 
+            this.chkShowAllCategories.AutoSize = true;
+            this.chkShowAllCategories.Checked = true;
+            this.chkShowAllCategories.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chkShowAllCategories.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chkShowAllCategories.ForeColor = System.Drawing.Color.White;
+            this.chkShowAllCategories.Location = new System.Drawing.Point(420, 6);
+            this.chkShowAllCategories.Name = "chkShowAllCategories";
+            this.chkShowAllCategories.Size = new System.Drawing.Size(190, 32);
+            this.chkShowAllCategories.TabIndex = 2;
+            this.chkShowAllCategories.Text = "Show All Categories";
+            this.chkShowAllCategories.UseVisualStyleBackColor = true;
+            this.chkShowAllCategories.CheckedChanged += new System.EventHandler(this.chkShowAllCategories_CheckedChanged);
+            // 
             // panelSeats
             // 
             this.panelSeats.AutoScroll = true;
             this.panelSeats.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(25)))), ((int)(((byte)(35)))), ((int)(((byte)(65)))));
             this.panelSeats.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelSeats.Location = new System.Drawing.Point(0, 240);
+            this.panelSeats.Location = new System.Drawing.Point(0, 280);
             this.panelSeats.Name = "panelSeats";
             this.panelSeats.Padding = new System.Windows.Forms.Padding(20);
-            this.panelSeats.Size = new System.Drawing.Size(900, 300);
+            this.panelSeats.Size = new System.Drawing.Size(900, 260);
             this.panelSeats.TabIndex = 3;
             // 
             // panelLegend
@@ -372,6 +458,7 @@
             this.Controls.Add(this.panelLegend);
             this.Controls.Add(this.panelSelectedSeats);
             this.Controls.Add(this.panelScreen);
+            this.Controls.Add(this.panelSeatCategories);
             this.Controls.Add(this.panelMovieInfo);
             this.Controls.Add(this.panelMovieSelection);
             this.Controls.Add(this.panelHeader);
@@ -387,6 +474,8 @@
             this.panelMovieSelection.ResumeLayout(false);
             this.panelMovieSelection.PerformLayout();
             this.panelScreen.ResumeLayout(false);
+            this.panelSeatCategories.ResumeLayout(false);
+            this.panelSeatCategories.PerformLayout();
             this.panelSelectedSeats.ResumeLayout(false);
             this.panelSelectedSeats.PerformLayout();
             this.panelButtons.ResumeLayout(false);
@@ -423,5 +512,11 @@
         private System.Windows.Forms.Panel panelMovieInfo;
         private System.Windows.Forms.Panel panelActions;
         private System.Windows.Forms.PictureBox pictureBoxPoster;
+        private System.Windows.Forms.Label lblTheater;
+        private System.Windows.Forms.ComboBox cboTheaters;
+        private System.Windows.Forms.Panel panelSeatCategories;
+        private System.Windows.Forms.Label lblSeatCategory;
+        private System.Windows.Forms.ComboBox cboSeatCategory;
+        private System.Windows.Forms.CheckBox chkShowAllCategories;
     }
 }
