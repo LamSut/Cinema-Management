@@ -50,9 +50,9 @@ namespace Cinema
         private readonly Color selectedSeatColor = Color.FromArgb(240, 200, 70);
         private readonly Color bookedSeatColor = Color.FromArgb(175, 35, 35);
         private readonly Color textColor = Color.White;
+        private readonly Color standardSeatColor = Color.FromArgb(100, 160, 190); 
+        private readonly Color premiumSeatColor = Color.FromArgb(60, 179, 113);  
         private readonly Color vipSeatColor = Color.FromArgb(180, 120, 240);
-        private readonly Color premiumSeatColor = Color.FromArgb(120, 180, 200);
-        private readonly Color standardSeatColor = Color.FromArgb(100, 160, 190);
 
         private Label lblMovieInfoTitle;
         private Label lblGenreTitle;
@@ -178,90 +178,107 @@ namespace Cinema
         {
             foreach (Control ctrl in panelMovieInfo.Controls)
             {
-                if (ctrl != pictureBoxPoster)
+                if (ctrl != pictureBoxPoster && ctrl != panelActions)
                 {
                     panelMovieInfo.Controls.Remove(ctrl);
                 }
             }
 
+            panelMovieInfo.Padding = new Padding(15);
+            panelMovieInfo.AutoScroll = true;
+
             if (pictureBoxPoster != null)
             {
                 pictureBoxPoster.Location = new Point(15, 15);
-                pictureBoxPoster.Size = new Size(270, 280);
+                pictureBoxPoster.Size = new Size(210, 180);
                 pictureBoxPoster.SizeMode = PictureBoxSizeMode.Zoom;
                 pictureBoxPoster.BorderStyle = BorderStyle.FixedSingle;
                 pictureBoxPoster.Visible = true;
             }
 
+            Panel infoPanel = new Panel();
+            infoPanel.Location = new Point(240, 15);
+            infoPanel.Size = new Size(130, 180);
+            infoPanel.BackColor = Color.Transparent;
+            panelMovieInfo.Controls.Add(infoPanel);
+
+            int labelHeight = 25;
+            int spacing = 5;
+            int currentY = 0;
+
             lblMovieInfoTitle = new Label();
-            lblMovieInfoTitle.Location = new Point(15, 300);
-            lblMovieInfoTitle.Size = new Size(270, 30);
-            lblMovieInfoTitle.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblMovieInfoTitle.Location = new Point(0, currentY);
+            lblMovieInfoTitle.Size = new Size(130, labelHeight);
+            lblMovieInfoTitle.Font = new Font("Segoe UI", 12, FontStyle.Bold);
             lblMovieInfoTitle.ForeColor = accentColor;
             lblMovieInfoTitle.Text = "";
             lblMovieInfoTitle.AutoEllipsis = true;
-            panelMovieInfo.Controls.Add(lblMovieInfoTitle);
+            infoPanel.Controls.Add(lblMovieInfoTitle);
+            currentY += labelHeight + spacing;
 
             lblGenreTitle = new Label();
-            lblGenreTitle.Location = new Point(15, 340);
-            lblGenreTitle.Size = new Size(60, 25);
-            lblGenreTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            lblGenreTitle.Location = new Point(0, currentY);
+            lblGenreTitle.Size = new Size(50, labelHeight);
+            lblGenreTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             lblGenreTitle.ForeColor = textColor;
             lblGenreTitle.Text = "Genre:";
-            panelMovieInfo.Controls.Add(lblGenreTitle);
+            infoPanel.Controls.Add(lblGenreTitle);
 
             lblGenreValue = new Label();
-            lblGenreValue.Location = new Point(80, 340);
-            lblGenreValue.Size = new Size(205, 25);
-            lblGenreValue.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            lblGenreValue.Location = new Point(50, currentY);
+            lblGenreValue.Size = new Size(80, labelHeight);
+            lblGenreValue.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             lblGenreValue.ForeColor = textColor;
             lblGenreValue.Text = "";
             lblGenreValue.AutoEllipsis = true;
-            panelMovieInfo.Controls.Add(lblGenreValue);
+            infoPanel.Controls.Add(lblGenreValue);
+            currentY += labelHeight + spacing;
 
             lblDurationTitle = new Label();
-            lblDurationTitle.Location = new Point(15, 365);
-            lblDurationTitle.Size = new Size(70, 25);
-            lblDurationTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            lblDurationTitle.Location = new Point(0, currentY);
+            lblDurationTitle.Size = new Size(70, labelHeight);
+            lblDurationTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             lblDurationTitle.ForeColor = textColor;
             lblDurationTitle.Text = "Duration:";
-            panelMovieInfo.Controls.Add(lblDurationTitle);
+            infoPanel.Controls.Add(lblDurationTitle);
 
             lblDurationValue = new Label();
-            lblDurationValue.Location = new Point(90, 365);
-            lblDurationValue.Size = new Size(195, 25);
-            lblDurationValue.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            lblDurationValue.Location = new Point(70, currentY);
+            lblDurationValue.Size = new Size(60, labelHeight);
+            lblDurationValue.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             lblDurationValue.ForeColor = textColor;
             lblDurationValue.Text = "";
-            panelMovieInfo.Controls.Add(lblDurationValue);
+            infoPanel.Controls.Add(lblDurationValue);
+            currentY += labelHeight + spacing;
 
             lblTheaterTitle = new Label();
-            lblTheaterTitle.Location = new Point(15, 390);
-            lblTheaterTitle.Size = new Size(70, 25);
-            lblTheaterTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            lblTheaterTitle.Location = new Point(0, currentY);
+            lblTheaterTitle.Size = new Size(60, labelHeight);
+            lblTheaterTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             lblTheaterTitle.ForeColor = textColor;
             lblTheaterTitle.Text = "Theater:";
-            panelMovieInfo.Controls.Add(lblTheaterTitle);
+            infoPanel.Controls.Add(lblTheaterTitle);
 
             lblTheaterValue = new Label();
-            lblTheaterValue.Location = new Point(90, 390);
-            lblTheaterValue.Size = new Size(195, 25);
-            lblTheaterValue.Font = new Font("Segoe UI", 10, FontStyle.Regular);
+            lblTheaterValue.Location = new Point(60, currentY);
+            lblTheaterValue.Size = new Size(70, labelHeight);
+            lblTheaterValue.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             lblTheaterValue.ForeColor = textColor;
             lblTheaterValue.Text = "";
-            panelMovieInfo.Controls.Add(lblTheaterValue);
+            infoPanel.Controls.Add(lblTheaterValue);
+            currentY += labelHeight + spacing;
 
             lblDescriptionTitle = new Label();
-            lblDescriptionTitle.Location = new Point(15, 420);
-            lblDescriptionTitle.Size = new Size(270, 25);
+            lblDescriptionTitle.Location = new Point(15, 210);
+            lblDescriptionTitle.Size = new Size(370, 20);
             lblDescriptionTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             lblDescriptionTitle.ForeColor = textColor;
             lblDescriptionTitle.Text = "Description:";
             panelMovieInfo.Controls.Add(lblDescriptionTitle);
 
             txtDescription = new TextBox();
-            txtDescription.Location = new Point(15, 445);
-            txtDescription.Size = new Size(270, 75);
+            txtDescription.Location = new Point(15, 235);
+            txtDescription.Size = new Size(370, 60);
             txtDescription.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             txtDescription.ForeColor = textColor;
             txtDescription.BackColor = Color.FromArgb(30, 40, 70);
@@ -269,105 +286,199 @@ namespace Cinema
             txtDescription.Multiline = true;
             txtDescription.ReadOnly = true;
             txtDescription.ScrollBars = ScrollBars.Vertical;
+            txtDescription.WordWrap = true;
             txtDescription.Text = "";
             panelMovieInfo.Controls.Add(txtDescription);
-            panelActions.Controls.Clear();
 
-            groupBoxTicketSummary = new GroupBox();
-            groupBoxTicketSummary.Location = new Point(15, 525);
-            groupBoxTicketSummary.Size = new Size(270, 155);
-            groupBoxTicketSummary.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            groupBoxTicketSummary.ForeColor = accentColor;
-            groupBoxTicketSummary.Text = "Ticket Summary";
-            groupBoxTicketSummary.BackColor = Color.FromArgb(30, 40, 70);
-            panelActions.Controls.Add(groupBoxTicketSummary);
+            GroupBox ticketGroupBox = new GroupBox();
+            ticketGroupBox.Location = new Point(15, 305);
+            ticketGroupBox.Size = new Size(370, 150);
+            ticketGroupBox.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            ticketGroupBox.ForeColor = accentColor;
+            ticketGroupBox.Text = "Ticket Information";
+            ticketGroupBox.BackColor = Color.FromArgb(25, 35, 65);
+            panelMovieInfo.Controls.Add(ticketGroupBox);
+
+            int gbY = 25;
+            int gbX = 15;
+            int gbLabelWidth = 120;
+            int gbValueWidth = 225;
+
+            Label lblSeatsTitle = new Label();
+            lblSeatsTitle.Location = new Point(gbX, gbY);
+            lblSeatsTitle.Size = new Size(gbLabelWidth, 20);
+            lblSeatsTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            lblSeatsTitle.ForeColor = textColor;
+            lblSeatsTitle.Text = "Selected Seats:";
+            ticketGroupBox.Controls.Add(lblSeatsTitle);
 
             lblTicketCount = new Label();
-            lblTicketCount.Location = new Point(10, 25);
-            lblTicketCount.Size = new Size(250, 25);
+            lblTicketCount.Location = new Point(gbX + gbLabelWidth, gbY);
+            lblTicketCount.Size = new Size(gbValueWidth, 20);
             lblTicketCount.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             lblTicketCount.ForeColor = textColor;
-            lblTicketCount.Text = "Selected Seats: 0";
-            groupBoxTicketSummary.Controls.Add(lblTicketCount);
+            lblTicketCount.Text = "0";
+            ticketGroupBox.Controls.Add(lblTicketCount);
+            gbY += 25;
+
+            Label lblTicketPriceTitle = new Label();
+            lblTicketPriceTitle.Location = new Point(gbX, gbY);
+            lblTicketPriceTitle.Size = new Size(gbLabelWidth, 20);
+            lblTicketPriceTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            lblTicketPriceTitle.ForeColor = textColor;
+            lblTicketPriceTitle.Text = "Price per Ticket:";
+            ticketGroupBox.Controls.Add(lblTicketPriceTitle);
 
             lblTicketPrice = new Label();
-            lblTicketPrice.Location = new Point(10, 50);
-            lblTicketPrice.Size = new Size(250, 25);
+            lblTicketPrice.Location = new Point(gbX + gbLabelWidth, gbY);
+            lblTicketPrice.Size = new Size(gbValueWidth, 20);
             lblTicketPrice.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             lblTicketPrice.ForeColor = textColor;
-            lblTicketPrice.Text = "Price per Ticket: $0.00";
-            groupBoxTicketSummary.Controls.Add(lblTicketPrice);
+            lblTicketPrice.Text = "$0.00";
+            ticketGroupBox.Controls.Add(lblTicketPrice);
+            gbY += 25;
+
+            Label lblSubtotalTitle = new Label();
+            lblSubtotalTitle.Location = new Point(gbX, gbY);
+            lblSubtotalTitle.Size = new Size(gbLabelWidth, 20);
+            lblSubtotalTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            lblSubtotalTitle.ForeColor = textColor;
+            lblSubtotalTitle.Text = "Subtotal:";
+            ticketGroupBox.Controls.Add(lblSubtotalTitle);
 
             lblTicketTotal = new Label();
-            lblTicketTotal.Location = new Point(10, 75);
-            lblTicketTotal.Size = new Size(250, 25);
+            lblTicketTotal.Location = new Point(gbX + gbLabelWidth, gbY);
+            lblTicketTotal.Size = new Size(gbValueWidth, 20);
             lblTicketTotal.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             lblTicketTotal.ForeColor = textColor;
-            lblTicketTotal.Text = "Subtotal: $0.00";
-            groupBoxTicketSummary.Controls.Add(lblTicketTotal);
+            lblTicketTotal.Text = "$0.00";
+            ticketGroupBox.Controls.Add(lblTicketTotal);
+            gbY += 25;
 
             lblDiscountTitle = new Label();
-            lblDiscountTitle.Location = new Point(10, 100);
-            lblDiscountTitle.Size = new Size(70, 25);
-            lblDiscountTitle.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            lblDiscountTitle.Location = new Point(gbX, gbY);
+            lblDiscountTitle.Size = new Size(gbLabelWidth, 20);
+            lblDiscountTitle.Font = new Font("Segoe UI", 9, FontStyle.Bold);
             lblDiscountTitle.ForeColor = textColor;
             lblDiscountTitle.Text = "Discount:";
-            groupBoxTicketSummary.Controls.Add(lblDiscountTitle);
+            ticketGroupBox.Controls.Add(lblDiscountTitle);
 
             cboDiscount = new ComboBox();
-            cboDiscount.Location = new Point(85, 100);
-            cboDiscount.Size = new Size(175, 25);
+            cboDiscount.Location = new Point(gbX + gbLabelWidth, gbY);
+            cboDiscount.Size = new Size(gbValueWidth, 25);
             cboDiscount.Font = new Font("Segoe UI", 9, FontStyle.Regular);
             cboDiscount.ForeColor = Color.Black;
             cboDiscount.BackColor = Color.White;
             cboDiscount.DropDownStyle = ComboBoxStyle.DropDownList;
             cboDiscount.Items.AddRange(new object[] {
-                "None (0%)",
-                "Student (10%)",
-                "Senior (15%)",
-                "Member (20%)"
-            });
+        "None (0%)",
+        "Student (10%)",
+        "Senior (15%)",
+        "Member (20%)"
+    });
             cboDiscount.SelectedIndex = 0;
             cboDiscount.SelectedIndexChanged += CboDiscount_SelectedIndexChanged;
-            groupBoxTicketSummary.Controls.Add(cboDiscount);
+            ticketGroupBox.Controls.Add(cboDiscount);
+            gbY += 30;
+
+            Label lblFinalTotalTitle = new Label();
+            lblFinalTotalTitle.Location = new Point(gbX, gbY);
+            lblFinalTotalTitle.Size = new Size(gbLabelWidth, 25);
+            lblFinalTotalTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            lblFinalTotalTitle.ForeColor = textColor;
+            lblFinalTotalTitle.Text = "Total:";
+            ticketGroupBox.Controls.Add(lblFinalTotalTitle);
 
             lblFinalTotal = new Label();
-            lblFinalTotal.Location = new Point(10, 125);
-            lblFinalTotal.Size = new Size(250, 25);
+            lblFinalTotal.Location = new Point(gbX + gbLabelWidth, gbY);
+            lblFinalTotal.Size = new Size(gbValueWidth, 25);
             lblFinalTotal.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             lblFinalTotal.ForeColor = accentColor;
-            lblFinalTotal.Text = "Total: $0.00";
-            groupBoxTicketSummary.Controls.Add(lblFinalTotal);
+            lblFinalTotal.Text = "$0.00";
+            ticketGroupBox.Controls.Add(lblFinalTotal);
 
-            lblPaymentMethodTitle = new Label();
-            lblPaymentMethodTitle.Location = new Point(15, 690);
-            lblPaymentMethodTitle.Size = new Size(120, 25);
-            lblPaymentMethodTitle.Font = new Font("Segoe UI", 10, FontStyle.Bold);
-            lblPaymentMethodTitle.ForeColor = textColor;
-            lblPaymentMethodTitle.Text = "Payment Method:";
-            panelActions.Controls.Add(lblPaymentMethodTitle);
+            GroupBox paymentGroupBox = new GroupBox();
+            paymentGroupBox.Location = new Point(15, 465);
+            paymentGroupBox.Size = new Size(370, 80);
+            paymentGroupBox.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            paymentGroupBox.ForeColor = accentColor;
+            paymentGroupBox.Text = "Payment Method";
+            paymentGroupBox.BackColor = Color.FromArgb(25, 35, 65);
+            panelMovieInfo.Controls.Add(paymentGroupBox);
 
             cboPaymentMethod = new ComboBox();
-            cboPaymentMethod.Location = new Point(140, 690);
-            cboPaymentMethod.Size = new Size(145, 25);
-            cboPaymentMethod.Font = new Font("Segoe UI", 9, FontStyle.Regular);
+            cboPaymentMethod.Location = new Point(15, 30);
+            cboPaymentMethod.Size = new Size(340, 35);
+            cboPaymentMethod.Font = new Font("Segoe UI", 10, FontStyle.Regular);
             cboPaymentMethod.ForeColor = Color.Black;
             cboPaymentMethod.BackColor = Color.White;
             cboPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPaymentMethod.Items.AddRange(new object[] {
-                "Credit Card",
-                "Debit Card",
-                "Cash",
-                "Mobile Payment"
-            });
+        "Credit Card",
+        "Debit Card",
+        "Cash",
+        "Mobile Payment"
+    });
             cboPaymentMethod.SelectedIndex = 0;
-            panelActions.Controls.Add(cboPaymentMethod);
+            paymentGroupBox.Controls.Add(cboPaymentMethod);
+
+            panelActions.Visible = false;
 
             if (pictureBoxPoster != null)
             {
                 pictureBoxPoster.BringToFront();
             }
         }
+
+        private void UpdateSummary()
+        {
+            decimal subtotal = 0;
+            lblTicketCount.Text = selectedSeats.Count.ToString();
+
+            foreach (string seatId in selectedSeats)
+            {
+                if (seatButtons.ContainsKey(seatId))
+                {
+                    string categoryId = seatButtons[seatId].Tag.ToString();
+                    decimal seatPrice = ticketPrice;
+
+                    if (seatCategories.ContainsKey(categoryId))
+                    {
+                        seatPrice *= seatCategories[categoryId].PriceMultiplier;
+                    }
+
+                    subtotal += seatPrice;
+                }
+            }
+
+            lblTicketPrice.Text = "$" + ticketPrice.ToString("0.00");
+            lblTicketTotal.Text = "$" + subtotal.ToString("0.00");
+
+            decimal discountPercent = 0;
+            switch (cboDiscount.SelectedIndex)
+            {
+                case 1:
+                    discountPercent = 0.10m;
+                    break;
+                case 2:
+                    discountPercent = 0.15m;
+                    break;
+                case 3:
+                    discountPercent = 0.20m;
+                    break;
+                default:
+                    discountPercent = 0;
+                    break;
+            }
+
+            decimal discountAmount = subtotal * discountPercent;
+            decimal finalTotal = subtotal - discountAmount;
+
+            lblFinalTotal.Text = "$" + finalTotal.ToString("0.00");
+            lblTotalPriceValue.Text = "$" + finalTotal.ToString("0.00");
+        }
+
+
 
         private void CboDiscount_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -522,11 +633,11 @@ namespace Cinema
 
                 string categoryId;
                 if (row < 2)
-                    categoryId = "SC003";
+                    categoryId = "SC003"; 
                 else if (row < 4)
                     categoryId = "SC002";
                 else
-                    categoryId = "SC001";
+                    categoryId = "SC001"; 
 
                 for (int col = 1; col <= SEATS_PER_ROW; col++)
                 {
@@ -1038,6 +1149,7 @@ namespace Cinema
             screenBar.Size = new Size(totalSeatsWidth * 3 / 4, 3);
             screenBar.Location = new Point(totalSeatsWidth / 8, TOP_MARGIN - 5);
             mainContainer.Controls.Add(screenBar);
+
             int leftSectionCount = LEFT_SECTION;
             int centerSectionCount = CENTER_SECTION;
 
@@ -1053,23 +1165,31 @@ namespace Cinema
                 lblRow.ForeColor = Color.White;
                 lblRow.TextAlign = ContentAlignment.MiddleCenter;
                 mainContainer.Controls.Add(lblRow);
-                string categoryID = "SC001";
-                Color seatColor = standardSeatColor;
+
+                string categoryID;
+                Color seatColor;
+
+                if (row < 2)
+                {
+                    categoryID = "SC003"; 
+                    seatColor = vipSeatColor;
+                }
+                else if (row < 4)
+                {
+                    categoryID = "SC002"; 
+                    seatColor = premiumSeatColor;
+                }
+                else
+                {
+                    categoryID = "SC001"; 
+                    seatColor = standardSeatColor;
+                }
 
                 int xPos = ROW_LABEL_WIDTH + 10;
 
                 for (int col = 1; col <= leftSectionCount; col++)
                 {
                     string seatID = rowLetter.ToString() + col.ToString("00");
-                    if (seatCategoryMapping.ContainsKey(seatID))
-                    {
-                        categoryID = seatCategoryMapping[seatID];
-                        if (seatCategories.ContainsKey(categoryID))
-                        {
-                            seatColor = seatCategories[categoryID].SeatColor;
-                        }
-                    }
-
                     CreateSeatButton(mainContainer, seatID, xPos,
                         TOP_MARGIN + 10 + row * (SEAT_SIZE + SEAT_MARGIN),
                         seatColor, categoryID, SEAT_SIZE);
@@ -1080,15 +1200,6 @@ namespace Cinema
                 for (int col = leftSectionCount + 1; col <= leftSectionCount + centerSectionCount; col++)
                 {
                     string seatID = rowLetter.ToString() + col.ToString("00");
-                    if (seatCategoryMapping.ContainsKey(seatID))
-                    {
-                        categoryID = seatCategoryMapping[seatID];
-                        if (seatCategories.ContainsKey(categoryID))
-                        {
-                            seatColor = seatCategories[categoryID].SeatColor;
-                        }
-                    }
-
                     CreateSeatButton(mainContainer, seatID, xPos,
                         TOP_MARGIN + 10 + row * (SEAT_SIZE + SEAT_MARGIN),
                         seatColor, categoryID, SEAT_SIZE);
@@ -1099,23 +1210,14 @@ namespace Cinema
                 for (int col = leftSectionCount + centerSectionCount + 1; col <= SEATS_PER_ROW; col++)
                 {
                     string seatID = rowLetter.ToString() + col.ToString("00");
-                    if (seatCategoryMapping.ContainsKey(seatID))
-                    {
-                        categoryID = seatCategoryMapping[seatID];
-                        if (seatCategories.ContainsKey(categoryID))
-                        {
-                            seatColor = seatCategories[categoryID].SeatColor;
-                        }
-                    }
-
                     CreateSeatButton(mainContainer, seatID, xPos,
                         TOP_MARGIN + 10 + row * (SEAT_SIZE + SEAT_MARGIN),
                         seatColor, categoryID, SEAT_SIZE);
                     xPos += SEAT_SIZE + SEAT_MARGIN;
                 }
             }
-            panelSeats.ResumeLayout();
 
+            panelSeats.ResumeLayout();
             UpdateSeatLegend();
             ApplySeatCategoryFilter();
         }
@@ -1387,52 +1489,7 @@ namespace Cinema
             UpdateSummary();
         }
 
-        private void UpdateSummary()
-        {
-            decimal subtotal = 0;
-            lblTicketCount.Text = "Selected Seats: " + selectedSeats.Count;
-            foreach (string seatId in selectedSeats)
-            {
-                if (seatButtons.ContainsKey(seatId))
-                {
-                    string categoryId = seatButtons[seatId].Tag.ToString();
-                    decimal seatPrice = ticketPrice;
-
-                    if (seatCategories.ContainsKey(categoryId))
-                    {
-                        seatPrice *= seatCategories[categoryId].PriceMultiplier;
-                    }
-
-                    subtotal += seatPrice;
-                }
-            }
-
-            lblTicketPrice.Text = "Price per Ticket: $" + ticketPrice.ToString("0.00");
-            lblTicketTotal.Text = "Subtotal: $" + subtotal.ToString("0.00");
-
-            decimal discountPercent = 0;
-            switch (cboDiscount.SelectedIndex)
-            {
-                case 1:
-                    discountPercent = 0.10m;
-                    break;
-                case 2:
-                    discountPercent = 0.15m;
-                    break;
-                case 3:
-                    discountPercent = 0.20m;
-                    break;
-                default:
-                    discountPercent = 0;
-                    break;
-            }
-
-            decimal discountAmount = subtotal * discountPercent;
-            decimal finalTotal = subtotal - discountAmount;
-
-            lblFinalTotal.Text = "Total: $" + finalTotal.ToString("0.00");
-            lblTotalPriceValue.Text = "$" + finalTotal.ToString("0.00");
-        }
+        
 
         private void ResetSelectedSeats()
         {
@@ -1939,15 +1996,14 @@ namespace Cinema
             {
                 if (selectedSeats.Count == 0)
                 {
-                    MessageBox.Show("Please select at least one seat!",
-                        "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Please select at least one seat!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
-                string totalPrice = lblFinalTotal.Text.Replace("Total: $", "");
+                decimal totalPrice = CalculateTotalPrice();
                 string paymentMethod = cboPaymentMethod.SelectedItem.ToString();
                 string theaterName = "";
-                if (cboShowTimes.SelectedItem is DataRowView selectedRow)
+                if (cboTheaters.SelectedItem is DataRowView selectedRow)
                 {
                     theaterName = selectedRow["TheaterName"].ToString();
                 }
@@ -1985,32 +2041,167 @@ namespace Cinema
                     seatTypeInfo = seatTypeInfo.Substring(0, seatTypeInfo.Length - 2);
                 }
 
-                DialogResult result = MessageBox.Show(
-                    $"Confirm booking for the following details:\n\n" +
-                    $"Movie: {movieTitle}\n" +
-                    $"Theater: {theaterName}\n" +
-                    $"Showtime: {cboShowTimes.Text}\n" +
-                    $"Seats: {string.Join(", ", selectedSeats)}\n" +
-                    $"Seat Types: {seatTypeInfo}\n" +
-                    $"Total Price: ${totalPrice}\n" +
-                    $"Payment Method: {paymentMethod}\n\n" +
-                    $"Proceed with booking?",
-                    "Confirm Booking",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Question);
+                ShowConfirmationDialog(theaterName, seatTypeInfo, totalPrice, paymentMethod);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error booking tickets: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
+        private void ShowConfirmationDialog(string theaterName, string seatTypeInfo, decimal totalPrice, string paymentMethod)
+        {
+            using (Form confirmDialog = new Form())
+            {
+                confirmDialog.Text = "Confirm Booking";
+                confirmDialog.Size = new Size(550, 480);
+                confirmDialog.StartPosition = FormStartPosition.CenterParent;
+                confirmDialog.FormBorderStyle = FormBorderStyle.FixedDialog;
+                confirmDialog.MaximizeBox = false;
+                confirmDialog.MinimizeBox = false;
+                confirmDialog.BackColor = Color.FromArgb(20, 30, 60);
+                confirmDialog.Icon = this.Icon;
+
+                Panel headerPanel = new Panel();
+                headerPanel.Dock = DockStyle.Top;
+                headerPanel.Height = 60;
+                headerPanel.BackColor = Color.FromArgb(30, 40, 70);
+                confirmDialog.Controls.Add(headerPanel);
+
+                Label headerLabel = new Label();
+                headerLabel.Text = "Confirm Booking Details";
+                headerLabel.Font = new Font("Segoe UI", 18, FontStyle.Bold);
+                headerLabel.ForeColor = Color.FromArgb(240, 200, 70);
+                headerLabel.AutoSize = false;
+                headerLabel.TextAlign = ContentAlignment.MiddleCenter;
+                headerLabel.Dock = DockStyle.Fill;
+                headerPanel.Controls.Add(headerLabel);
+
+                Panel contentPanel = new Panel();
+                contentPanel.Dock = DockStyle.Fill;
+                contentPanel.Padding = new Padding(20);
+                contentPanel.BackColor = Color.FromArgb(20, 30, 60);
+                confirmDialog.Controls.Add(contentPanel);
+
+                TableLayoutPanel tablePanel = new TableLayoutPanel();
+                tablePanel.RowCount = 9; // Increased to 9 rows to include movie title
+                tablePanel.ColumnCount = 2;
+                tablePanel.Dock = DockStyle.Top;
+                tablePanel.Height = 320;
+                tablePanel.Width = 510;
+                tablePanel.Location = new Point(20, 20);
+                tablePanel.BackColor = Color.FromArgb(25, 35, 65);
+                tablePanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
+
+                tablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
+                tablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
+
+                for (int i = 0; i < 9; i++)
+                {
+                    tablePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 11.11F)); // Adjusted to 11.11% (100/9)
+                }
+
+                contentPanel.Controls.Add(tablePanel);
+
+                // Add row contents - now including movie title as the first row
+                AddConfirmationTableRow(tablePanel, 0, "Movie:", movieTitle);
+                AddConfirmationTableRow(tablePanel, 1, "Theater:", theaterName);
+                AddConfirmationTableRow(tablePanel, 2, "Showtime:", cboShowTimes.Text);
+                AddConfirmationTableRow(tablePanel, 3, "Seats:", string.Join(", ", selectedSeats));
+                AddConfirmationTableRow(tablePanel, 4, "Seat Types:", seatTypeInfo);
+                AddConfirmationTableRow(tablePanel, 5, "Discount:", cboDiscount.Text);
+                AddConfirmationTableRow(tablePanel, 6, "Payment Method:", paymentMethod);
+                AddConfirmationTableRow(tablePanel, 7, "Total Price:", $"${totalPrice:0.00}", true);
+
+                Panel buttonPanel = new Panel();
+                buttonPanel.Dock = DockStyle.Bottom;
+                buttonPanel.Height = 80;
+                buttonPanel.BackColor = Color.FromArgb(25, 35, 65);
+                confirmDialog.Controls.Add(buttonPanel);
+
+                Button btnYes = new Button();
+                btnYes.Text = "Yes";
+                btnYes.BackColor = Color.FromArgb(52, 152, 219);
+                btnYes.FlatStyle = FlatStyle.Flat;
+                btnYes.FlatAppearance.BorderSize = 0;
+                btnYes.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                btnYes.ForeColor = Color.White;
+                btnYes.Size = new Size(160, 45);
+                btnYes.Location = new Point(120, 20);
+                btnYes.DialogResult = DialogResult.Yes;
+                buttonPanel.Controls.Add(btnYes);
+
+                Button btnNo = new Button();
+                btnNo.Text = "No";
+                btnNo.BackColor = Color.FromArgb(175, 35, 35);
+                btnNo.FlatStyle = FlatStyle.Flat;
+                btnNo.FlatAppearance.BorderSize = 0;
+                btnNo.Font = new Font("Segoe UI", 12, FontStyle.Bold);
+                btnNo.ForeColor = Color.White;
+                btnNo.Size = new Size(160, 45);
+                btnNo.Location = new Point(290, 20);
+                btnNo.DialogResult = DialogResult.No;
+                buttonPanel.Controls.Add(btnNo);
+
+                DialogResult result = confirmDialog.ShowDialog();
                 if (result == DialogResult.Yes)
                 {
                     BookTickets();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error booking tickets: " + ex.Message,
-                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
 
+        private void AddConfirmationTableRow(TableLayoutPanel table, int rowIndex, string labelText, string valueText, bool highlight = false)
+        {
+            Label label = new Label();
+            label.Text = labelText;
+            label.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            label.ForeColor = Color.White;
+            label.Dock = DockStyle.Fill;
+            label.TextAlign = ContentAlignment.MiddleRight;
+            label.Padding = new Padding(0, 0, 10, 0);
+            table.Controls.Add(label, 0, rowIndex);
+
+            Label value = new Label();
+            value.Text = valueText;
+            value.Font = new Font("Segoe UI", 11, highlight ? FontStyle.Bold : FontStyle.Regular);
+            value.ForeColor = highlight ? Color.FromArgb(240, 200, 70) : Color.White;
+            value.Dock = DockStyle.Fill;
+            value.TextAlign = ContentAlignment.MiddleLeft;
+            table.Controls.Add(value, 1, rowIndex);
+        }
+
+        private decimal CalculateTotalPrice()
+        {
+            decimal subtotal = 0;
+            foreach (string seatId in selectedSeats)
+            {
+                if (seatButtons.ContainsKey(seatId))
+                {
+                    string categoryId = seatButtons[seatId].Tag.ToString();
+                    decimal seatPrice = ticketPrice;
+
+                    if (seatCategories.ContainsKey(categoryId))
+                    {
+                        seatPrice *= seatCategories[categoryId].PriceMultiplier;
+                    }
+
+                    subtotal += seatPrice;
+                }
+            }
+
+            decimal discountPercent = 0;
+            switch (cboDiscount.SelectedIndex)
+            {
+                case 1: discountPercent = 0.10m; break;
+                case 2: discountPercent = 0.15m; break;
+                case 3: discountPercent = 0.20m; break;
+                default: discountPercent = 0; break;
+            }
+
+            decimal discountAmount = subtotal * discountPercent;
+            return subtotal - discountAmount;
+        }
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -2045,8 +2236,8 @@ namespace Cinema
                                 string discountID = "D00" + (cboDiscount.SelectedIndex + 1);
 
                                 string insertBookingQuery = @"
-                   INSERT INTO Booking (BookingID, ShowID, BookingTime, DiscountID, PaymentMethodID, TotalAmount)
-                   VALUES (@BookingID, @ShowID, @BookingTime, @DiscountID, @PaymentMethodID, @TotalAmount)";
+                                   INSERT INTO Booking (BookingID, ShowID, BookingTime, DiscountID, PaymentMethodID, TotalAmount)
+                                   VALUES (@BookingID, @ShowID, @BookingTime, @DiscountID, @PaymentMethodID, @TotalAmount)";
 
                                 using (SqlCommand cmdBooking = new SqlCommand(insertBookingQuery, conn, transaction))
                                 {
