@@ -2380,6 +2380,9 @@ namespace Cinema
                     }
 
                     ResetSelectedSeats();
+
+                    TicketForm ticketForm = new TicketForm(bookingId);
+                    ticketForm.ShowDialog();
                 }
                 catch (Exception ex)
                 {

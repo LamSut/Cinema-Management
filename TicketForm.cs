@@ -27,23 +27,23 @@ namespace Cinema
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 string query = @"
-    SELECT 
-        sb.BookingID, 
-        STRING_AGG(CONCAT(s.SeatRow, s.SeatNumber), ', ') AS Seats,
-        sc.CategoryName AS SeatCategory,
-        m.Title AS MovieTitle, -- Lấy tiêu đề phim thay vì MovieID
-        sh.ShowTime, 
-        t.TheaterName
-    FROM SeatBooking sb
-    JOIN Seat s ON sb.SeatID = s.SeatID
-    JOIN SeatCategory sc ON s.CategoryID = sc.CategoryID
-    JOIN Booking b ON sb.BookingID = b.BookingID
-    JOIN Show sh ON b.ShowID = sh.ShowID
-    JOIN Movie m ON sh.MovieID = m.MovieID
-    JOIN Theater t ON sh.TheaterID = t.TheaterID
-    WHERE sb.BookingID = @BookingID
-    GROUP BY sb.BookingID, sc.CategoryName, m.Title, sh.ShowTime, t.TheaterName";
-
+SELECT 
+    sb.BookingID, 
+    STRING_AGG(CONCAT(s.SeatRow, s.SeatNumber), ', ') AS Seats,
+    sc.CategoryName AS SeatCategory,
+    m.Title AS MovieTitle, 
+    sh.ShowTime, 
+    t.TheaterName,
+    SUM(sb.Price) AS TotalPrice  -- Tổng tiền vé
+FROM SeatBooking sb
+JOIN Seat s ON sb.SeatID = s.SeatID
+JOIN SeatCategory sc ON s.CategoryID = sc.CategoryID
+JOIN Booking b ON sb.BookingID = b.BookingID
+JOIN Show sh ON b.ShowID = sh.ShowID
+JOIN Movie m ON sh.MovieID = m.MovieID
+JOIN Theater t ON sh.TheaterID = t.TheaterID
+WHERE sb.BookingID = @BookingID
+GROUP BY sb.BookingID, sc.CategoryName, m.Title, sh.ShowTime, t.TheaterName";
 
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
@@ -59,6 +59,10 @@ namespace Cinema
                             lblTheater.Text = $"Theater: {reader["TheaterName"]}";
                             lblTime.Text = $"Showtime: {Convert.ToDateTime(reader["ShowTime"]).ToString("dd/MM/yyyy HH:mm")}";
                             lblSeats.Text = $"Seats: {reader["Seats"]} ({reader["SeatCategory"]})";
+
+                            // Hiển thị tổng tiền vé
+                            decimal totalPrice = reader["TotalPrice"] != DBNull.Value ? Convert.ToDecimal(reader["TotalPrice"]) : 0;
+                            lblTotal.Text = $"Total Price: {totalPrice:C}"; // Hiển thị theo định dạng tiền tệ
                         }
                         else
                         {
@@ -68,6 +72,7 @@ namespace Cinema
                 }
             }
         }
+
 
         private void TicketForm_FormClosed(object sender, FormClosedEventArgs e)
         {
