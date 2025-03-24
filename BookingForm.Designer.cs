@@ -1,6 +1,6 @@
 ﻿namespace Cinema
 {
-    partial class SeatsForm
+    partial class BookingForm
     {
         /// <summary>
         /// Required designer variable.

@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Cinema
 {
-    public partial class SeatsForm : Form
+    public partial class BookingForm : Form
     {
         private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=CinemaDB;Integrated Security=True";
 
@@ -98,7 +98,7 @@ namespace Cinema
             public string PosterURL { get; set; } = "";
         }
 
-        public SeatsForm()
+        public BookingForm()
         {
             InitializeComponent();
             this.StartPosition = FormStartPosition.CenterScreen;

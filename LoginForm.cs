@@ -25,9 +25,9 @@ namespace Cinema
             {
                 MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //ShowsForm showForm = new ShowsForm();
-                SeatsForm seatsForm = new SeatsForm();
+                BookingForm bookingForm = new BookingForm();
                 //showForm.Show();
-                seatsForm.Show();
+                bookingForm.Show();
                 this.Hide();
             }
             else if (role == 1)
