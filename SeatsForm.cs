@@ -50,8 +50,8 @@ namespace Cinema
         private readonly Color selectedSeatColor = Color.FromArgb(240, 200, 70);
         private readonly Color bookedSeatColor = Color.FromArgb(175, 35, 35);
         private readonly Color textColor = Color.White;
-        private readonly Color standardSeatColor = Color.FromArgb(100, 160, 190); 
-        private readonly Color premiumSeatColor = Color.FromArgb(60, 179, 113);  
+        private readonly Color standardSeatColor = Color.FromArgb(100, 160, 190);
+        private readonly Color premiumSeatColor = Color.FromArgb(60, 179, 113);
         private readonly Color vipSeatColor = Color.FromArgb(180, 120, 240);
 
         private Label lblMovieInfoTitle;
@@ -106,7 +106,7 @@ namespace Cinema
             this.MaximizeBox = false;
         }
 
-        private async void SeatsForm_Load(object sender, EventArgs e)
+        private void SeatsForm_Load(object sender, EventArgs e)
         {
             try
             {
@@ -115,20 +115,25 @@ namespace Cinema
                 InitializeSeatCategories();
                 InitializeSeatLayout();
 
-                bool connected = await TryConnectToDatabaseAsync();
-
-                if (connected)
+                Task.Run(async () =>
                 {
-                    await LoadSeatCategoriesAsync();
-                    await LoadAllTheatersAsync();
-                    await LoadMoviesAsync();
-                }
-                else
-                {
-                    LoadSampleData();
-                    MessageBox.Show("Running in demo mode with sample data. Database connection unavailable.",
-                        "Demo Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                    bool connected = await TryConnectToDatabaseAsync();
+                    if (connected)
+                    {
+                        await LoadSeatCategoriesAsync();
+                        await LoadAllTheatersAsync();
+                        await LoadMoviesAsync();
+                    }
+                    else
+                    {
+                        this.Invoke((MethodInvoker)delegate
+                        {
+                            LoadSampleData();
+                            MessageBox.Show("Running in demo mode with sample data. Database connection unavailable.",
+                            "Demo Mode", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        });
+                    }
+                });
 
                 btnBook.Enabled = false;
             }
@@ -371,11 +376,11 @@ namespace Cinema
             cboDiscount.BackColor = Color.White;
             cboDiscount.DropDownStyle = ComboBoxStyle.DropDownList;
             cboDiscount.Items.AddRange(new object[] {
-        "None (0%)",
-        "Student (10%)",
-        "Senior (15%)",
-        "Member (20%)"
-    });
+                "None (0%)",
+                "Student (10%)",
+                "Senior (15%)",
+                "Member (20%)"
+            });
             cboDiscount.SelectedIndex = 0;
             cboDiscount.SelectedIndexChanged += CboDiscount_SelectedIndexChanged;
             ticketGroupBox.Controls.Add(cboDiscount);
@@ -414,11 +419,11 @@ namespace Cinema
             cboPaymentMethod.BackColor = Color.White;
             cboPaymentMethod.DropDownStyle = ComboBoxStyle.DropDownList;
             cboPaymentMethod.Items.AddRange(new object[] {
-        "Credit Card",
-        "Debit Card",
-        "Cash",
-        "Mobile Payment"
-    });
+                "Credit Card",
+                "Debit Card",
+                "Cash",
+                "Mobile Payment"
+            });
             cboPaymentMethod.SelectedIndex = 0;
             paymentGroupBox.Controls.Add(cboPaymentMethod);
 
@@ -478,8 +483,6 @@ namespace Cinema
             lblTotalPriceValue.Text = "$" + finalTotal.ToString("0.00");
         }
 
-
-
         private void CboDiscount_SelectedIndexChanged(object sender, EventArgs e)
         {
             UpdateSummary();
@@ -496,7 +499,8 @@ namespace Cinema
                 @"Data Source=127.0.0.1;Initial Catalog=CinemaDB;Integrated Security=True"
             };
 
-            return await Task.Run(() => {
+            return await Task.Run(() =>
+            {
                 foreach (string connStr in possibleConnectionStrings)
                 {
                     try
@@ -522,7 +526,8 @@ namespace Cinema
             Dictionary<string, SeatCategoryInfo> tempCategories = new Dictionary<string, SeatCategoryInfo>();
             List<string> categoryItems = new List<string>();
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     try
@@ -574,10 +579,13 @@ namespace Cinema
 
             if (tempCategories.Count > 0)
             {
-                seatCategories = tempCategories;
-                cboSeatCategory.Items.Clear();
-                cboSeatCategory.Items.AddRange(categoryItems.ToArray());
-                cboSeatCategory.SelectedIndex = 0;
+                this.Invoke((MethodInvoker)delegate
+                {
+                    seatCategories = tempCategories;
+                    cboSeatCategory.Items.Clear();
+                    cboSeatCategory.Items.AddRange(categoryItems.ToArray());
+                    cboSeatCategory.SelectedIndex = 0;
+                });
             }
         }
 
@@ -589,7 +597,8 @@ namespace Cinema
 
             Dictionary<string, string> tempMapping = new Dictionary<string, string>();
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     try
@@ -633,11 +642,11 @@ namespace Cinema
 
                 string categoryId;
                 if (row < 2)
-                    categoryId = "SC003"; 
+                    categoryId = "SC003";
                 else if (row < 4)
                     categoryId = "SC002";
                 else
-                    categoryId = "SC001"; 
+                    categoryId = "SC001";
 
                 for (int col = 1; col <= SEATS_PER_ROW; col++)
                 {
@@ -650,18 +659,19 @@ namespace Cinema
         private void LoadSampleSeatCategories()
         {
             seatCategories.Clear();
-            cboSeatCategory.Items.Clear();
-
             seatCategories.Add("SC001", new SeatCategoryInfo("SC001", "Standard", 1.0m, standardSeatColor));
             seatCategories.Add("SC002", new SeatCategoryInfo("SC002", "Premium", 1.2m, premiumSeatColor));
             seatCategories.Add("SC003", new SeatCategoryInfo("SC003", "VIP", 1.5m, vipSeatColor));
 
-            cboSeatCategory.Items.Add("-- All Categories --");
-            cboSeatCategory.Items.Add("Standard (x1.00)");
-            cboSeatCategory.Items.Add("Premium (x1.20)");
-            cboSeatCategory.Items.Add("VIP (x1.50)");
-
-            cboSeatCategory.SelectedIndex = 0;
+            this.Invoke((MethodInvoker)delegate
+            {
+                cboSeatCategory.Items.Clear();
+                cboSeatCategory.Items.Add("-- All Categories --");
+                cboSeatCategory.Items.Add("Standard (x1.00)");
+                cboSeatCategory.Items.Add("Premium (x1.20)");
+                cboSeatCategory.Items.Add("VIP (x1.50)");
+                cboSeatCategory.SelectedIndex = 0;
+            });
 
             Dictionary<string, string> mapping = new Dictionary<string, string>();
             CreateSampleSeatMapping(mapping);
@@ -670,12 +680,13 @@ namespace Cinema
 
         private async Task LoadAllTheatersAsync()
         {
-            allTheatersTable = new DataTable();
-            allTheatersTable.Columns.Add("TheaterID", typeof(string));
-            allTheatersTable.Columns.Add("TheaterName", typeof(string));
-            allTheatersTable.Columns.Add("TheaterType", typeof(string));
+            DataTable theatersTable = new DataTable();
+            theatersTable.Columns.Add("TheaterID", typeof(string));
+            theatersTable.Columns.Add("TheaterName", typeof(string));
+            theatersTable.Columns.Add("TheaterType", typeof(string));
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     try
@@ -685,36 +696,41 @@ namespace Cinema
                         using (SqlCommand cmd = new SqlCommand(query, conn))
                         using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
                         {
-                            adapter.Fill(allTheatersTable);
+                            adapter.Fill(theatersTable);
                         }
                     }
                     catch (Exception)
                     {
-                        LoadSampleTheatersData(allTheatersTable);
+                        LoadSampleTheatersData(theatersTable);
                     }
                 }
             });
 
-            if (allTheatersTable.Rows.Count > 0)
+            this.Invoke((MethodInvoker)delegate
             {
-                DataTable displayTable = allTheatersTable.Copy();
-                DataRow newRow = displayTable.NewRow();
-                newRow["TheaterID"] = DBNull.Value;
-                newRow["TheaterName"] = "-- Select a theater --";
-                newRow["TheaterType"] = "";
-                displayTable.Rows.InsertAt(newRow, 0);
+                allTheatersTable = theatersTable;
 
-                cboTheaters.DataSource = displayTable;
-                cboTheaters.DisplayMember = "TheaterName";
-                cboTheaters.ValueMember = "TheaterID";
-                cboTheaters.SelectedIndex = 0;
-            }
-            else
-            {
-                MessageBox.Show("No theaters found in the database.",
-                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadSampleTheaters();
-            }
+                if (theatersTable.Rows.Count > 0)
+                {
+                    DataTable displayTable = theatersTable.Copy();
+                    DataRow newRow = displayTable.NewRow();
+                    newRow["TheaterID"] = DBNull.Value;
+                    newRow["TheaterName"] = "-- Select a theater --";
+                    newRow["TheaterType"] = "";
+                    displayTable.Rows.InsertAt(newRow, 0);
+
+                    cboTheaters.DataSource = displayTable;
+                    cboTheaters.DisplayMember = "TheaterName";
+                    cboTheaters.ValueMember = "TheaterID";
+                    cboTheaters.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("No theaters found in the database.",
+                        "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadSampleTheaters();
+                }
+            });
         }
 
         private void LoadSampleTheatersData(DataTable theatersTable)
@@ -724,6 +740,7 @@ namespace Cinema
             theatersTable.Rows.Add("T003", "Theater 3", "VIP");
             theatersTable.Rows.Add("T004", "Theater 4", "IMAX");
             theatersTable.Rows.Add("T005", "Theater 5", "Standard");
+            theatersTable.Rows.Add("T006", "Theater 6", "4DX");
         }
 
         private void LoadSampleTheaters()
@@ -754,7 +771,8 @@ namespace Cinema
             moviesTable.Columns.Add("MovieID", typeof(string));
             moviesTable.Columns.Add("Title", typeof(string));
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     try
@@ -774,32 +792,35 @@ namespace Cinema
                 }
             });
 
-            if (moviesTable.Rows.Count > 0)
+            this.Invoke((MethodInvoker)delegate
             {
-                DataRow newRow = moviesTable.NewRow();
-                newRow["MovieID"] = DBNull.Value;
-                newRow["Title"] = "-- Select a movie --";
-                moviesTable.Rows.InsertAt(newRow, 0);
+                if (moviesTable.Rows.Count > 0)
+                {
+                    DataRow newRow = moviesTable.NewRow();
+                    newRow["MovieID"] = DBNull.Value;
+                    newRow["Title"] = "-- Select a movie --";
+                    moviesTable.Rows.InsertAt(newRow, 0);
 
-                cboMovies.DataSource = moviesTable;
-                cboMovies.DisplayMember = "Title";
-                cboMovies.ValueMember = "MovieID";
-
-                cboMovies.SelectedIndex = 0;
-            }
-            else
-            {
-                MessageBox.Show("No movies found in the database.",
-                    "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                LoadSampleData();
-            }
+                    cboMovies.DataSource = moviesTable;
+                    cboMovies.DisplayMember = "Title";
+                    cboMovies.ValueMember = "MovieID";
+                    cboMovies.SelectedIndex = 0;
+                }
+                else
+                {
+                    MessageBox.Show("No movies found in the database.",
+                        "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadSampleData();
+                }
+            });
         }
 
         private async Task<MovieInfo> GetMovieDetailsAsync(string movieID)
         {
             MovieInfo info = new MovieInfo();
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
@@ -905,7 +926,7 @@ namespace Cinema
             return info;
         }
 
-        private async void LoadMoviePosterAsync(string posterURL)
+        private void LoadMoviePosterAsync(string posterURL)
         {
             if (string.IsNullOrEmpty(posterURL))
             {
@@ -915,28 +936,44 @@ namespace Cinema
 
             try
             {
-                await Task.Run(() => {
+                Task.Run(() =>
+                {
                     try
                     {
-                        using (WebClientWithTimeout client = new WebClientWithTimeout())
+                        using (WebClient client = new WebClient())
                         {
                             client.Headers.Add("User-Agent", "Mozilla/5.0");
-                            client.Timeout = 5000;
-
                             byte[] data = client.DownloadData(posterURL);
                             using (MemoryStream ms = new MemoryStream(data))
                             {
                                 Image posterImage = Image.FromStream(ms);
-                                this.Invoke(new Action(() => {
-                                    pictureBoxPoster.Image = new Bitmap(posterImage);
-                                    pictureBoxPoster.SizeMode = PictureBoxSizeMode.Zoom;
-                                }));
+                                if (!IsDisposed && pictureBoxPoster != null)
+                                {
+                                    this.Invoke((MethodInvoker)delegate
+                                    {
+                                        if (!IsDisposed && pictureBoxPoster != null)
+                                        {
+                                            pictureBoxPoster.Image?.Dispose();
+                                            pictureBoxPoster.Image = new Bitmap(posterImage);
+                                            pictureBoxPoster.SizeMode = PictureBoxSizeMode.Zoom;
+                                        }
+                                    });
+                                }
                             }
                         }
                     }
                     catch
                     {
-                        this.Invoke(new Action(() => CreatePlaceholderImage()));
+                        if (!IsDisposed && pictureBoxPoster != null)
+                        {
+                            this.Invoke((MethodInvoker)delegate
+                            {
+                                if (!IsDisposed && pictureBoxPoster != null)
+                                {
+                                    CreatePlaceholderImage();
+                                }
+                            });
+                        }
                     }
                 });
             }
@@ -979,6 +1016,7 @@ namespace Cinema
                     }
                 }
 
+                pictureBoxPoster.Image?.Dispose();
                 pictureBoxPoster.Image = bmp;
                 pictureBoxPoster.SizeMode = PictureBoxSizeMode.Zoom;
             }
@@ -1001,7 +1039,8 @@ namespace Cinema
             if (string.IsNullOrEmpty(movieID) || movieID == DBNull.Value.ToString())
                 return dataTable;
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 try
                 {
                     using (SqlConnection conn = new SqlConnection(connectionString))
@@ -1088,7 +1127,6 @@ namespace Cinema
 
         private void LoadSampleMoviesData(DataTable moviesTable)
         {
-            moviesTable.Rows.Add(DBNull.Value, "-- Select a movie --");
             moviesTable.Rows.Add("M001", "Inception");
             moviesTable.Rows.Add("M002", "Avatar: The Way of Water");
             moviesTable.Rows.Add("M003", "The Batman");
@@ -1104,13 +1142,12 @@ namespace Cinema
             moviesTable.Columns.Add("MovieID", typeof(string));
             moviesTable.Columns.Add("Title", typeof(string));
 
+            moviesTable.Rows.Add(DBNull.Value, "-- Select a movie --");
             LoadSampleMoviesData(moviesTable);
 
             cboMovies.DataSource = moviesTable;
             cboMovies.DisplayMember = "Title";
             cboMovies.ValueMember = "MovieID";
-
-            cboMovies.SelectedIndex = 0;
 
             LoadSampleTheaters();
             LoadSampleSeatCategories();
@@ -1171,17 +1208,17 @@ namespace Cinema
 
                 if (row < 2)
                 {
-                    categoryID = "SC003"; 
+                    categoryID = "SC003";
                     seatColor = vipSeatColor;
                 }
                 else if (row < 4)
                 {
-                    categoryID = "SC002"; 
+                    categoryID = "SC002";
                     seatColor = premiumSeatColor;
                 }
                 else
                 {
-                    categoryID = "SC001"; 
+                    categoryID = "SC001";
                     seatColor = standardSeatColor;
                 }
 
@@ -1404,7 +1441,8 @@ namespace Cinema
             bookedSeats.Clear();
             List<string> tempBookedSeats = new List<string>();
 
-            await Task.Run(() => {
+            await Task.Run(() =>
+            {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     try
@@ -1488,8 +1526,6 @@ namespace Cinema
 
             UpdateSummary();
         }
-
-        
 
         private void ResetSelectedSeats()
         {
@@ -1607,86 +1643,81 @@ namespace Cinema
 
             try
             {
-                using (LoadingForm loadingForm = new LoadingForm())
+                allShowtimesTable = await GetAllShowTimesAsync(movieId);
+
+                if (allShowtimesTable.Rows.Count > 0)
                 {
-                    loadingForm.Show(this);
-                    Application.DoEvents();
+                    DataTable theatersWithShowtimes = new DataTable();
+                    theatersWithShowtimes.Columns.Add("TheaterID", typeof(string));
+                    theatersWithShowtimes.Columns.Add("TheaterName", typeof(string));
+                    theatersWithShowtimes.Columns.Add("TheaterType", typeof(string));
 
-                    allShowtimesTable = await GetAllShowTimesAsync(movieId);
+                    DataRow blankRow = theatersWithShowtimes.NewRow();
+                    blankRow["TheaterID"] = DBNull.Value;
+                    blankRow["TheaterName"] = "-- Select a theater --";
+                    blankRow["TheaterType"] = "";
+                    theatersWithShowtimes.Rows.Add(blankRow);
 
-                    if (allShowtimesTable.Rows.Count > 0)
-                    {
-                        DataTable theatersWithShowtimes = new DataTable();
-                        theatersWithShowtimes.Columns.Add("TheaterID", typeof(string));
-                        theatersWithShowtimes.Columns.Add("TheaterName", typeof(string));
-                        theatersWithShowtimes.Columns.Add("TheaterType", typeof(string));
-
-                        DataRow blankRow = theatersWithShowtimes.NewRow();
-                        blankRow["TheaterID"] = DBNull.Value;
-                        blankRow["TheaterName"] = "-- Select a theater --";
-                        blankRow["TheaterType"] = "";
-                        theatersWithShowtimes.Rows.Add(blankRow);
-
-                        var uniqueTheaters = allShowtimesTable.AsEnumerable()
-                            .Select(r => new {
-                                TheaterID = r.Field<string>("TheaterID"),
-                                TheaterName = r.Field<string>("TheaterName")
-                            })
-                            .Distinct()
-                            .ToList();
-
-                        foreach (var theater in uniqueTheaters)
+                    var uniqueTheaters = allShowtimesTable.AsEnumerable()
+                        .Select(r => new
                         {
-                            string theaterType = "";
+                            TheaterID = r.Field<string>("TheaterID"),
+                            TheaterName = r.Field<string>("TheaterName")
+                        })
+                        .Distinct()
+                        .ToList();
 
-                            if (allTheatersTable != null)
+                    foreach (var theater in uniqueTheaters)
+                    {
+                        string theaterType = "";
+
+                        if (allTheatersTable != null)
+                        {
+                            var theaterRow = allTheatersTable.AsEnumerable()
+                                .FirstOrDefault(r => r.Field<string>("TheaterID") == theater.TheaterID);
+
+                            if (theaterRow != null)
                             {
-                                var theaterRow = allTheatersTable.AsEnumerable()
-                                    .FirstOrDefault(r => r.Field<string>("TheaterID") == theater.TheaterID);
-
-                                if (theaterRow != null)
-                                {
-                                    theaterType = theaterRow.Field<string>("TheaterType");
-                                }
+                                theaterType = theaterRow.Field<string>("TheaterType");
                             }
-
-                            DataRow newRow = theatersWithShowtimes.NewRow();
-                            newRow["TheaterID"] = theater.TheaterID;
-                            newRow["TheaterName"] = theater.TheaterName;
-                            newRow["TheaterType"] = theaterType;
-                            theatersWithShowtimes.Rows.Add(newRow);
                         }
 
-                        cboTheaters.SelectedIndexChanged -= cboTheaters_SelectedIndexChanged;
-                        cboTheaters.DataSource = theatersWithShowtimes;
-                        cboTheaters.DisplayMember = "TheaterName";
-                        cboTheaters.ValueMember = "TheaterID";
-                        cboTheaters.SelectedIndex = 0;
-                        cboTheaters.SelectedIndexChanged += cboTheaters_SelectedIndexChanged;
-
-                        UpdateShowtimes();
+                        DataRow newRow = theatersWithShowtimes.NewRow();
+                        newRow["TheaterID"] = theater.TheaterID;
+                        newRow["TheaterName"] = theater.TheaterName;
+                        newRow["TheaterType"] = theaterType;
+                        theatersWithShowtimes.Rows.Add(newRow);
                     }
-                    else
-                    {
-                        MessageBox.Show("No showtimes available for this movie.",
-                            "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        if (cboShowTimes.DataSource != null)
-                        {
-                            cboShowTimes.SelectedIndexChanged -= cboShowTimes_SelectedIndexChanged;
-                            ((DataTable)cboShowTimes.DataSource).Clear();
-                            DataTable emptyTable = new DataTable();
-                            emptyTable.Columns.Add("ShowID", typeof(string));
-                            emptyTable.Columns.Add("ShowTimeDisplay", typeof(string));
-                            emptyTable.Columns.Add("Price", typeof(decimal));
-                            emptyTable.Columns.Add("TheaterName", typeof(string));
-                            emptyTable.Rows.Add(DBNull.Value, "-- Select a showtime --", 0, "");
-                            cboShowTimes.DataSource = emptyTable;
-                            cboShowTimes.DisplayMember = "ShowTimeDisplay";
-                            cboShowTimes.ValueMember = "ShowID";
-                            cboShowTimes.SelectedIndex = 0;
-                            cboShowTimes.SelectedIndexChanged += cboShowTimes_SelectedIndexChanged;
-                        }
+                    cboTheaters.SelectedIndexChanged -= cboTheaters_SelectedIndexChanged;
+                    cboTheaters.DataSource = theatersWithShowtimes;
+                    cboTheaters.DisplayMember = "TheaterName";
+                    cboTheaters.ValueMember = "TheaterID";
+                    cboTheaters.SelectedIndex = 0;
+                    cboTheaters.SelectedIndexChanged += cboTheaters_SelectedIndexChanged;
+
+                    UpdateShowtimes();
+                }
+                else
+                {
+                    MessageBox.Show("No showtimes available for this movie.",
+                        "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    if (cboShowTimes.DataSource != null)
+                    {
+                        cboShowTimes.SelectedIndexChanged -= cboShowTimes_SelectedIndexChanged;
+                        ((DataTable)cboShowTimes.DataSource).Clear();
+                        DataTable emptyTable = new DataTable();
+                        emptyTable.Columns.Add("ShowID", typeof(string));
+                        emptyTable.Columns.Add("ShowTimeDisplay", typeof(string));
+                        emptyTable.Columns.Add("Price", typeof(decimal));
+                        emptyTable.Columns.Add("TheaterName", typeof(string));
+                        emptyTable.Rows.Add(DBNull.Value, "-- Select a showtime --", 0, "");
+                        cboShowTimes.DataSource = emptyTable;
+                        cboShowTimes.DisplayMember = "ShowTimeDisplay";
+                        cboShowTimes.ValueMember = "ShowID";
+                        cboShowTimes.SelectedIndex = 0;
+                        cboShowTimes.SelectedIndexChanged += cboShowTimes_SelectedIndexChanged;
                     }
                 }
             }
@@ -1772,87 +1803,81 @@ namespace Cinema
         {
             try
             {
-                using (LoadingForm loadingForm = new LoadingForm())
+                ResetSelectedSeats();
+
+                if (cboMovies.SelectedValue != null && cboMovies.SelectedValue != DBNull.Value && cboMovies.SelectedIndex > 0)
                 {
-                    loadingForm.Show(this);
-                    Application.DoEvents();
+                    string movieId = cboMovies.SelectedValue.ToString();
+                    selectedMovieId = movieId;
 
-                    ResetSelectedSeats();
+                    var movieDetailsTask = GetMovieDetailsAsync(movieId);
+                    await movieDetailsTask;
 
-                    if (cboMovies.SelectedValue != null && cboMovies.SelectedValue != DBNull.Value && cboMovies.SelectedIndex > 0)
+                    var movieDetails = movieDetailsTask.Result;
+
+                    movieTitle = movieDetails.Title;
+                    movieGenre = movieDetails.Genre;
+                    movieDuration = movieDetails.Duration;
+                    movieDescription = movieDetails.Description;
+                    moviePosterURL = movieDetails.PosterURL;
+
+                    lblMovieInfoTitle.Text = movieDetails.Title;
+                    lblGenreValue.Text = movieDetails.Genre;
+                    lblDurationValue.Text = movieDetails.Duration + " min";
+                    txtDescription.Text = movieDetails.Description;
+
+                    lblMovieInfoTitle.Visible = true;
+                    lblGenreValue.Visible = true;
+                    lblDurationValue.Visible = true;
+                    txtDescription.Visible = true;
+
+                    LoadMoviePosterAsync(movieDetails.PosterURL);
+
+                    UpdateTheatersForMovie(movieId);
+                }
+                else
+                {
+                    selectedMovieId = "";
+
+                    if (allTheatersTable != null)
                     {
-                        string movieId = cboMovies.SelectedValue.ToString();
-                        selectedMovieId = movieId;
+                        DataTable displayTable = allTheatersTable.Copy();
+                        DataRow newRow = displayTable.NewRow();
+                        newRow["TheaterID"] = DBNull.Value;
+                        newRow["TheaterName"] = "-- Select a theater --";
+                        newRow["TheaterType"] = "";
+                        displayTable.Rows.InsertAt(newRow, 0);
 
-                        var movieDetailsTask = GetMovieDetailsAsync(movieId);
-                        await movieDetailsTask;
-
-                        var movieDetails = movieDetailsTask.Result;
-
-                        movieTitle = movieDetails.Title;
-                        movieGenre = movieDetails.Genre;
-                        movieDuration = movieDetails.Duration;
-                        movieDescription = movieDetails.Description;
-                        moviePosterURL = movieDetails.PosterURL;
-
-                        lblMovieInfoTitle.Text = movieDetails.Title;
-                        lblGenreValue.Text = movieDetails.Genre;
-                        lblDurationValue.Text = movieDetails.Duration + " min";
-                        txtDescription.Text = movieDetails.Description;
-
-                        lblMovieInfoTitle.Visible = true;
-                        lblGenreValue.Visible = true;
-                        lblDurationValue.Visible = true;
-                        txtDescription.Visible = true;
-
-                        LoadMoviePosterAsync(movieDetails.PosterURL);
-
-                        UpdateTheatersForMovie(movieId);
+                        cboTheaters.SelectedIndexChanged -= cboTheaters_SelectedIndexChanged;
+                        cboTheaters.DataSource = displayTable;
+                        cboTheaters.DisplayMember = "TheaterName";
+                        cboTheaters.ValueMember = "TheaterID";
+                        cboTheaters.SelectedIndex = 0;
+                        cboTheaters.SelectedIndexChanged += cboTheaters_SelectedIndexChanged;
                     }
-                    else
-                    {
-                        selectedMovieId = "";
 
-                        if (allTheatersTable != null)
-                        {
-                            DataTable displayTable = allTheatersTable.Copy();
-                            DataRow newRow = displayTable.NewRow();
-                            newRow["TheaterID"] = DBNull.Value;
-                            newRow["TheaterName"] = "-- Select a theater --";
-                            newRow["TheaterType"] = "";
-                            displayTable.Rows.InsertAt(newRow, 0);
+                    DataTable emptyTable = new DataTable();
+                    emptyTable.Columns.Add("ShowID", typeof(string));
+                    emptyTable.Columns.Add("ShowTimeDisplay", typeof(string));
+                    emptyTable.Columns.Add("Price", typeof(decimal));
+                    emptyTable.Columns.Add("TheaterName", typeof(string));
+                    emptyTable.Rows.Add(DBNull.Value, "-- Select a showtime --", 0, "");
 
-                            cboTheaters.SelectedIndexChanged -= cboTheaters_SelectedIndexChanged;
-                            cboTheaters.DataSource = displayTable;
-                            cboTheaters.DisplayMember = "TheaterName";
-                            cboTheaters.ValueMember = "TheaterID";
-                            cboTheaters.SelectedIndex = 0;
-                            cboTheaters.SelectedIndexChanged += cboTheaters_SelectedIndexChanged;
-                        }
+                    cboShowTimes.SelectedIndexChanged -= cboShowTimes_SelectedIndexChanged;
+                    cboShowTimes.DataSource = emptyTable;
+                    cboShowTimes.DisplayMember = "ShowTimeDisplay";
+                    cboShowTimes.ValueMember = "ShowID";
+                    cboShowTimes.SelectedIndex = 0;
+                    cboShowTimes.SelectedIndexChanged += cboShowTimes_SelectedIndexChanged;
 
-                        DataTable emptyTable = new DataTable();
-                        emptyTable.Columns.Add("ShowID", typeof(string));
-                        emptyTable.Columns.Add("ShowTimeDisplay", typeof(string));
-                        emptyTable.Columns.Add("Price", typeof(decimal));
-                        emptyTable.Columns.Add("TheaterName", typeof(string));
-                        emptyTable.Rows.Add(DBNull.Value, "-- Select a showtime --", 0, "");
-
-                        cboShowTimes.SelectedIndexChanged -= cboShowTimes_SelectedIndexChanged;
-                        cboShowTimes.DataSource = emptyTable;
-                        cboShowTimes.DisplayMember = "ShowTimeDisplay";
-                        cboShowTimes.ValueMember = "ShowID";
-                        cboShowTimes.SelectedIndex = 0;
-                        cboShowTimes.SelectedIndexChanged += cboShowTimes_SelectedIndexChanged;
-
-                        lblMovieInfoTitle.Text = "";
-                        lblGenreValue.Text = "";
-                        lblDurationValue.Text = "";
-                        txtDescription.Text = "";
-                        pictureBoxPoster.Image = null;
-                        ticketPrice = 0;
-                        lblPriceValue.Text = "$0.00";
-                        lblTicketPrice.Text = "Price per Ticket: $0.00";
-                    }
+                    lblMovieInfoTitle.Text = "";
+                    lblGenreValue.Text = "";
+                    lblDurationValue.Text = "";
+                    txtDescription.Text = "";
+                    pictureBoxPoster.Image = null;
+                    ticketPrice = 0;
+                    lblPriceValue.Text = "$0.00";
+                    lblTicketPrice.Text = "Price per Ticket: $0.00";
                 }
             }
             catch (Exception ex)
@@ -1866,35 +1891,25 @@ namespace Cinema
         {
             try
             {
-                using (LoadingForm loadingForm = new LoadingForm())
+                ResetSelectedSeats();
+
+                if (cboTheaters.SelectedValue != null && cboTheaters.SelectedValue != DBNull.Value && cboTheaters.SelectedIndex > 0)
                 {
-                    loadingForm.Show(this);
-                    Application.DoEvents();
+                    selectedTheaterId = cboTheaters.SelectedValue.ToString();
+                    DataRowView selectedRow = (DataRowView)cboTheaters.SelectedItem;
+                    string theaterName = selectedRow["TheaterName"].ToString();
+                    string theaterType = selectedRow["TheaterType"].ToString();
+                    lblTheaterValue.Text = $"{theaterName} ({theaterType})";
 
-                    ResetSelectedSeats();
-
-                    if (cboTheaters.SelectedValue != null && cboTheaters.SelectedValue != DBNull.Value && cboTheaters.SelectedIndex > 0)
-                    {
-                        selectedTheaterId = cboTheaters.SelectedValue.ToString();
-                        DataRowView selectedRow = (DataRowView)cboTheaters.SelectedItem;
-                        string theaterName = selectedRow["TheaterName"].ToString();
-                        string theaterType = selectedRow["TheaterType"].ToString();
-                        lblTheaterValue.Text = $"{theaterName} ({theaterType})";
-
-                        Task loadSeatMappingTask = LoadSeatCategoryMappingAsync();
-
-                        UpdateShowtimes();
-
-                        await loadSeatMappingTask;
-                        InitializeSeatLayout();
-                    }
-                    else
-                    {
-                        selectedTheaterId = "";
-                        lblTheaterValue.Text = "";
-
-                        UpdateShowtimes();
-                    }
+                    await LoadSeatCategoryMappingAsync();
+                    InitializeSeatLayout();
+                    UpdateShowtimes();
+                }
+                else
+                {
+                    selectedTheaterId = "";
+                    lblTheaterValue.Text = "";
+                    UpdateShowtimes();
                 }
             }
             catch (Exception ex)
@@ -1918,7 +1933,7 @@ namespace Cinema
                     {
                         ticketPrice = Convert.ToDecimal(selectedRow["Price"]);
                         lblPriceValue.Text = "$" + ticketPrice.ToString("0.00");
-                        lblTicketPrice.Text = "Price per Ticket: $" + ticketPrice.ToString("0.00");
+                        lblTicketPrice.Text = "$" + ticketPrice.ToString("0.00");
 
                         await LoadBookedSeatsAsync(selectedShowID);
                         lblScreen.Visible = true;
@@ -1929,7 +1944,7 @@ namespace Cinema
                     selectedShowID = "";
                     ticketPrice = 0;
                     lblPriceValue.Text = "$0.00";
-                    lblTicketPrice.Text = "Price per Ticket: $0.00";
+                    lblTicketPrice.Text = "$0.00";
                     lblScreen.Visible = false;
 
                     foreach (KeyValuePair<string, Button> seat in seatButtons)
@@ -1959,28 +1974,21 @@ namespace Cinema
         {
             try
             {
-                using (LoadingForm loadingForm = new LoadingForm())
+                ResetAllFormData();
+                bool connected = await TryConnectToDatabaseAsync();
+
+                if (connected)
                 {
-                    loadingForm.Show(this);
-                    Application.DoEvents();
-
-                    ResetAllFormData();
-                    bool connected = await TryConnectToDatabaseAsync();
-
-                    if (connected)
-                    {
-                        await LoadSeatCategoriesAsync();
-                        await LoadAllTheatersAsync();
-                        await LoadMoviesAsync();
-                    }
-                    else
-                    {
-                        LoadSampleData();
-                    }
-
-                    InitializeSeatLayout();
+                    await LoadSeatCategoriesAsync();
+                    await LoadAllTheatersAsync();
+                    await LoadMoviesAsync();
+                }
+                else
+                {
+                    LoadSampleData();
                 }
 
+                InitializeSeatLayout();
                 MessageBox.Show("All data has been refreshed!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
@@ -1992,14 +2000,14 @@ namespace Cinema
 
         private void btnBook_Click(object sender, EventArgs e)
         {
+            if (selectedSeats.Count == 0)
+            {
+                MessageBox.Show("Please select at least one seat!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                if (selectedSeats.Count == 0)
-                {
-                    MessageBox.Show("Please select at least one seat!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-
                 decimal totalPrice = CalculateTotalPrice();
                 string paymentMethod = cboPaymentMethod.SelectedItem.ToString();
                 string theaterName = "";
@@ -2049,145 +2057,354 @@ namespace Cinema
             }
         }
 
-        private void ShowConfirmationDialog(string theaterName, string seatTypeInfo, decimal totalPrice, string paymentMethod)
+        private bool SaveBookingToDatabase(string bookingId, string showId, string customerId,
+                                          string discountId, string paymentMethodId, decimal totalAmount)
         {
-            using (Form confirmDialog = new Form())
+            List<string> seatsToBook = new List<string>(selectedSeats);
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
             {
-                confirmDialog.Text = "Confirm Booking";
-                confirmDialog.Size = new Size(550, 480);
-                confirmDialog.StartPosition = FormStartPosition.CenterParent;
-                confirmDialog.FormBorderStyle = FormBorderStyle.FixedDialog;
-                confirmDialog.MaximizeBox = false;
-                confirmDialog.MinimizeBox = false;
-                confirmDialog.BackColor = Color.FromArgb(20, 30, 60);
-                confirmDialog.Icon = this.Icon;
-
-                Panel headerPanel = new Panel();
-                headerPanel.Dock = DockStyle.Top;
-                headerPanel.Height = 60;
-                headerPanel.BackColor = Color.FromArgb(30, 40, 70);
-                confirmDialog.Controls.Add(headerPanel);
-
-                Label headerLabel = new Label();
-                headerLabel.Text = "Confirm Booking Details";
-                headerLabel.Font = new Font("Segoe UI", 18, FontStyle.Bold);
-                headerLabel.ForeColor = Color.FromArgb(240, 200, 70);
-                headerLabel.AutoSize = false;
-                headerLabel.TextAlign = ContentAlignment.MiddleCenter;
-                headerLabel.Dock = DockStyle.Fill;
-                headerPanel.Controls.Add(headerLabel);
-
-                Panel contentPanel = new Panel();
-                contentPanel.Dock = DockStyle.Fill;
-                contentPanel.Padding = new Padding(20);
-                contentPanel.BackColor = Color.FromArgb(20, 30, 60);
-                confirmDialog.Controls.Add(contentPanel);
-
-                TableLayoutPanel tablePanel = new TableLayoutPanel();
-                tablePanel.RowCount = 9; // Increased to 9 rows to include movie title
-                tablePanel.ColumnCount = 2;
-                tablePanel.Dock = DockStyle.Top;
-                tablePanel.Height = 320;
-                tablePanel.Width = 510;
-                tablePanel.Location = new Point(20, 20);
-                tablePanel.BackColor = Color.FromArgb(25, 35, 65);
-                tablePanel.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
-
-                tablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30F));
-                tablePanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 70F));
-
-                for (int i = 0; i < 9; i++)
+                try
                 {
-                    tablePanel.RowStyles.Add(new RowStyle(SizeType.Percent, 11.11F)); // Adjusted to 11.11% (100/9)
+                    conn.Open();
+                    using (SqlTransaction transaction = conn.BeginTransaction())
+                    {
+                        try
+                        {
+                            string insertBookingQuery = @"
+                                INSERT INTO Booking (BookingID, ShowID, CustomerID, BookingTime, DiscountID, 
+                                        PaymentMethodID, TotalAmount, Status)
+                                VALUES (@BookingID, @ShowID, @CustomerID, @BookingTime, @DiscountID, 
+                                        @PaymentMethodID, @TotalAmount, 'Active')";
+
+                            using (SqlCommand cmd = new SqlCommand(insertBookingQuery, conn, transaction))
+                            {
+                                cmd.Parameters.AddWithValue("@BookingID", bookingId);
+                                cmd.Parameters.AddWithValue("@ShowID", showId);
+
+                                if (string.IsNullOrEmpty(customerId))
+                                    cmd.Parameters.AddWithValue("@CustomerID", DBNull.Value);
+                                else
+                                    cmd.Parameters.AddWithValue("@CustomerID", customerId);
+
+                                cmd.Parameters.AddWithValue("@BookingTime", DateTime.Now);
+                                cmd.Parameters.AddWithValue("@DiscountID", discountId);
+                                cmd.Parameters.AddWithValue("@PaymentMethodID", paymentMethodId);
+                                cmd.Parameters.AddWithValue("@TotalAmount", totalAmount);
+                                cmd.ExecuteNonQuery();
+                            }
+
+                            foreach (string seatId in seatsToBook)
+                            {
+                                string categoryId = "SC001";
+                                if (seatCategoryMapping.ContainsKey(seatId))
+                                {
+                                    categoryId = seatCategoryMapping[seatId];
+                                }
+
+                                decimal multiplier = 1.0m;
+                                if (seatCategories.ContainsKey(categoryId))
+                                {
+                                    multiplier = seatCategories[categoryId].PriceMultiplier;
+                                }
+
+                                decimal seatPrice = ticketPrice * multiplier;
+
+                                using (SqlCommand cmd = new SqlCommand(
+                                    "INSERT INTO SeatBooking (BookingID, SeatID, Price) VALUES (@BookingID, @SeatID, @Price)",
+                                    conn, transaction))
+                                {
+                                    cmd.Parameters.AddWithValue("@BookingID", bookingId);
+                                    cmd.Parameters.AddWithValue("@SeatID", seatId);
+                                    cmd.Parameters.AddWithValue("@Price", seatPrice);
+                                    cmd.ExecuteNonQuery();
+                                }
+                            }
+
+                            transaction.Commit();
+                            return true;
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine("Transaction error: " + ex.Message);
+                            transaction.Rollback();
+                            return false;
+                        }
+                    }
                 }
-
-                contentPanel.Controls.Add(tablePanel);
-
-                // Add row contents - now including movie title as the first row
-                AddConfirmationTableRow(tablePanel, 0, "Movie:", movieTitle);
-                AddConfirmationTableRow(tablePanel, 1, "Theater:", theaterName);
-                AddConfirmationTableRow(tablePanel, 2, "Showtime:", cboShowTimes.Text);
-                AddConfirmationTableRow(tablePanel, 3, "Seats:", string.Join(", ", selectedSeats));
-                AddConfirmationTableRow(tablePanel, 4, "Seat Types:", seatTypeInfo);
-                AddConfirmationTableRow(tablePanel, 5, "Discount:", cboDiscount.Text);
-                AddConfirmationTableRow(tablePanel, 6, "Payment Method:", paymentMethod);
-                AddConfirmationTableRow(tablePanel, 7, "Total Price:", $"${totalPrice:0.00}", true);
-
-                Panel buttonPanel = new Panel();
-                buttonPanel.Dock = DockStyle.Bottom;
-                buttonPanel.Height = 80;
-                buttonPanel.BackColor = Color.FromArgb(25, 35, 65);
-                confirmDialog.Controls.Add(buttonPanel);
-
-                Button btnYes = new Button();
-                btnYes.Text = "Yes";
-                btnYes.BackColor = Color.FromArgb(52, 152, 219);
-                btnYes.FlatStyle = FlatStyle.Flat;
-                btnYes.FlatAppearance.BorderSize = 0;
-                btnYes.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-                btnYes.ForeColor = Color.White;
-                btnYes.Size = new Size(160, 45);
-                btnYes.Location = new Point(120, 20);
-                btnYes.DialogResult = DialogResult.Yes;
-                buttonPanel.Controls.Add(btnYes);
-
-                Button btnNo = new Button();
-                btnNo.Text = "No";
-                btnNo.BackColor = Color.FromArgb(175, 35, 35);
-                btnNo.FlatStyle = FlatStyle.Flat;
-                btnNo.FlatAppearance.BorderSize = 0;
-                btnNo.Font = new Font("Segoe UI", 12, FontStyle.Bold);
-                btnNo.ForeColor = Color.White;
-                btnNo.Size = new Size(160, 45);
-                btnNo.Location = new Point(290, 20);
-                btnNo.DialogResult = DialogResult.No;
-                buttonPanel.Controls.Add(btnNo);
-
-                DialogResult result = confirmDialog.ShowDialog();
-                if (result == DialogResult.Yes)
+                catch (Exception ex)
                 {
-                    BookTickets();
+                    Console.WriteLine("Database connection error: " + ex.Message);
+                    return false;
                 }
             }
         }
 
-        private void AddConfirmationTableRow(TableLayoutPanel table, int rowIndex, string labelText, string valueText, bool highlight = false)
+        private void ShowConfirmationDialog(string theaterName, string seatTypeInfo, decimal totalPrice, string paymentMethod)
         {
-            Label label = new Label();
-            label.Text = labelText;
-            label.Font = new Font("Segoe UI", 11, FontStyle.Bold);
-            label.ForeColor = Color.White;
-            label.Dock = DockStyle.Fill;
-            label.TextAlign = ContentAlignment.MiddleRight;
-            label.Padding = new Padding(0, 0, 10, 0);
-            table.Controls.Add(label, 0, rowIndex);
+            Form confirmDialog = new Form();
+            confirmDialog.Text = "Confirm Booking";
+            confirmDialog.Size = new Size(600, 650);
+            confirmDialog.StartPosition = FormStartPosition.CenterScreen;
+            confirmDialog.FormBorderStyle = FormBorderStyle.FixedDialog;
+            confirmDialog.MaximizeBox = false;
+            confirmDialog.MinimizeBox = false;
+            confirmDialog.BackColor = Color.FromArgb(20, 30, 60);
+            string movieName = "Unknown Movie";
+            try
+            {
+                if (cboMovies.SelectedIndex > 0)
+                {
+                    if (cboMovies.SelectedItem is DataRowView selectedMovie)
+                    {
+                        movieName = selectedMovie["Title"].ToString();
+                    }
+                }
+                if (string.IsNullOrEmpty(movieName) || movieName == "Unknown Movie")
+                {
+                    movieName = movieTitle;
+                }
+                if (string.IsNullOrEmpty(movieName) || movieName == "Unknown Movie")
+                {
+                    movieName = cboMovies.Text;
+                }
+            }
+            catch
+            {
+                movieName = "Unknown Movie";
+            }
 
-            Label value = new Label();
-            value.Text = valueText;
-            value.Font = new Font("Segoe UI", 11, highlight ? FontStyle.Bold : FontStyle.Regular);
-            value.ForeColor = highlight ? Color.FromArgb(240, 200, 70) : Color.White;
-            value.Dock = DockStyle.Fill;
-            value.TextAlign = ContentAlignment.MiddleLeft;
-            table.Controls.Add(value, 1, rowIndex);
+            Label titleLabel = new Label();
+            titleLabel.Text = "Confirm Booking Details";
+            titleLabel.Size = new Size(600, 70);
+            titleLabel.Location = new Point(0, 0);
+            titleLabel.BackColor = Color.FromArgb(30, 40, 70);
+            titleLabel.ForeColor = Color.FromArgb(240, 200, 70);
+            titleLabel.Font = new Font("Segoe UI", 24, FontStyle.Bold);
+            titleLabel.TextAlign = ContentAlignment.MiddleCenter;
+            confirmDialog.Controls.Add(titleLabel);
+
+            Label lblMovie = new Label();
+            lblMovie.Text = "Movie:";
+            lblMovie.Size = new Size(150, 40);
+            lblMovie.Location = new Point(40, 100);
+            lblMovie.ForeColor = Color.White;
+            lblMovie.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblMovie.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblMovie);
+
+            Label lblMovieValue = new Label();
+            lblMovieValue.Text = movieName;
+            lblMovieValue.Size = new Size(370, 40);
+            lblMovieValue.Location = new Point(200, 100);
+            lblMovieValue.ForeColor = Color.White;
+            lblMovieValue.Font = new Font("Segoe UI", 14);
+            lblMovieValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblMovieValue);
+
+            Label lblTheater = new Label();
+            lblTheater.Text = "Theater:";
+            lblTheater.Size = new Size(150, 40);
+            lblTheater.Location = new Point(40, 150);
+            lblTheater.ForeColor = Color.White;
+            lblTheater.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblTheater.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblTheater);
+
+            Label lblTheaterValue = new Label();
+            lblTheaterValue.Text = theaterName;
+            lblTheaterValue.Size = new Size(370, 40);
+            lblTheaterValue.Location = new Point(200, 150);
+            lblTheaterValue.ForeColor = Color.White;
+            lblTheaterValue.Font = new Font("Segoe UI", 14);
+            lblTheaterValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblTheaterValue);
+
+            Label lblShowtime = new Label();
+            lblShowtime.Text = "Showtime:";
+            lblShowtime.Size = new Size(150, 40);
+            lblShowtime.Location = new Point(40, 200);
+            lblShowtime.ForeColor = Color.White;
+            lblShowtime.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblShowtime.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblShowtime);
+
+            Label lblShowtimeValue = new Label();
+            lblShowtimeValue.Text = cboShowTimes.Text;
+            lblShowtimeValue.Size = new Size(370, 40);
+            lblShowtimeValue.Location = new Point(200, 200);
+            lblShowtimeValue.ForeColor = Color.White;
+            lblShowtimeValue.Font = new Font("Segoe UI", 14);
+            lblShowtimeValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblShowtimeValue);
+
+            Label lblSeats = new Label();
+            lblSeats.Text = "Seats:";
+            lblSeats.Size = new Size(150, 40);
+            lblSeats.Location = new Point(40, 250);
+            lblSeats.ForeColor = Color.White;
+            lblSeats.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblSeats.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblSeats);
+
+            Label lblSeatsValue = new Label();
+            lblSeatsValue.Text = string.Join(", ", selectedSeats);
+            lblSeatsValue.Size = new Size(370, 40);
+            lblSeatsValue.Location = new Point(200, 250);
+            lblSeatsValue.ForeColor = Color.White;
+            lblSeatsValue.Font = new Font("Segoe UI", 14);
+            lblSeatsValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblSeatsValue);
+
+            Label lblSeatTypes = new Label();
+            lblSeatTypes.Text = "Seat Types:";
+            lblSeatTypes.Size = new Size(150, 40);
+            lblSeatTypes.Location = new Point(40, 300);
+            lblSeatTypes.ForeColor = Color.White;
+            lblSeatTypes.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblSeatTypes.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblSeatTypes);
+
+            Label lblSeatTypesValue = new Label();
+            lblSeatTypesValue.Text = seatTypeInfo;
+            lblSeatTypesValue.Size = new Size(370, 40);
+            lblSeatTypesValue.Location = new Point(200, 300);
+            lblSeatTypesValue.ForeColor = Color.White;
+            lblSeatTypesValue.Font = new Font("Segoe UI", 14);
+            lblSeatTypesValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblSeatTypesValue);
+
+            Label lblDiscount = new Label();
+            lblDiscount.Text = "Discount:";
+            lblDiscount.Size = new Size(150, 40);
+            lblDiscount.Location = new Point(40, 350);
+            lblDiscount.ForeColor = Color.White;
+            lblDiscount.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblDiscount.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblDiscount);
+
+            Label lblDiscountValue = new Label();
+            lblDiscountValue.Text = cboDiscount.Text;
+            lblDiscountValue.Size = new Size(370, 40);
+            lblDiscountValue.Location = new Point(200, 350);
+            lblDiscountValue.ForeColor = Color.White;
+            lblDiscountValue.Font = new Font("Segoe UI", 14);
+            lblDiscountValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblDiscountValue);
+
+            Label lblPayment = new Label();
+            lblPayment.Text = "Payment:";
+            lblPayment.Size = new Size(150, 40);
+            lblPayment.Location = new Point(40, 400);
+            lblPayment.ForeColor = Color.White;
+            lblPayment.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblPayment.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblPayment);
+
+            Label lblPaymentValue = new Label();
+            lblPaymentValue.Text = paymentMethod;
+            lblPaymentValue.Size = new Size(370, 40);
+            lblPaymentValue.Location = new Point(200, 400);
+            lblPaymentValue.ForeColor = Color.White;
+            lblPaymentValue.Font = new Font("Segoe UI", 14);
+            lblPaymentValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblPaymentValue);
+
+            Label lblTotalPrice = new Label();
+            lblTotalPrice.Text = "Total Price:";
+            lblTotalPrice.Size = new Size(150, 40);
+            lblTotalPrice.Location = new Point(40, 450);
+            lblTotalPrice.ForeColor = Color.White;
+            lblTotalPrice.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblTotalPrice.TextAlign = ContentAlignment.MiddleRight;
+            confirmDialog.Controls.Add(lblTotalPrice);
+
+            Label lblTotalPriceValue = new Label();
+            lblTotalPriceValue.Text = "$" + totalPrice.ToString("0.00");
+            lblTotalPriceValue.Size = new Size(370, 40);
+            lblTotalPriceValue.Location = new Point(200, 450);
+            lblTotalPriceValue.ForeColor = Color.FromArgb(240, 200, 70);
+            lblTotalPriceValue.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            lblTotalPriceValue.TextAlign = ContentAlignment.MiddleLeft;
+            confirmDialog.Controls.Add(lblTotalPriceValue);
+
+            Panel buttonPanel = new Panel();
+            buttonPanel.Size = new Size(600, 100);
+            buttonPanel.Location = new Point(0, 520);
+            buttonPanel.BackColor = Color.FromArgb(25, 35, 65);
+            confirmDialog.Controls.Add(buttonPanel);
+
+            Button btnYes = new Button();
+            btnYes.Text = "Yes";
+            btnYes.Size = new Size(150, 50);
+            btnYes.Location = new Point(150, 25);
+            btnYes.BackColor = Color.FromArgb(52, 152, 219);
+            btnYes.ForeColor = Color.White;
+            btnYes.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            btnYes.FlatStyle = FlatStyle.Flat;
+            btnYes.FlatAppearance.BorderSize = 0;
+            btnYes.DialogResult = DialogResult.Yes;
+            buttonPanel.Controls.Add(btnYes);
+
+            Button btnNo = new Button();
+            btnNo.Text = "No";
+            btnNo.Size = new Size(150, 50);
+            btnNo.Location = new Point(320, 25);
+            btnNo.BackColor = Color.FromArgb(175, 35, 35);
+            btnNo.ForeColor = Color.White;
+            btnNo.Font = new Font("Segoe UI", 14, FontStyle.Bold);
+            btnNo.FlatStyle = FlatStyle.Flat;
+            btnNo.FlatAppearance.BorderSize = 0;
+            btnNo.DialogResult = DialogResult.No;
+            buttonPanel.Controls.Add(btnNo);
+
+            if (confirmDialog.ShowDialog() == DialogResult.Yes)
+            {
+                string customerId = "C001";
+                string discountId = "D00" + (cboDiscount.SelectedIndex + 1);
+                string paymentMethodId = "PM00" + (cboPaymentMethod.SelectedIndex + 1);
+                string bookingId = "B" + DateTime.Now.ToString("yyyyMMddHHmmss");
+
+                try
+                {
+                    SaveBookingToDatabase(bookingId, selectedShowID, customerId, discountId, paymentMethodId, totalPrice);
+                    MessageBox.Show($"Booking successful! Your booking ID is {bookingId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    foreach (string seatId in selectedSeats)
+                    {
+                        if (seatButtons.ContainsKey(seatId))
+                        {
+                            seatButtons[seatId].BackColor = bookedSeatColor;
+                            seatButtons[seatId].Enabled = false;
+                            bookedSeats.Add(seatId);
+                        }
+                    }
+
+                    ResetSelectedSeats();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error during booking: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
-
         private decimal CalculateTotalPrice()
         {
             decimal subtotal = 0;
             foreach (string seatId in selectedSeats)
             {
-                if (seatButtons.ContainsKey(seatId))
+                string categoryId = "SC001";
+                if (seatButtons.ContainsKey(seatId) && seatButtons[seatId].Tag != null)
                 {
-                    string categoryId = seatButtons[seatId].Tag.ToString();
-                    decimal seatPrice = ticketPrice;
-
-                    if (seatCategories.ContainsKey(categoryId))
-                    {
-                        seatPrice *= seatCategories[categoryId].PriceMultiplier;
-                    }
-
-                    subtotal += seatPrice;
+                    categoryId = seatButtons[seatId].Tag.ToString();
                 }
+
+                decimal seatPrice = ticketPrice;
+                if (seatCategories.ContainsKey(categoryId))
+                {
+                    seatPrice *= seatCategories[categoryId].PriceMultiplier;
+                }
+
+                subtotal += seatPrice;
             }
 
             decimal discountPercent = 0;
@@ -2202,155 +2419,10 @@ namespace Cinema
             decimal discountAmount = subtotal * discountPercent;
             return subtotal - discountAmount;
         }
+
         private void btnBack_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private async void BookTickets()
-        {
-            using (LoadingForm loadingForm = new LoadingForm())
-            {
-                loadingForm.Show(this);
-                Application.DoEvents();
-
-                bool isConnected = await TryConnectToDatabaseAsync();
-
-                if (isConnected)
-                {
-                    bool bookingSuccess = await Task.Run(() => {
-                        using (SqlConnection conn = new SqlConnection(connectionString))
-                        {
-                            SqlTransaction transaction = null;
-
-                            try
-                            {
-                                conn.Open();
-                                transaction = conn.BeginTransaction();
-
-                                string bookingID = "B" + DateTime.Now.ToString("yyyyMMddHHmmss");
-                                string totalPriceString = lblFinalTotal.Text.Replace("Total: $", "");
-                                decimal totalAmount = decimal.Parse(totalPriceString);
-
-                                string paymentMethodID = "PM00" + (cboPaymentMethod.SelectedIndex + 1);
-                                string discountID = "D00" + (cboDiscount.SelectedIndex + 1);
-
-                                string insertBookingQuery = @"
-                                   INSERT INTO Booking (BookingID, ShowID, BookingTime, DiscountID, PaymentMethodID, TotalAmount)
-                                   VALUES (@BookingID, @ShowID, @BookingTime, @DiscountID, @PaymentMethodID, @TotalAmount)";
-
-                                using (SqlCommand cmdBooking = new SqlCommand(insertBookingQuery, conn, transaction))
-                                {
-                                    cmdBooking.Parameters.AddWithValue("@BookingID", bookingID);
-                                    cmdBooking.Parameters.AddWithValue("@ShowID", selectedShowID);
-                                    cmdBooking.Parameters.AddWithValue("@BookingTime", DateTime.Now);
-                                    cmdBooking.Parameters.AddWithValue("@DiscountID", discountID);
-                                    cmdBooking.Parameters.AddWithValue("@PaymentMethodID", paymentMethodID);
-                                    cmdBooking.Parameters.AddWithValue("@TotalAmount", totalAmount);
-                                    cmdBooking.ExecuteNonQuery();
-                                }
-
-                                foreach (string seatID in selectedSeats)
-                                {
-                                    string categoryId = "SC001";
-                                    decimal seatPriceMultiplier = 1.0m;
-
-                                    if (seatButtons.ContainsKey(seatID))
-                                    {
-                                        categoryId = seatButtons[seatID].Tag.ToString();
-                                        if (seatCategories.ContainsKey(categoryId))
-                                        {
-                                            seatPriceMultiplier = seatCategories[categoryId].PriceMultiplier;
-                                        }
-                                    }
-
-                                    decimal seatPrice = ticketPrice * seatPriceMultiplier;
-
-                                    using (SqlCommand cmdSeat = new SqlCommand("Book_Seat", conn, transaction))
-                                    {
-                                        cmdSeat.CommandType = CommandType.StoredProcedure;
-                                        cmdSeat.Parameters.AddWithValue("@BookingID", bookingID);
-                                        cmdSeat.Parameters.AddWithValue("@SeatID", seatID);
-                                        cmdSeat.Parameters.AddWithValue("@Price", seatPrice);
-
-                                        int result = cmdSeat.ExecuteNonQuery();
-                                        if (result < 0)
-                                        {
-                                            transaction.Rollback();
-                                            this.Invoke(new Action(() => {
-                                                MessageBox.Show($"Seat {seatID} has already been booked by someone else. Please refresh and select again!",
-                                                    "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                                LoadBookedSeatsAsync(selectedShowID);
-                                            }));
-                                            return false;
-                                        }
-                                    }
-                                }
-
-                                transaction.Commit();
-
-                                this.Invoke(new Action(() => {
-                                    MessageBox.Show($"Booking successful! Your booking ID is {bookingID}",
-                                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                }));
-
-                                return true;
-                            }
-                            catch (Exception ex)
-                            {
-                                transaction?.Rollback();
-                                this.Invoke(new Action(() => {
-                                    MessageBox.Show("Database error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                }));
-                                return false;
-                            }
-                        }
-                    });
-
-                    if (bookingSuccess)
-                    {
-                        ResetSelectedSeats();
-                        await LoadBookedSeatsAsync(selectedShowID);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Booking successful! (Demo Mode)\n\nIn a real application, your booking would be saved to the database.",
-                        "Demo Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    foreach (string seatID in selectedSeats)
-                    {
-                        if (seatButtons.ContainsKey(seatID))
-                        {
-                            bookedSeats.Add(seatID);
-                            seatButtons[seatID].BackColor = bookedSeatColor;
-                            seatButtons[seatID].Enabled = false;
-                        }
-                    }
-
-                    ResetSelectedSeats();
-                }
-            }
-        }
-
-        public class WebClientWithTimeout : WebClient
-        {
-            private int _timeout = 10000;
-
-            public int Timeout
-            {
-                get { return _timeout; }
-                set { _timeout = value; }
-            }
-
-            protected override WebRequest GetWebRequest(Uri uri)
-            {
-                WebRequest request = base.GetWebRequest(uri);
-                if (request != null)
-                {
-                    request.Timeout = _timeout;
-                }
-                return request;
-            }
         }
     }
 }
