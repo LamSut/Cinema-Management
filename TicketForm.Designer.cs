@@ -28,6 +28,7 @@ namespace Cinema
             this.lblSeats = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnClose = new System.Windows.Forms.Button();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblBookingID
@@ -104,10 +105,21 @@ namespace Cinema
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
+            // lblTotal
+            // 
+            this.lblTotal.AutoSize = true;
+            this.lblTotal.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.lblTotal.Location = new System.Drawing.Point(20, 208);
+            this.lblTotal.Name = "lblTotal";
+            this.lblTotal.Size = new System.Drawing.Size(64, 28);
+            this.lblTotal.TabIndex = 7;
+            this.lblTotal.Text = "Total:";
+            // 
             // TicketForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(25)))), ((int)(((byte)(50)))));
             this.ClientSize = new System.Drawing.Size(600, 300);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.lblBookingID);
             this.Controls.Add(this.lblShow);
             this.Controls.Add(this.lblTheater);
@@ -127,5 +139,7 @@ namespace Cinema
             this.PerformLayout();
 
         }
+
+        private Label lblTotal;
     }
 }
