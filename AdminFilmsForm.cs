@@ -55,6 +55,8 @@ namespace Cinema
                     dataGridViewMovies.DefaultCellStyle.SelectionBackColor = Color.DarkBlue;
                     dataGridViewMovies.DefaultCellStyle.SelectionForeColor = Color.White;
 
+                    dataGridViewMovies.Columns["ReleaseDate"].HeaderText = "Date";
+
                     dataGridViewMovies.Columns["MovieID"].Visible = false;
 
                     foreach (DataGridViewColumn col in dataGridViewMovies.Columns)
@@ -267,7 +269,8 @@ namespace Cinema
 
         private void dateTimePickerRelease_ValueChanged(object sender, EventArgs e)
         {
-
+            dateTimePickerRelease.Format = DateTimePickerFormat.Custom;
+            dateTimePickerRelease.CustomFormat = "dd/MM/yyyy";
         }
 
         private void txtGenre_TextChanged(object sender, EventArgs e)
