@@ -71,7 +71,7 @@
             this.btnAddMovie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
             this.btnAddMovie.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddMovie.Location = new System.Drawing.Point(113, 499);
-            this.btnAddMovie.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddMovie.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddMovie.Name = "btnAddMovie";
             this.btnAddMovie.Size = new System.Drawing.Size(192, 39);
             this.btnAddMovie.TabIndex = 1;
@@ -85,7 +85,7 @@
             this.btnDeleteMovie.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteMovie.ForeColor = System.Drawing.Color.White;
             this.btnDeleteMovie.Location = new System.Drawing.Point(899, 77);
-            this.btnDeleteMovie.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDeleteMovie.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteMovie.Name = "btnDeleteMovie";
             this.btnDeleteMovie.Size = new System.Drawing.Size(183, 37);
             this.btnDeleteMovie.TabIndex = 3;
@@ -98,13 +98,13 @@
             this.dataGridViewMovies.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewMovies.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dataGridViewMovies.Location = new System.Drawing.Point(326, 125);
-            this.dataGridViewMovies.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewMovies.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewMovies.Name = "dataGridViewMovies";
             this.dataGridViewMovies.RowHeadersWidth = 62;
             this.dataGridViewMovies.RowTemplate.Height = 28;
             this.dataGridViewMovies.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewMovies.ShowRowErrors = false;
-            this.dataGridViewMovies.Size = new System.Drawing.Size(756, 363);
+            this.dataGridViewMovies.Size = new System.Drawing.Size(756, 413);
             this.dataGridViewMovies.TabIndex = 4;
             this.dataGridViewMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -112,7 +112,7 @@
             // 
             this.txtTitle.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.txtTitle.Location = new System.Drawing.Point(113, 131);
-            this.txtTitle.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtTitle.Margin = new System.Windows.Forms.Padding(2);
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(192, 29);
             this.txtTitle.TabIndex = 5;
@@ -122,7 +122,7 @@
             // 
             this.numericDuration.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.numericDuration.Location = new System.Drawing.Point(113, 178);
-            this.numericDuration.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.numericDuration.Margin = new System.Windows.Forms.Padding(2);
             this.numericDuration.Name = "numericDuration";
             this.numericDuration.Size = new System.Drawing.Size(94, 29);
             this.numericDuration.TabIndex = 6;
@@ -132,7 +132,7 @@
             // 
             this.txtMovieID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.txtMovieID.Location = new System.Drawing.Point(113, 85);
-            this.txtMovieID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtMovieID.Margin = new System.Windows.Forms.Padding(2);
             this.txtMovieID.Name = "txtMovieID";
             this.txtMovieID.ReadOnly = true;
             this.txtMovieID.Size = new System.Drawing.Size(95, 29);
@@ -143,7 +143,7 @@
             // 
             this.txtGenre.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.txtGenre.Location = new System.Drawing.Point(113, 372);
-            this.txtGenre.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtGenre.Margin = new System.Windows.Forms.Padding(2);
             this.txtGenre.Name = "txtGenre";
             this.txtGenre.Size = new System.Drawing.Size(191, 29);
             this.txtGenre.TabIndex = 8;
@@ -153,7 +153,7 @@
             // 
             this.txtDirector.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.txtDirector.Location = new System.Drawing.Point(113, 277);
-            this.txtDirector.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDirector.Margin = new System.Windows.Forms.Padding(2);
             this.txtDirector.Name = "txtDirector";
             this.txtDirector.Size = new System.Drawing.Size(192, 29);
             this.txtDirector.TabIndex = 9;
@@ -163,7 +163,7 @@
             // 
             this.txtPosterURL.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.txtPosterURL.Location = new System.Drawing.Point(113, 228);
-            this.txtPosterURL.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtPosterURL.Margin = new System.Windows.Forms.Padding(2);
             this.txtPosterURL.Name = "txtPosterURL";
             this.txtPosterURL.Size = new System.Drawing.Size(192, 29);
             this.txtPosterURL.TabIndex = 10;
@@ -173,7 +173,7 @@
             // 
             this.txtDescription.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.txtDescription.Location = new System.Drawing.Point(113, 419);
-            this.txtDescription.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDescription.Margin = new System.Windows.Forms.Padding(2);
             this.txtDescription.Multiline = true;
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(192, 66);
@@ -183,11 +183,13 @@
             // dateTimePickerRelease
             // 
             this.dateTimePickerRelease.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.dateTimePickerRelease.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePickerRelease.Location = new System.Drawing.Point(113, 326);
-            this.dateTimePickerRelease.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dateTimePickerRelease.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePickerRelease.Name = "dateTimePickerRelease";
             this.dateTimePickerRelease.Size = new System.Drawing.Size(192, 29);
             this.dateTimePickerRelease.TabIndex = 12;
+            this.dateTimePickerRelease.Value = new System.DateTime(2025, 3, 25, 20, 6, 57, 0);
             this.dateTimePickerRelease.ValueChanged += new System.EventHandler(this.dateTimePickerRelease_ValueChanged);
             // 
             // lblMovieID
@@ -258,9 +260,9 @@
             this.lblDate.Location = new System.Drawing.Point(11, 326);
             this.lblDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(50, 21);
+            this.lblDate.Size = new System.Drawing.Size(52, 21);
             this.lblDate.TabIndex = 18;
-            this.lblDate.Text = "Date:";
+            this.lblDate.Text = "Time:";
             // 
             // lblGenre
             // 
@@ -326,7 +328,7 @@
             this.Controls.Add(this.btnAddMovie);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminFilmsForm";
             this.Text = "AdminFilmsForm";
             this.Load += new System.EventHandler(this.AdminFilmsForm_Load);
