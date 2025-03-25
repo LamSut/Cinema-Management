@@ -52,7 +52,7 @@
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1350, 46);
+            this.panel1.Size = new System.Drawing.Size(1300, 46);
             this.panel1.TabIndex = 0;
             // 
             // lblTitle
@@ -62,7 +62,7 @@
             this.lblTitle.Location = new System.Drawing.Point(40, 7);
             this.lblTitle.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(208, 45);
+            this.lblTitle.Size = new System.Drawing.Size(136, 30);
             this.lblTitle.TabIndex = 1;
             this.lblTitle.Text = "Admin Form";
             // 
@@ -157,7 +157,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1350, 600);
+            this.ClientSize = new System.Drawing.Size(1300, 600);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

@@ -82,7 +82,7 @@ namespace Cinema
 
                     // Chỉnh tên cột hiển thị
                     //dataGridViewShows.Columns["MovieID"].HeaderText = "Title";
-                    dataGridViewShows.Columns["Title"].HeaderText = "Tên Phim";
+                    dataGridViewShows.Columns["Title"].HeaderText = "Movie";
                     dataGridViewShows.Columns["Genre"].HeaderText = "Genre";
                     dataGridViewShows.Columns["ShowTime"].HeaderText = "Time";
                     dataGridViewShows.Columns["TheaterName"].HeaderText = "Theater";
