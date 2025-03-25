@@ -38,10 +38,10 @@
             this.comboBoxMovieTitle = new System.Windows.Forms.ComboBox();
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtShowID = new System.Windows.Forms.TextBox();
-            this.comboBoxTheaterID = new System.Windows.Forms.ComboBox();
+            this.comboBoxTheaterName = new System.Windows.Forms.ComboBox();
             this.lblShowID = new System.Windows.Forms.Label();
             this.lblMovieTitle = new System.Windows.Forms.Label();
-            this.lblTheaterID = new System.Windows.Forms.Label();
+            this.lblTheaterName = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -155,16 +155,16 @@
             this.txtShowID.Size = new System.Drawing.Size(194, 29);
             this.txtShowID.TabIndex = 10;
             // 
-            // comboBoxTheaterID
+            // comboBoxTheaterName
             // 
-            this.comboBoxTheaterID.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxTheaterID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
-            this.comboBoxTheaterID.FormattingEnabled = true;
-            this.comboBoxTheaterID.Location = new System.Drawing.Point(133, 260);
-            this.comboBoxTheaterID.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBoxTheaterID.Name = "comboBoxTheaterID";
-            this.comboBoxTheaterID.Size = new System.Drawing.Size(194, 29);
-            this.comboBoxTheaterID.TabIndex = 11;
+            this.comboBoxTheaterName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTheaterName.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
+            this.comboBoxTheaterName.FormattingEnabled = true;
+            this.comboBoxTheaterName.Location = new System.Drawing.Point(133, 260);
+            this.comboBoxTheaterName.Margin = new System.Windows.Forms.Padding(2);
+            this.comboBoxTheaterName.Name = "comboBoxTheaterName";
+            this.comboBoxTheaterName.Size = new System.Drawing.Size(194, 29);
+            this.comboBoxTheaterName.TabIndex = 11;
             // 
             // lblShowID
             // 
@@ -190,17 +190,17 @@
             this.lblMovieTitle.TabIndex = 15;
             this.lblMovieTitle.Text = "Movie Title:";
             // 
-            // lblTheaterID
+            // lblTheaterName
             // 
-            this.lblTheaterID.AutoSize = true;
-            this.lblTheaterID.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTheaterID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.lblTheaterID.Location = new System.Drawing.Point(11, 260);
-            this.lblTheaterID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTheaterID.Name = "lblTheaterID";
-            this.lblTheaterID.Size = new System.Drawing.Size(109, 25);
-            this.lblTheaterID.TabIndex = 16;
-            this.lblTheaterID.Text = "Theater ID:";
+            this.lblTheaterName.AutoSize = true;
+            this.lblTheaterName.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTheaterName.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
+            this.lblTheaterName.Location = new System.Drawing.Point(11, 260);
+            this.lblTheaterName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTheaterName.Name = "lblTheaterName";
+            this.lblTheaterName.Size = new System.Drawing.Size(85, 25);
+            this.lblTheaterName.TabIndex = 16;
+            this.lblTheaterName.Text = "Theater:";
             // 
             // lblDate
             // 
@@ -247,10 +247,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblDate);
-            this.Controls.Add(this.lblTheaterID);
+            this.Controls.Add(this.lblTheaterName);
             this.Controls.Add(this.lblMovieTitle);
             this.Controls.Add(this.lblShowID);
-            this.Controls.Add(this.comboBoxTheaterID);
+            this.Controls.Add(this.comboBoxTheaterName);
             this.Controls.Add(this.txtShowID);
             this.Controls.Add(this.txtPrice);
             this.Controls.Add(this.comboBoxMovieTitle);
@@ -281,10 +281,10 @@
         private System.Windows.Forms.ComboBox comboBoxMovieTitle;
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtShowID;
-        private System.Windows.Forms.ComboBox comboBoxTheaterID;
+        private System.Windows.Forms.ComboBox comboBoxTheaterName;
         private System.Windows.Forms.Label lblShowID;
         private System.Windows.Forms.Label lblMovieTitle;
-        private System.Windows.Forms.Label lblTheaterID;
+        private System.Windows.Forms.Label lblTheaterName;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblPrice;
         private System.Windows.Forms.Label label2;
