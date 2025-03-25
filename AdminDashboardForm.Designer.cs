@@ -56,7 +56,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 28F, System.Drawing.FontStyle.Bold);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.label1.Location = new System.Drawing.Point(221, 8);
+            this.label1.Location = new System.Drawing.Point(51, 9);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(574, 51);
@@ -72,13 +72,13 @@
             this.panel1.Location = new System.Drawing.Point(60, 74);
             this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(240, 140);
+            this.panel1.Size = new System.Drawing.Size(258, 140);
             this.panel1.TabIndex = 1;
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Cinema.Properties.Resources.customer_picture;
-            this.pictureBox1.Location = new System.Drawing.Point(145, 54);
+            this.pictureBox1.Location = new System.Drawing.Point(160, 50);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(80, 60);
@@ -114,16 +114,16 @@
             this.panel2.Controls.Add(this.pictureBox2);
             this.panel2.Controls.Add(this.lbBooking);
             this.panel2.Controls.Add(this.lable4);
-            this.panel2.Location = new System.Drawing.Point(340, 74);
+            this.panel2.Location = new System.Drawing.Point(375, 74);
             this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(240, 140);
+            this.panel2.Size = new System.Drawing.Size(256, 140);
             this.panel2.TabIndex = 2;
             // 
             // pictureBox2
             // 
             this.pictureBox2.Image = global::Cinema.Properties.Resources.movies;
-            this.pictureBox2.Location = new System.Drawing.Point(144, 56);
+            this.pictureBox2.Location = new System.Drawing.Point(158, 56);
             this.pictureBox2.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(80, 60);
@@ -159,16 +159,16 @@
             this.panel3.Controls.Add(this.pictureBox3);
             this.panel3.Controls.Add(this.lbMoney);
             this.panel3.Controls.Add(this.label4);
-            this.panel3.Location = new System.Drawing.Point(618, 75);
+            this.panel3.Location = new System.Drawing.Point(690, 74);
             this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(319, 140);
+            this.panel3.Size = new System.Drawing.Size(346, 140);
             this.panel3.TabIndex = 3;
             // 
             // pictureBox3
             // 
             this.pictureBox3.Image = global::Cinema.Properties.Resources.salary;
-            this.pictureBox3.Location = new System.Drawing.Point(217, 56);
+            this.pictureBox3.Location = new System.Drawing.Point(244, 56);
             this.pictureBox3.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(80, 60);
@@ -204,7 +204,7 @@
             this.pictureBox4.Location = new System.Drawing.Point(60, 234);
             this.pictureBox4.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(877, 282);
+            this.pictureBox4.Size = new System.Drawing.Size(976, 282);
             this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox4.TabIndex = 4;
             this.pictureBox4.TabStop = false;
@@ -214,7 +214,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1000, 560);
+            this.ClientSize = new System.Drawing.Size(1100, 560);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);

@@ -4,24 +4,23 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Cinema
 {
-    public partial class AdminFilmsForm: Form
+    public partial class AdminFilmsForm : Form
     {
+        private string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=CinemaDB;Trusted_Connection=True;";
+        private Dictionary<string, object> originalCellValues = new Dictionary<string, object>();
+
         public AdminFilmsForm()
         {
             InitializeComponent();
             LoadMovieData();
         }
-
-        private string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=CinemaDB;Trusted_Connection=True;";
 
         private void LoadMovieData()
         {
@@ -56,7 +55,6 @@ namespace Cinema
                     dataGridViewMovies.DefaultCellStyle.SelectionForeColor = Color.White;
 
                     dataGridViewMovies.Columns["ReleaseDate"].HeaderText = "Date";
-
                     dataGridViewMovies.Columns["MovieID"].Visible = false;
 
                     foreach (DataGridViewColumn col in dataGridViewMovies.Columns)
@@ -81,7 +79,6 @@ namespace Cinema
             string director = txtDirector.Text.Trim();
             DateTime releaseDate = dateTimePickerRelease.Value;
             string posterURL = txtPosterURL.Text.Trim();
-            //string status = cmbStatus.Text;
 
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(genre))
             {
@@ -106,7 +103,6 @@ namespace Cinema
                     cmd.Parameters.AddWithValue("@Director", director);
                     cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
                     cmd.Parameters.AddWithValue("@PosterURL", posterURL);
-                    //cmd.Parameters.AddWithValue("@Status", status);
 
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
@@ -127,20 +123,15 @@ namespace Cinema
             }
         }
 
-
-
         private void btnDeleteFilm_Click(object sender, EventArgs e)
         {
-            if (dataGridViewMovies.SelectedRows.Count > 0) // Check if a row is selected
+            if (dataGridViewMovies.SelectedRows.Count > 0)
             {
                 string movieId = dataGridViewMovies.SelectedRows[0].Cells["MovieID"].Value.ToString();
-
-                // Show confirmation message
                 DialogResult result = MessageBox.Show($"Are you sure you want to delete: {movieId}?",
                                                       "Confirm Deletion",
                                                       MessageBoxButtons.YesNo,
                                                       MessageBoxIcon.Warning);
-
                 if (result == DialogResult.Yes)
                 {
                     DeleteMovie(movieId);
@@ -167,7 +158,7 @@ namespace Cinema
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Movie deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        LoadMovieData(); 
+                        LoadMovieData();
                     }
                     else
                     {
@@ -181,18 +172,38 @@ namespace Cinema
             }
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dataGridViewMovies_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
+            string key = $"{e.RowIndex}-{e.ColumnIndex}";
+            if (!originalCellValues.ContainsKey(key))
+            {
+                originalCellValues[key] = dataGridViewMovies.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+            }
         }
 
         private void dataGridViewMovies_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
             try
             {
-                string columnName = dataGridViewMovies.Columns[e.ColumnIndex].Name;
-                if (columnName == "MovieID") return; // Không cho phép chỉnh sửa MovieID
+                string key = $"{e.RowIndex}-{e.ColumnIndex}";
+                if (!originalCellValues.ContainsKey(key))
+                    return;
 
-                string newValue = dataGridViewMovies.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                object originalValue = originalCellValues[key];
+                object newValueObj = dataGridViewMovies.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
+                string newValue = newValueObj?.ToString() ?? "";
+                string originalValueStr = originalValue?.ToString() ?? "";
+
+
+                if (newValue == originalValueStr)
+                {
+                    originalCellValues.Remove(key);
+                    return;
+                }
+
+                string columnName = dataGridViewMovies.Columns[e.ColumnIndex].Name;
+                if (columnName == "MovieID") return; 
+
                 string movieID = dataGridViewMovies.Rows[e.RowIndex].Cells["MovieID"].Value.ToString();
 
                 using (SqlConnection conn = new SqlConnection(connectionString))
@@ -203,11 +214,16 @@ namespace Cinema
                     {
                         cmd.Parameters.AddWithValue("@Value", newValue);
                         cmd.Parameters.AddWithValue("@MovieID", movieID);
-                        cmd.ExecuteNonQuery();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Movie updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
                     }
                 }
 
-                MessageBox.Show("Movie updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                originalCellValues.Remove(key);
             }
             catch (Exception ex)
             {
@@ -215,13 +231,13 @@ namespace Cinema
             }
         }
 
-
-
         private void AdminFilmsForm_Load(object sender, EventArgs e)
         {
+            dataGridViewMovies.CellBeginEdit += dataGridViewMovies_CellBeginEdit;
             dataGridViewMovies.CellEndEdit += dataGridViewMovies_CellEndEdit;
             GenerateNewMovieID();
         }
+
         private void GenerateNewMovieID()
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
@@ -234,7 +250,7 @@ namespace Cinema
                     object result = cmd.ExecuteScalar();
 
                     int newID = (result != DBNull.Value) ? Convert.ToInt32(result) + 1 : 1;
-                    txtMovieID.Text = "M" + newID.ToString("000"); // Format M001, S002, ...
+                    txtMovieID.Text = "M" + newID.ToString("000"); // Format M001, M002, ...
                 }
                 catch (Exception ex)
                 {
@@ -246,46 +262,23 @@ namespace Cinema
         private void btnEditFilm_Click(object sender, EventArgs e)
         {
         }
-
-        private void txtTitle_TextChanged(object sender, EventArgs e)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
         }
-
-        private void numericDuration_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtPosterURL_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDirector_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void txtTitle_TextChanged(object sender, EventArgs e) { }
+        private void numericDuration_ValueChanged(object sender, EventArgs e) { }
+        private void txtPosterURL_TextChanged(object sender, EventArgs e) { }
+        private void txtDirector_TextChanged(object sender, EventArgs e) { }
 
         private void dateTimePickerRelease_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerRelease.Format = DateTimePickerFormat.Custom;
-            dateTimePickerRelease.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerRelease.CustomFormat = "dd/MM/yyyy HH:mm";
+            dateTimePickerRelease.ShowUpDown = true;
         }
 
-        private void txtGenre_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtDescription_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtMovieID_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+        private void txtGenre_TextChanged(object sender, EventArgs e) { }
+        private void txtDescription_TextChanged(object sender, EventArgs e) { }
+        private void txtMovieID_TextChanged(object sender, EventArgs e) { }
     }
 }
