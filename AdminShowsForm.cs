@@ -84,6 +84,8 @@ namespace Cinema
                     //dataGridViewShows.Columns["MovieID"].HeaderText = "Title";
                     dataGridViewShows.Columns["Title"].HeaderText = "Tên Phim";
                     dataGridViewShows.Columns["Genre"].HeaderText = "Genre";
+                    dataGridViewShows.Columns["ShowTime"].HeaderText = "Time";
+                    dataGridViewShows.Columns["TheaterName"].HeaderText = "Theater";
 
                     // Ẩn cột ID không cần thiết
                     dataGridViewShows.Columns["MovieID"].Visible = false;
@@ -357,7 +359,8 @@ namespace Cinema
 
         private void dateTimePickerShowTime_ValueChanged(object sender, EventArgs e)
         {
-
+            dateTimePickerShowTime.Format = DateTimePickerFormat.Custom;
+            dateTimePickerShowTime.CustomFormat = "dd/MM/yyyy";
         }
 
         private void txtPrice_TextChanged(object sender, EventArgs e)
