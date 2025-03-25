@@ -13,7 +13,6 @@ namespace Cinema
         public AdminMainForm()
         {
             InitializeComponent();
-            this.Size = new Size(1100, 600);
             this.IsMdiContainer = true;
             this.Load += AdminMainForm_Load; 
         }

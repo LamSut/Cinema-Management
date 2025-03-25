@@ -44,29 +44,31 @@
             this.lblTheaterID = new System.Windows.Forms.Label();
             this.lblDate = new System.Windows.Forms.Label();
             this.lblPrice = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShows)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.label1.Location = new System.Drawing.Point(376, 44);
+            this.label1.Location = new System.Drawing.Point(372, 94);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(250, 50);
+            this.label1.Size = new System.Drawing.Size(244, 37);
             this.label1.TabIndex = 1;
-            this.label1.Text = "List of Shows";
+            this.label1.Text = "List of Showtimes";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnAddShow
             // 
             this.btnAddShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.btnAddShow.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddShow.Location = new System.Drawing.Point(692, 551);
-            this.btnAddShow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddShow.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddShow.Location = new System.Drawing.Point(122, 462);
+            this.btnAddShow.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddShow.Name = "btnAddShow";
-            this.btnAddShow.Size = new System.Drawing.Size(196, 43);
+            this.btnAddShow.Size = new System.Drawing.Size(194, 35);
             this.btnAddShow.TabIndex = 2;
             this.btnAddShow.Text = "Add New Show";
             this.btnAddShow.UseVisualStyleBackColor = false;
@@ -77,10 +79,10 @@
             this.btnDeleteShow.BackColor = System.Drawing.Color.DarkRed;
             this.btnDeleteShow.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteShow.ForeColor = System.Drawing.Color.White;
-            this.btnDeleteShow.Location = new System.Drawing.Point(899, 86);
-            this.btnDeleteShow.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnDeleteShow.Location = new System.Drawing.Point(780, 92);
+            this.btnDeleteShow.Margin = new System.Windows.Forms.Padding(2);
             this.btnDeleteShow.Name = "btnDeleteShow";
-            this.btnDeleteShow.Size = new System.Drawing.Size(260, 52);
+            this.btnDeleteShow.Size = new System.Drawing.Size(195, 42);
             this.btnDeleteShow.TabIndex = 4;
             this.btnDeleteShow.Text = "Delete This Show";
             this.btnDeleteShow.UseVisualStyleBackColor = false;
@@ -90,14 +92,14 @@
             // 
             this.dataGridViewShows.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewShows.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
-            this.dataGridViewShows.Location = new System.Drawing.Point(364, 160);
-            this.dataGridViewShows.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewShows.Location = new System.Drawing.Point(379, 149);
+            this.dataGridViewShows.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewShows.Name = "dataGridViewShows";
             this.dataGridViewShows.RowHeadersWidth = 62;
             this.dataGridViewShows.RowTemplate.Height = 28;
             this.dataGridViewShows.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridViewShows.ShowRowErrors = false;
-            this.dataGridViewShows.Size = new System.Drawing.Size(794, 384);
+            this.dataGridViewShows.Size = new System.Drawing.Size(596, 380);
             this.dataGridViewShows.TabIndex = 5;
             this.dataGridViewShows.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewShows_CellContentClick);
             // 
@@ -111,10 +113,10 @@
             // dateTimePickerShowTime
             // 
             this.dateTimePickerShowTime.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dateTimePickerShowTime.Location = new System.Drawing.Point(20, 372);
-            this.dateTimePickerShowTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dateTimePickerShowTime.Location = new System.Drawing.Point(122, 334);
+            this.dateTimePickerShowTime.Margin = new System.Windows.Forms.Padding(2);
             this.dateTimePickerShowTime.Name = "dateTimePickerShowTime";
-            this.dateTimePickerShowTime.Size = new System.Drawing.Size(328, 29);
+            this.dateTimePickerShowTime.Size = new System.Drawing.Size(240, 25);
             this.dateTimePickerShowTime.TabIndex = 7;
             this.dateTimePickerShowTime.ValueChanged += new System.EventHandler(this.dateTimePickerShowTime_ValueChanged);
             // 
@@ -123,20 +125,20 @@
             this.comboBoxMovieID.DisplayMember = "movieID";
             this.comboBoxMovieID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBoxMovieID.FormattingEnabled = true;
-            this.comboBoxMovieID.Location = new System.Drawing.Point(20, 230);
-            this.comboBoxMovieID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxMovieID.Location = new System.Drawing.Point(122, 205);
+            this.comboBoxMovieID.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxMovieID.Name = "comboBoxMovieID";
-            this.comboBoxMovieID.Size = new System.Drawing.Size(258, 36);
+            this.comboBoxMovieID.Size = new System.Drawing.Size(194, 29);
             this.comboBoxMovieID.TabIndex = 8;
             this.comboBoxMovieID.SelectedIndexChanged += new System.EventHandler(this.comboBoxMovieID_SelectedIndexChanged);
             // 
             // txtPrice
             // 
             this.txtPrice.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPrice.Location = new System.Drawing.Point(20, 438);
-            this.txtPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPrice.Location = new System.Drawing.Point(122, 400);
+            this.txtPrice.Margin = new System.Windows.Forms.Padding(2);
             this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(258, 34);
+            this.txtPrice.Size = new System.Drawing.Size(194, 29);
             this.txtPrice.TabIndex = 9;
             this.txtPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
@@ -144,21 +146,21 @@
             // txtShowID
             // 
             this.txtShowID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtShowID.Location = new System.Drawing.Point(20, 160);
-            this.txtShowID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtShowID.Location = new System.Drawing.Point(122, 135);
+            this.txtShowID.Margin = new System.Windows.Forms.Padding(2);
             this.txtShowID.Name = "txtShowID";
             this.txtShowID.ReadOnly = true;
-            this.txtShowID.Size = new System.Drawing.Size(258, 34);
+            this.txtShowID.Size = new System.Drawing.Size(194, 29);
             this.txtShowID.TabIndex = 10;
             // 
             // comboBoxTheaterID
             // 
             this.comboBoxTheaterID.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.comboBoxTheaterID.FormattingEnabled = true;
-            this.comboBoxTheaterID.Location = new System.Drawing.Point(20, 301);
-            this.comboBoxTheaterID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxTheaterID.Location = new System.Drawing.Point(122, 268);
+            this.comboBoxTheaterID.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxTheaterID.Name = "comboBoxTheaterID";
-            this.comboBoxTheaterID.Size = new System.Drawing.Size(258, 36);
+            this.comboBoxTheaterID.Size = new System.Drawing.Size(194, 29);
             this.comboBoxTheaterID.TabIndex = 11;
             // 
             // lblShowID
@@ -166,9 +168,10 @@
             this.lblShowID.AutoSize = true;
             this.lblShowID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblShowID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.lblShowID.Location = new System.Drawing.Point(15, 130);
+            this.lblShowID.Location = new System.Drawing.Point(13, 135);
+            this.lblShowID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblShowID.Name = "lblShowID";
-            this.lblShowID.Size = new System.Drawing.Size(95, 28);
+            this.lblShowID.Size = new System.Drawing.Size(77, 21);
             this.lblShowID.TabIndex = 14;
             this.lblShowID.Text = "Show ID:";
             // 
@@ -177,9 +180,10 @@
             this.lblMovieID.AutoSize = true;
             this.lblMovieID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMovieID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.lblMovieID.Location = new System.Drawing.Point(15, 199);
+            this.lblMovieID.Location = new System.Drawing.Point(13, 205);
+            this.lblMovieID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMovieID.Name = "lblMovieID";
-            this.lblMovieID.Size = new System.Drawing.Size(103, 28);
+            this.lblMovieID.Size = new System.Drawing.Size(83, 21);
             this.lblMovieID.TabIndex = 15;
             this.lblMovieID.Text = "Movie ID:";
             // 
@@ -188,9 +192,10 @@
             this.lblTheaterID.AutoSize = true;
             this.lblTheaterID.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTheaterID.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.lblTheaterID.Location = new System.Drawing.Point(15, 270);
+            this.lblTheaterID.Location = new System.Drawing.Point(11, 268);
+            this.lblTheaterID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTheaterID.Name = "lblTheaterID";
-            this.lblTheaterID.Size = new System.Drawing.Size(117, 28);
+            this.lblTheaterID.Size = new System.Drawing.Size(93, 21);
             this.lblTheaterID.TabIndex = 16;
             this.lblTheaterID.Text = "Theater ID:";
             // 
@@ -199,29 +204,44 @@
             this.lblDate.AutoSize = true;
             this.lblDate.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.lblDate.Location = new System.Drawing.Point(15, 340);
+            this.lblDate.Location = new System.Drawing.Point(13, 334);
+            this.lblDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDate.Name = "lblDate";
-            this.lblDate.Size = new System.Drawing.Size(117, 28);
+            this.lblDate.Size = new System.Drawing.Size(50, 21);
             this.lblDate.TabIndex = 17;
-            this.lblDate.Text = "Theater ID:";
+            this.lblDate.Text = "Date:";
             // 
             // lblPrice
             // 
             this.lblPrice.AutoSize = true;
             this.lblPrice.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPrice.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
-            this.lblPrice.Location = new System.Drawing.Point(15, 406);
+            this.lblPrice.Location = new System.Drawing.Point(11, 400);
+            this.lblPrice.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPrice.Name = "lblPrice";
-            this.lblPrice.Size = new System.Drawing.Size(64, 28);
+            this.lblPrice.Size = new System.Drawing.Size(52, 21);
             this.lblPrice.TabIndex = 18;
             this.lblPrice.Text = "Price:";
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(200)))), ((int)(((byte)(70)))));
+            this.label2.Location = new System.Drawing.Point(344, 21);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(391, 45);
+            this.label2.TabIndex = 19;
+            this.label2.Text = "Showtimes Management";
+            // 
             // AdminShowsForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(40)))), ((int)(((byte)(70)))));
-            this.ClientSize = new System.Drawing.Size(1217, 624);
+            this.ClientSize = new System.Drawing.Size(1000, 560);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.lblPrice);
             this.Controls.Add(this.lblDate);
             this.Controls.Add(this.lblTheaterID);
@@ -237,7 +257,7 @@
             this.Controls.Add(this.btnAddShow);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminShowsForm";
             this.Text = "AdminShowsForm";
             this.Load += new System.EventHandler(this.AdminShowsForm_Load);
@@ -264,5 +284,6 @@
         private System.Windows.Forms.Label lblTheaterID;
         private System.Windows.Forms.Label lblDate;
         private System.Windows.Forms.Label lblPrice;
+        private System.Windows.Forms.Label label2;
     }
 }
