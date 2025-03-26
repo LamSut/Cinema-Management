@@ -106,7 +106,6 @@
             this.dataGridViewMovies.ShowRowErrors = false;
             this.dataGridViewMovies.Size = new System.Drawing.Size(756, 413);
             this.dataGridViewMovies.TabIndex = 4;
-            this.dataGridViewMovies.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // txtTitle
             // 
@@ -116,7 +115,6 @@
             this.txtTitle.Name = "txtTitle";
             this.txtTitle.Size = new System.Drawing.Size(192, 29);
             this.txtTitle.TabIndex = 5;
-            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
             // 
             // numericDuration
             // 
@@ -131,7 +129,6 @@
             this.numericDuration.Name = "numericDuration";
             this.numericDuration.Size = new System.Drawing.Size(94, 29);
             this.numericDuration.TabIndex = 6;
-            this.numericDuration.ValueChanged += new System.EventHandler(this.numericDuration_ValueChanged);
             // 
             // txtMovieID
             // 
@@ -142,7 +139,6 @@
             this.txtMovieID.ReadOnly = true;
             this.txtMovieID.Size = new System.Drawing.Size(95, 29);
             this.txtMovieID.TabIndex = 7;
-            this.txtMovieID.TextChanged += new System.EventHandler(this.txtMovieID_TextChanged);
             // 
             // txtGenre
             // 
@@ -152,7 +148,6 @@
             this.txtGenre.Name = "txtGenre";
             this.txtGenre.Size = new System.Drawing.Size(191, 29);
             this.txtGenre.TabIndex = 8;
-            this.txtGenre.TextChanged += new System.EventHandler(this.txtGenre_TextChanged);
             // 
             // txtDirector
             // 
@@ -162,7 +157,6 @@
             this.txtDirector.Name = "txtDirector";
             this.txtDirector.Size = new System.Drawing.Size(192, 29);
             this.txtDirector.TabIndex = 9;
-            this.txtDirector.TextChanged += new System.EventHandler(this.txtDirector_TextChanged);
             // 
             // txtPosterURL
             // 
@@ -172,7 +166,6 @@
             this.txtPosterURL.Name = "txtPosterURL";
             this.txtPosterURL.Size = new System.Drawing.Size(192, 29);
             this.txtPosterURL.TabIndex = 10;
-            this.txtPosterURL.TextChanged += new System.EventHandler(this.txtPosterURL_TextChanged);
             // 
             // txtDescription
             // 
@@ -183,7 +176,6 @@
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(192, 66);
             this.txtDescription.TabIndex = 11;
-            this.txtDescription.TextChanged += new System.EventHandler(this.txtDescription_TextChanged);
             // 
             // dateTimePickerRelease
             // 

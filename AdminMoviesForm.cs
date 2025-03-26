@@ -1,12 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Cinema
@@ -33,29 +29,68 @@ namespace Cinema
                     SqlDataAdapter adapter = new SqlDataAdapter(query, conn);
                     DataTable dt = new DataTable();
                     adapter.Fill(dt);
-                    dataGridViewMovies.DataSource = dt;
+                    dataGridViewMovies.AutoGenerateColumns = false;
+                    dataGridViewMovies.Columns.Clear();
 
+                    DataGridViewTextBoxColumn colMovieID = new DataGridViewTextBoxColumn();
+                    colMovieID.DataPropertyName = "MovieID";
+                    colMovieID.Name = "MovieID";
+                    colMovieID.Visible = false;
+                    dataGridViewMovies.Columns.Add(colMovieID);
+
+                    DataGridViewTextBoxColumn colTitle = new DataGridViewTextBoxColumn();
+                    colTitle.DataPropertyName = "Title";
+                    colTitle.Name = "Title";
+                    dataGridViewMovies.Columns.Add(colTitle);
+
+                    DataGridViewTextBoxColumn colGenre = new DataGridViewTextBoxColumn();
+                    colGenre.DataPropertyName = "Genre";
+                    colGenre.Name = "Genre";
+                    dataGridViewMovies.Columns.Add(colGenre);
+
+                    DataGridViewTextBoxColumn colDuration = new DataGridViewTextBoxColumn();
+                    colDuration.DataPropertyName = "Duration";
+                    colDuration.Name = "Duration";
+                    dataGridViewMovies.Columns.Add(colDuration);
+
+                    DataGridViewTextBoxColumn colDirector = new DataGridViewTextBoxColumn();
+                    colDirector.DataPropertyName = "Director";
+                    colDirector.Name = "Director";
+                    dataGridViewMovies.Columns.Add(colDirector);
+
+                    CalendarColumn colReleaseDate = new CalendarColumn();
+                    colReleaseDate.DataPropertyName = "ReleaseDate";
+                    colReleaseDate.Name = "ReleaseDate";
+                    colReleaseDate.HeaderText = "Date";
+                    dataGridViewMovies.Columns.Add(colReleaseDate);
+
+                    DataGridViewTextBoxColumn colPosterURL = new DataGridViewTextBoxColumn();
+                    colPosterURL.DataPropertyName = "PosterURL";
+                    colPosterURL.Name = "PosterURL";
+                    dataGridViewMovies.Columns.Add(colPosterURL);
+
+                    DataGridViewTextBoxColumn colStatus = new DataGridViewTextBoxColumn();
+                    colStatus.DataPropertyName = "Status";
+                    colStatus.Name = "Status";
+                    dataGridViewMovies.Columns.Add(colStatus);
+
+                    dataGridViewMovies.DataSource = dt;
                     dataGridViewMovies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                     dataGridViewMovies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
                     dataGridViewMovies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
                     dataGridViewMovies.EnableHeadersVisualStyles = false;
                     dataGridViewMovies.ColumnHeadersDefaultCellStyle.Font = new Font("Arial", 12, FontStyle.Bold);
                     dataGridViewMovies.ColumnHeadersDefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     dataGridViewMovies.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
                     dataGridViewMovies.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-
                     dataGridViewMovies.DefaultCellStyle.Font = new Font("Arial", 11);
                     dataGridViewMovies.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
                     dataGridViewMovies.DefaultCellStyle.ForeColor = Color.Black;
                     dataGridViewMovies.DefaultCellStyle.BackColor = Color.WhiteSmoke;
                     dataGridViewMovies.AlternatingRowsDefaultCellStyle.BackColor = Color.LightGray;
-
                     dataGridViewMovies.DefaultCellStyle.SelectionBackColor = Color.DarkBlue;
                     dataGridViewMovies.DefaultCellStyle.SelectionForeColor = Color.White;
-
-                    dataGridViewMovies.Columns["ReleaseDate"].HeaderText = "Date";
-                    dataGridViewMovies.Columns["MovieID"].Visible = false;
+                    dataGridViewMovies.AllowUserToAddRows = false;
 
                     foreach (DataGridViewColumn col in dataGridViewMovies.Columns)
                     {
@@ -79,13 +114,11 @@ namespace Cinema
             string director = txtDirector.Text.Trim();
             DateTime releaseDate = dateTimePickerRelease.Value;
             string posterURL = txtPosterURL.Text.Trim();
-
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(genre))
             {
                 MessageBox.Show("Please fill in all required fields!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -93,7 +126,6 @@ namespace Cinema
                     conn.Open();
                     string query = "INSERT INTO Movie (MovieID, Title, Genre, Duration, Description, Director, ReleaseDate, PosterURL) " +
                                    "VALUES (@MovieID, @Title, @Genre, @Duration, @Description, @Director, @ReleaseDate, @PosterURL)";
-
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@MovieID", movieID);
                     cmd.Parameters.AddWithValue("@Title", title);
@@ -103,7 +135,6 @@ namespace Cinema
                     cmd.Parameters.AddWithValue("@Director", director);
                     cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
                     cmd.Parameters.AddWithValue("@PosterURL", posterURL);
-
                     int rowsAffected = cmd.ExecuteNonQuery();
                     if (rowsAffected > 0)
                     {
@@ -154,7 +185,6 @@ namespace Cinema
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@MovieID", movieId);
                     int rowsAffected = cmd.ExecuteNonQuery();
-
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Movie deleted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -188,41 +218,36 @@ namespace Cinema
                 string key = $"{e.RowIndex}-{e.ColumnIndex}";
                 if (!originalCellValues.ContainsKey(key))
                     return;
-
                 object originalValue = originalCellValues[key];
                 object newValueObj = dataGridViewMovies.Rows[e.RowIndex].Cells[e.ColumnIndex].Value;
                 string newValue = newValueObj?.ToString() ?? "";
                 string originalValueStr = originalValue?.ToString() ?? "";
-
-
                 if (newValue == originalValueStr)
                 {
                     originalCellValues.Remove(key);
                     return;
                 }
-
                 string columnName = dataGridViewMovies.Columns[e.ColumnIndex].Name;
-                if (columnName == "MovieID") return; 
-
+                if (columnName == "MovieID") return;
                 string movieID = dataGridViewMovies.Rows[e.RowIndex].Cells["MovieID"].Value.ToString();
-
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
                     string query = $"UPDATE Movie SET {columnName} = @Value WHERE MovieID = @MovieID";
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
-                        cmd.Parameters.AddWithValue("@Value", newValue);
+                        if (columnName == "ReleaseDate")
+                            cmd.Parameters.AddWithValue("@Value", DateTime.Parse(newValue));
+                        else
+                            cmd.Parameters.AddWithValue("@Value", newValue);
                         cmd.Parameters.AddWithValue("@MovieID", movieID);
                         int rowsAffected = cmd.ExecuteNonQuery();
-
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Movie updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
                 }
-
                 originalCellValues.Remove(key);
             }
             catch (Exception ex)
@@ -248,9 +273,8 @@ namespace Cinema
                     string query = "SELECT MAX(CAST(SUBSTRING(MovieID, 2, LEN(MovieID)-1) AS INT)) FROM Movie";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     object result = cmd.ExecuteScalar();
-
                     int newID = (result != DBNull.Value) ? Convert.ToInt32(result) + 1 : 1;
-                    txtMovieID.Text = "M" + newID.ToString("000"); // Format M001, M002, ...
+                    txtMovieID.Text = "M" + newID.ToString("000");
                 }
                 catch (Exception ex)
                 {
@@ -259,25 +283,112 @@ namespace Cinema
             }
         }
 
-        private void btnEditMovie_Click(object sender, EventArgs e)
-        {
-        }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
-        private void txtTitle_TextChanged(object sender, EventArgs e) { }
-        private void numericDuration_ValueChanged(object sender, EventArgs e) { }
-        private void txtPosterURL_TextChanged(object sender, EventArgs e) { }
-        private void txtDirector_TextChanged(object sender, EventArgs e) { }
-
         private void dateTimePickerRelease_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerRelease.Format = DateTimePickerFormat.Custom;
             dateTimePickerRelease.CustomFormat = "MM/dd/yyyy";
         }
+    }
 
-        private void txtGenre_TextChanged(object sender, EventArgs e) { }
-        private void txtDescription_TextChanged(object sender, EventArgs e) { }
-        private void txtMovieID_TextChanged(object sender, EventArgs e) { }
+    public class CalendarColumn : DataGridViewColumn
+    {
+        public CalendarColumn() : base(new CalendarCell()) { }
+        public override DataGridViewCell CellTemplate
+        {
+            get { return base.CellTemplate; }
+            set
+            {
+                if (value != null && !value.GetType().IsAssignableFrom(typeof(CalendarCell)))
+                    throw new InvalidCastException("Must be a CalendarCell");
+                base.CellTemplate = value;
+            }
+        }
+    }
+
+    public class CalendarCell : DataGridViewTextBoxCell
+    {
+        public CalendarCell() : base() { }
+        public override void InitializeEditingControl(int rowIndex, object initialFormattedValue, DataGridViewCellStyle dataGridViewCellStyle)
+        {
+            base.InitializeEditingControl(rowIndex, initialFormattedValue, dataGridViewCellStyle);
+            CalendarEditingControl ctl = DataGridView.EditingControl as CalendarEditingControl;
+            if (this.Value == null || this.Value == DBNull.Value)
+                ctl.Value = (DateTime)this.DefaultNewRowValue;
+            else
+                ctl.Value = (DateTime)this.Value;
+        }
+        public override Type EditType => typeof(CalendarEditingControl);
+        public override Type ValueType => typeof(DateTime);
+        public override object DefaultNewRowValue => DateTime.Now;
+    }
+
+    public class CalendarEditingControl : DateTimePicker, IDataGridViewEditingControl
+    {
+        DataGridView dataGridView;
+        bool valueChanged = false;
+        int rowIndex;
+        public object EditingControlFormattedValue
+        {
+            get { return this.Value.ToShortDateString(); }
+            set
+            {
+                if (value is string)
+                {
+                    try { this.Value = DateTime.Parse((string)value); }
+                    catch { this.Value = DateTime.Now; }
+                }
+            }
+        }
+        public object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context)
+        {
+            return EditingControlFormattedValue;
+        }
+        public void ApplyCellStyleToEditingControl(DataGridViewCellStyle dataGridViewCellStyle)
+        {
+            this.Font = dataGridViewCellStyle.Font;
+            this.CalendarForeColor = dataGridViewCellStyle.ForeColor;
+            this.CalendarMonthBackground = dataGridViewCellStyle.BackColor;
+        }
+        public int EditingControlRowIndex
+        {
+            get { return rowIndex; }
+            set { rowIndex = value; }
+        }
+        public bool EditingControlWantsInputKey(Keys key, bool dataGridViewWantsInputKey)
+        {
+            switch (key & Keys.KeyCode)
+            {
+                case Keys.Left:
+                case Keys.Up:
+                case Keys.Down:
+                case Keys.Right:
+                case Keys.Home:
+                case Keys.End:
+                case Keys.PageDown:
+                case Keys.PageUp:
+                    return true;
+                default:
+                    return !dataGridViewWantsInputKey;
+            }
+        }
+        public void PrepareEditingControlForEdit(bool selectAll) { }
+        public bool RepositionEditingControlOnValueChange => false;
+        public DataGridView EditingControlDataGridView
+        {
+            get { return dataGridView; }
+            set { dataGridView = value; }
+        }
+        public bool EditingControlValueChanged
+        {
+            get { return valueChanged; }
+            set { valueChanged = value; }
+        }
+        public Cursor EditingPanelCursor => base.Cursor;
+        protected override void OnValueChanged(EventArgs eventargs)
+        {
+            valueChanged = true;
+            this.EditingControlDataGridView.NotifyCurrentCellDirty(true);
+            base.OnValueChanged(eventargs);
+        }
     }
 }
