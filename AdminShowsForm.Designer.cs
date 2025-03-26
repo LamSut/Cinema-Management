@@ -59,7 +59,6 @@
             this.label1.Size = new System.Drawing.Size(214, 32);
             this.label1.TabIndex = 1;
             this.label1.Text = "List of Showtimes";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnAddShow
             // 
@@ -101,14 +100,12 @@
             this.dataGridViewShows.ShowRowErrors = false;
             this.dataGridViewShows.Size = new System.Drawing.Size(712, 367);
             this.dataGridViewShows.TabIndex = 5;
-            this.dataGridViewShows.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewShows_CellContentClick);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
-            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // dateTimePickerShowTime
             // 
@@ -120,7 +117,6 @@
             this.dateTimePickerShowTime.Size = new System.Drawing.Size(194, 29);
             this.dateTimePickerShowTime.TabIndex = 7;
             this.dateTimePickerShowTime.Value = new System.DateTime(2025, 3, 25, 20, 6, 51, 0);
-            this.dateTimePickerShowTime.ValueChanged += new System.EventHandler(this.dateTimePickerShowTime_ValueChanged);
             // 
             // comboBoxMovieTitle
             // 
@@ -133,7 +129,6 @@
             this.comboBoxMovieTitle.Name = "comboBoxMovieTitle";
             this.comboBoxMovieTitle.Size = new System.Drawing.Size(194, 29);
             this.comboBoxMovieTitle.TabIndex = 8;
-            this.comboBoxMovieTitle.SelectedIndexChanged += new System.EventHandler(this.comboBoxMovieID_SelectedIndexChanged);
             // 
             // txtPrice
             // 
@@ -143,7 +138,6 @@
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(194, 29);
             this.txtPrice.TabIndex = 9;
-            this.txtPrice.TextChanged += new System.EventHandler(this.txtPrice_TextChanged);
             // 
             // txtShowID
             // 
