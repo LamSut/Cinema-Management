@@ -52,11 +52,11 @@
     <Compile Include="AdminDashboardForm.Designer.cs">
       <DependentUpon>AdminDashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminFilmsForm.cs">
+    <Compile Include="AdminMoviesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminFilmsForm.Designer.cs">
-      <DependentUpon>AdminFilmsForm.cs</DependentUpon>
+    <Compile Include="AdminMoviesForm.Designer.cs">
+      <DependentUpon>AdminMoviesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AdminMainForm.cs">
       <SubType>Form</SubType>
@@ -94,8 +94,8 @@
     <EmbeddedResource Include="AdminDashboardForm.resx">
       <DependentUpon>AdminDashboardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminFilmsForm.resx">
-      <DependentUpon>AdminFilmsForm.cs</DependentUpon>
+    <EmbeddedResource Include="AdminMoviesForm.resx">
+      <DependentUpon>AdminMoviesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminMainForm.resx">
       <DependentUpon>AdminMainForm.cs</DependentUpon>

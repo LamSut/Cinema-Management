@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace Cinema
 {
-    public partial class AdminFilmsForm : Form
+    public partial class AdminMoviesForm : Form
     {
         private string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=CinemaDB;Trusted_Connection=True;";
         private Dictionary<string, object> originalCellValues = new Dictionary<string, object>();
 
-        public AdminFilmsForm()
+        public AdminMoviesForm()
         {
             InitializeComponent();
             LoadMovieData();
@@ -69,7 +69,7 @@ namespace Cinema
             }
         }
 
-        private void btnAddFilm_Click(object sender, EventArgs e)
+        private void btnAddMovie_Click(object sender, EventArgs e)
         {
             string movieID = txtMovieID.Text;
             string title = txtTitle.Text.Trim();
@@ -123,7 +123,7 @@ namespace Cinema
             }
         }
 
-        private void btnDeleteFilm_Click(object sender, EventArgs e)
+        private void btnDeleteMovie_Click(object sender, EventArgs e)
         {
             if (dataGridViewMovies.SelectedRows.Count > 0)
             {
@@ -231,7 +231,7 @@ namespace Cinema
             }
         }
 
-        private void AdminFilmsForm_Load(object sender, EventArgs e)
+        private void AdminMoviesForm_Load(object sender, EventArgs e)
         {
             dataGridViewMovies.CellBeginEdit += dataGridViewMovies_CellBeginEdit;
             dataGridViewMovies.CellEndEdit += dataGridViewMovies_CellEndEdit;
@@ -259,7 +259,7 @@ namespace Cinema
             }
         }
 
-        private void btnEditFilm_Click(object sender, EventArgs e)
+        private void btnEditMovie_Click(object sender, EventArgs e)
         {
         }
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -273,8 +273,7 @@ namespace Cinema
         private void dateTimePickerRelease_ValueChanged(object sender, EventArgs e)
         {
             dateTimePickerRelease.Format = DateTimePickerFormat.Custom;
-            dateTimePickerRelease.CustomFormat = "dd/MM/yyyy HH:mm";
-            dateTimePickerRelease.ShowUpDown = true;
+            dateTimePickerRelease.CustomFormat = "MM/dd/yyyy";
         }
 
         private void txtGenre_TextChanged(object sender, EventArgs e) { }

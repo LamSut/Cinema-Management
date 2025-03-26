@@ -6,7 +6,7 @@ namespace Cinema
 {
     public partial class AdminMainForm : Form
     {
-        AdminFilmsForm filmsForm;
+        AdminMoviesForm filmsForm;
         AdminShowsForm showsForm;
         AdminDashboardForm dashboardForm;
 
@@ -42,7 +42,7 @@ namespace Cinema
         {
             if (filmsForm == null || filmsForm.IsDisposed)
             {
-                filmsForm = new AdminFilmsForm();
+                filmsForm = new AdminMoviesForm();
                 filmsForm.FormClosed += FilmsForm_FormClosed;
                 filmsForm.MdiParent = this;
                 filmsForm.Dock = DockStyle.Fill;
