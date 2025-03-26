@@ -1,6 +1,6 @@
 ﻿namespace Cinema
 {
-    partial class AdminFilmsForm
+    partial class AdminMoviesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -77,7 +77,7 @@
             this.btnAddMovie.TabIndex = 1;
             this.btnAddMovie.Text = "Add New Movie";
             this.btnAddMovie.UseVisualStyleBackColor = false;
-            this.btnAddMovie.Click += new System.EventHandler(this.btnAddFilm_Click);
+            this.btnAddMovie.Click += new System.EventHandler(this.btnAddMovie_Click);
             // 
             // btnDeleteMovie
             // 
@@ -91,7 +91,7 @@
             this.btnDeleteMovie.TabIndex = 3;
             this.btnDeleteMovie.Text = "Delete This Movie";
             this.btnDeleteMovie.UseVisualStyleBackColor = false;
-            this.btnDeleteMovie.Click += new System.EventHandler(this.btnDeleteFilm_Click);
+            this.btnDeleteMovie.Click += new System.EventHandler(this.btnDeleteMovie_Click);
             // 
             // dataGridViewMovies
             // 
@@ -123,6 +123,11 @@
             this.numericDuration.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold);
             this.numericDuration.Location = new System.Drawing.Point(113, 178);
             this.numericDuration.Margin = new System.Windows.Forms.Padding(2);
+            this.numericDuration.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.numericDuration.Name = "numericDuration";
             this.numericDuration.Size = new System.Drawing.Size(94, 29);
             this.numericDuration.TabIndex = 6;
@@ -300,7 +305,7 @@
             this.label2.TabIndex = 21;
             this.label2.Text = "Movies Management";
             // 
-            // AdminFilmsForm
+            // AdminMoviesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -329,9 +334,9 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "AdminFilmsForm";
-            this.Text = "AdminFilmsForm";
-            this.Load += new System.EventHandler(this.AdminFilmsForm_Load);
+            this.Name = "AdminMoviesForm";
+            this.Text = "AdminMoviesForm";
+            this.Load += new System.EventHandler(this.AdminMoviesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDuration)).EndInit();
             this.ResumeLayout(false);
