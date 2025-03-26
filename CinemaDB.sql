@@ -16,7 +16,7 @@ GO
 
 CREATE TABLE Movie (
     MovieID NVARCHAR(10) PRIMARY KEY,
-    Title NVARCHAR(100) NOT NULL,
+    Title NVARCHAR(100) UNIQUE,
     Genre NVARCHAR(50),
     Duration INT,
     Description NVARCHAR(1000),

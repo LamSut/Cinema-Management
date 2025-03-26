@@ -114,11 +114,13 @@ namespace Cinema
             string director = txtDirector.Text.Trim();
             DateTime releaseDate = dateTimePickerRelease.Value;
             string posterURL = txtPosterURL.Text.Trim();
+
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(genre))
             {
                 MessageBox.Show("Please fill in all required fields!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
                 try
@@ -136,6 +138,7 @@ namespace Cinema
                     cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
                     cmd.Parameters.AddWithValue("@PosterURL", posterURL);
                     int rowsAffected = cmd.ExecuteNonQuery();
+
                     if (rowsAffected > 0)
                     {
                         MessageBox.Show("Movie added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -147,12 +150,25 @@ namespace Cinema
                         MessageBox.Show("Failed to add movie.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 2627 || ex.Number == 2601)  // ERROR CODE OF UNIQUE
+                    {
+                        MessageBox.Show("A movie with this title already exists. Please choose a different title.",
+                                        "Duplicate Title", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                    else
+                    {
+                        MessageBox.Show("SQL Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Unexpected Error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
+
 
         private void btnDeleteMovie_Click(object sender, EventArgs e)
         {
