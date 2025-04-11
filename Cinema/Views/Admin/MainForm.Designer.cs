@@ -1,4 +1,4 @@
-﻿namespace Cinema.Views
+﻿namespace Cinema.Views.Admin
 {
     partial class MainForm
     {

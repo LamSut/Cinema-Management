@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 using Cinema.Controllers.Admin;
 
-namespace Cinema.Views
+namespace Cinema.Views.Admin
 {
     public partial class MainForm : Form
     {

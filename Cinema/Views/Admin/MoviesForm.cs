@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using Cinema.Controllers.Admin;
+using Cinema.Models;
 
-namespace Cinema.Views
+namespace Cinema.Views.Admin
 {
     public partial class MoviesForm : Form
     {
@@ -28,7 +28,13 @@ namespace Cinema.Views
 
         private void LoadMovieData()
         {
-            DataTable dt = MovieController.GetAllMovies();
+            // Lấy danh sách Movie từ controller
+            List<Movie> movies = MovieController.GetAllMoviesList();
+
+            // Binding list vào DataGridView thông qua BindingSource
+            BindingSource source = new BindingSource();
+            source.DataSource = movies;
+
             dataGridViewMovies.AutoGenerateColumns = false;
             dataGridViewMovies.Columns.Clear();
 
@@ -74,7 +80,7 @@ namespace Cinema.Views
             colStatus.Name = "Status";
             dataGridViewMovies.Columns.Add(colStatus);
 
-            dataGridViewMovies.DataSource = dt;
+            dataGridViewMovies.DataSource = source;
             dataGridViewMovies.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewMovies.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             dataGridViewMovies.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -100,22 +106,25 @@ namespace Cinema.Views
 
         private void btnAddMovie_Click(object sender, EventArgs e)
         {
-            string movieID = txtMovieID.Text;
-            string title = txtTitle.Text.Trim();
-            string genre = txtGenre.Text.Trim();
-            int duration = (int)numericDuration.Value;
-            string description = txtDescription.Text.Trim();
-            string director = txtDirector.Text.Trim();
-            DateTime releaseDate = dateTimePickerRelease.Value;
-            string posterURL = txtPosterURL.Text.Trim();
+            Movie movie = new Movie
+            {
+                MovieID = txtMovieID.Text,
+                Title = txtTitle.Text.Trim(),
+                Genre = txtGenre.Text.Trim(),
+                Duration = (int)numericDuration.Value,
+                Description = txtDescription.Text.Trim(),
+                Director = txtDirector.Text.Trim(),
+                ReleaseDate = dateTimePickerRelease.Value,
+                PosterURL = txtPosterURL.Text.Trim()
+            };
 
-            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(genre))
+            if (string.IsNullOrWhiteSpace(movie.Title) || string.IsNullOrWhiteSpace(movie.Genre))
             {
                 MessageBox.Show("Please fill in all required fields!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            if (MovieController.AddMovie(movieID, title, genre, duration, description, director, releaseDate, posterURL, out string err))
+            if (MovieController.AddMovie(movie, out string err))
             {
                 MessageBox.Show("Movie added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 LoadMovieData();
@@ -184,7 +193,8 @@ namespace Cinema.Views
                 if (columnName == "MovieID")
                     return;
                 string movieID = dataGridViewMovies.Rows[e.RowIndex].Cells["MovieID"].Value.ToString();
-                if (MovieController.UpdateMovieField(movieID, columnName, columnName == "ReleaseDate" ? (object)DateTime.Parse(newValue) : (object)newValue, out string err))
+                object valueToUpdate = columnName == "ReleaseDate" ? (object)DateTime.Parse(newValue) : newValue;
+                if (MovieController.UpdateMovieField(movieID, columnName, valueToUpdate, out string err))
                 {
                     MessageBox.Show("Movie updated successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -211,6 +221,7 @@ namespace Cinema.Views
             dateTimePickerRelease.CustomFormat = "MM/dd/yyyy";
         }
     }
+
     public class CalendarColumn : DataGridViewColumn
     {
         public CalendarColumn() : base(new CalendarCell()) { }

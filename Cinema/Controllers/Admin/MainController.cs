@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-using Cinema.Views;
+using Cinema.Views.Admin;
 
 namespace Cinema.Controllers.Admin
 {

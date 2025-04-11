@@ -1,30 +1,48 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using Cinema.Models;
 
 namespace Cinema.Controllers.Admin
 {
     public static class MovieController
     {
-        public static DataTable GetAllMovies()
+        public static List<Movie> GetAllMoviesList()
         {
-            DataTable dt = new DataTable();
+            List<Movie> movies = new List<Movie>();
 
             if (Database.OpenConnection())
             {
-                string query = "SELECT MovieID, Title, Genre, Duration, Director, ReleaseDate, PosterURL, Status FROM Movie";
+                string query = "SELECT MovieID, Title, Genre, Duration, Description, Director, ReleaseDate, PosterURL, Status FROM Movie";
                 using (SqlCommand cmd = new SqlCommand(query, Database.con))
                 {
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                    adapter.Fill(dt);
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            movies.Add(new Movie
+                            {
+                                MovieID = reader["MovieID"].ToString(),
+                                Title = reader["Title"].ToString(),
+                                Genre = reader["Genre"].ToString(),
+                                Duration = Convert.ToInt32(reader["Duration"]),
+                                Description = reader["Description"].ToString(),
+                                Director = reader["Director"].ToString(),
+                                ReleaseDate = Convert.ToDateTime(reader["ReleaseDate"]),
+                                PosterURL = reader["PosterURL"].ToString(),
+                                Status = reader["Status"].ToString()
+                            });
+                        }
+                    }
                 }
                 Database.CloseConnection();
             }
 
-            return dt;
+            return movies;
         }
 
-        public static bool AddMovie(string movieID, string title, string genre, int duration, string description, string director, DateTime releaseDate, string posterURL, out string errorMessage)
+        public static bool AddMovie(Movie movie, out string errorMessage)
         {
             errorMessage = string.Empty;
             bool result = false;
@@ -35,14 +53,14 @@ namespace Cinema.Controllers.Admin
                                "VALUES (@MovieID, @Title, @Genre, @Duration, @Description, @Director, @ReleaseDate, @PosterURL)";
                 using (SqlCommand cmd = new SqlCommand(query, Database.con))
                 {
-                    cmd.Parameters.AddWithValue("@MovieID", movieID);
-                    cmd.Parameters.AddWithValue("@Title", title);
-                    cmd.Parameters.AddWithValue("@Genre", genre);
-                    cmd.Parameters.AddWithValue("@Duration", duration);
-                    cmd.Parameters.AddWithValue("@Description", description);
-                    cmd.Parameters.AddWithValue("@Director", director);
-                    cmd.Parameters.AddWithValue("@ReleaseDate", releaseDate);
-                    cmd.Parameters.AddWithValue("@PosterURL", posterURL);
+                    cmd.Parameters.AddWithValue("@MovieID", movie.MovieID);
+                    cmd.Parameters.AddWithValue("@Title", movie.Title);
+                    cmd.Parameters.AddWithValue("@Genre", movie.Genre);
+                    cmd.Parameters.AddWithValue("@Duration", movie.Duration);
+                    cmd.Parameters.AddWithValue("@Description", movie.Description);
+                    cmd.Parameters.AddWithValue("@Director", movie.Director);
+                    cmd.Parameters.AddWithValue("@ReleaseDate", movie.ReleaseDate);
+                    cmd.Parameters.AddWithValue("@PosterURL", movie.PosterURL);
                     try
                     {
                         result = cmd.ExecuteNonQuery() > 0;

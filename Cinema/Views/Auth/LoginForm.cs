@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 using Cinema.Controllers.Auth;
-using Cinema.Views;
+using Cinema.Models;
+using Cinema.Views.Admin;
 
-namespace Cinema.Views
+namespace Cinema.Views.Auth
 {
     public partial class LoginForm : Form
     {
@@ -18,21 +18,24 @@ namespace Cinema.Views
             string empID = txtEmpID.Text.Trim();
             string password = txtPass.Text.Trim();
 
-            int role = AuthController.GetUserRole(empID, password);
+            Employee employee = AuthController.Authenticate(empID, password);
 
-            if (role == 0)
+            if (employee != null)
             {
-                MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                BookingForm bookingForm = new BookingForm();
-                bookingForm.Show();
-                this.Hide();
-            }
-            else if (role == 1)
-            {
-                MessageBox.Show("Admin login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                MainForm adminForm = new MainForm();
-                adminForm.Show();
-                this.Hide();
+                if (employee.Role == 0)
+                {
+                    MessageBox.Show("Login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    BookingForm bookingForm = new BookingForm();
+                    bookingForm.Show();
+                    this.Hide();
+                }
+                else if (employee.Role == 1)
+                {
+                    MessageBox.Show("Admin login successful!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MainForm adminForm = new MainForm();
+                    adminForm.Show();
+                    this.Hide();
+                }
             }
             else
             {

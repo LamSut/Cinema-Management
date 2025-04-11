@@ -1,4 +1,4 @@
-﻿namespace Cinema.Views
+﻿namespace Cinema.Views.Admin
 {
     partial class ShowsForm
     {
@@ -71,7 +71,6 @@
             this.btnAddShow.TabIndex = 2;
             this.btnAddShow.Text = "Add New Show";
             this.btnAddShow.UseVisualStyleBackColor = false;
-            this.btnAddShow.Click += new System.EventHandler(this.btnAddFilm_Click);
             // 
             // btnDeleteShow
             // 
@@ -85,7 +84,6 @@
             this.btnDeleteShow.TabIndex = 4;
             this.btnDeleteShow.Text = "Delete This Show";
             this.btnDeleteShow.UseVisualStyleBackColor = false;
-            this.btnDeleteShow.Click += new System.EventHandler(this.btnDeleteFilm_Click);
             // 
             // dataGridViewShows
             // 
@@ -257,7 +255,6 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AdminShowsForm";
             this.Text = "AdminShowsForm";
-            this.Load += new System.EventHandler(this.AdminShowsForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShows)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

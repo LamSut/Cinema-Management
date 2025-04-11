@@ -51,6 +51,11 @@
     <Compile Include="Controllers\Admin\MoviesController.cs" />
     <Compile Include="Controllers\Admin\ShowsController.cs" />
     <Compile Include="Controllers\Auth\LoginController.cs" />
+    <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\Employee.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Show.cs" />
+    <Compile Include="Models\Theater.cs" />
     <Compile Include="Views\Admin\DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
