@@ -46,64 +46,64 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminDashboardForm.cs">
+    <Compile Include="Views\Admin\AdminDashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminDashboardForm.Designer.cs">
+    <Compile Include="Views\Admin\AdminDashboardForm.Designer.cs">
       <DependentUpon>AdminDashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminMoviesForm.cs">
+    <Compile Include="Views\Admin\AdminMoviesForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminMoviesForm.Designer.cs">
+    <Compile Include="Views\Admin\AdminMoviesForm.Designer.cs">
       <DependentUpon>AdminMoviesForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminMainForm.cs">
+    <Compile Include="Views\Admin\AdminMainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminMainForm.Designer.cs">
+    <Compile Include="Views\Admin\AdminMainForm.Designer.cs">
       <DependentUpon>AdminMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminShowsForm.cs">
+    <Compile Include="Views\Admin\AdminShowsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="AdminShowsForm.Designer.cs">
+    <Compile Include="Views\Admin\AdminShowsForm.Designer.cs">
       <DependentUpon>AdminShowsForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Database.cs" />
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Views\Auth\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Views\Auth\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="BookingForm.cs">
+    <Compile Include="Views\Staff\BookingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BookingForm.Designer.cs">
+    <Compile Include="Views\Staff\BookingForm.Designer.cs">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TicketForm.cs">
+    <Compile Include="Views\Staff\TicketForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TicketForm.Designer.cs">
+    <Compile Include="Views\Staff\TicketForm.Designer.cs">
       <DependentUpon>TicketForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="AdminDashboardForm.resx">
+    <EmbeddedResource Include="Views\Admin\AdminDashboardForm.resx">
       <DependentUpon>AdminDashboardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminMoviesForm.resx">
+    <EmbeddedResource Include="Views\Admin\AdminMoviesForm.resx">
       <DependentUpon>AdminMoviesForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminMainForm.resx">
+    <EmbeddedResource Include="Views\Admin\AdminMainForm.resx">
       <DependentUpon>AdminMainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AdminShowsForm.resx">
+    <EmbeddedResource Include="Views\Admin\AdminShowsForm.resx">
       <DependentUpon>AdminShowsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Views\Auth\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -117,10 +117,10 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="BookingForm.resx">
+    <EmbeddedResource Include="Views\Staff\BookingForm.resx">
       <DependentUpon>BookingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TicketForm.resx">
+    <EmbeddedResource Include="Views\Staff\TicketForm.resx">
       <DependentUpon>TicketForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include=".editorconfig" />
