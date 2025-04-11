@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Cinema
+namespace Cinema.Views.Staff
 {
     public partial class TicketForm : Form
     {

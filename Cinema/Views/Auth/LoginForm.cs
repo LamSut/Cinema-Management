@@ -3,6 +3,7 @@ using System.Windows.Forms;
 using Cinema.Controllers.Auth;
 using Cinema.Models;
 using Cinema.Views.Admin;
+using Cinema.Views.Staff;
 
 namespace Cinema.Views.Auth
 {

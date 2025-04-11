@@ -1,4 +1,4 @@
-﻿namespace Cinema
+﻿namespace Cinema.Views.Staff
 {
     partial class BookingForm
     {

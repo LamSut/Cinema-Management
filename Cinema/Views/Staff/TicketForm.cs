@@ -1,83 +1,47 @@
-﻿using System.Data.SqlClient;
-using System.Data;
+﻿using System;
 using System.Windows.Forms;
-using System;
+using Cinema.Controllers.Staff;
+using Cinema.Models;
 
-namespace Cinema
+namespace Cinema.Views.Staff
 {
     public partial class TicketForm : Form
     {
-        private string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=CinemaDB;Trusted_Connection=True;";
-        private string bookingID;
+        private readonly TicketController _controller;
 
         public TicketForm(string bookingID)
         {
             InitializeComponent();
-            this.bookingID = bookingID;
-            LoadTicketData(bookingID);
+            _controller = new TicketController();
+            Load += (s, e) => LoadTicketData(bookingID);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Close();
         }
 
         private void LoadTicketData(string bookingID)
         {
-            using (SqlConnection conn = new SqlConnection(connectionString))
+            Ticket info = _controller.GetTicketInfo(bookingID);
+
+            if (info == null)
             {
-                string query = @"
-SELECT 
-    sb.BookingID, 
-    STRING_AGG(CONCAT(s.SeatRow, s.SeatNumber), ', ') AS Seats,
-    sc.CategoryName AS SeatCategory,
-    m.Title AS MovieTitle, 
-    sh.ShowTime, 
-    t.TheaterName,
-    SUM(sb.Price) AS TotalPrice  -- Tổng tiền vé
-FROM SeatBooking sb
-JOIN Seat s ON sb.SeatID = s.SeatID
-JOIN SeatCategory sc ON s.CategoryID = sc.CategoryID
-JOIN Booking b ON sb.BookingID = b.BookingID
-JOIN Show sh ON b.ShowID = sh.ShowID
-JOIN Movie m ON sh.MovieID = m.MovieID
-JOIN Theater t ON sh.TheaterID = t.TheaterID
-WHERE sb.BookingID = @BookingID
-GROUP BY sb.BookingID, sc.CategoryName, m.Title, sh.ShowTime, t.TheaterName";
-
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    cmd.Parameters.Add("@BookingID", SqlDbType.NVarChar, 15).Value = bookingID;
-
-                    conn.Open();
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read())
-                        {
-                            lblBookingID.Text = $"Booking ID: {reader["BookingID"]}";
-                            lblShow.Text = $"Movie: {reader["MovieTitle"]}";
-                            lblTheater.Text = $"Theater: {reader["TheaterName"]}";
-                            lblTime.Text = $"Showtime: {Convert.ToDateTime(reader["ShowTime"]).ToString("dd/MM/yyyy HH:mm")}";
-                            lblSeats.Text = $"Seats: {reader["Seats"]} ({reader["SeatCategory"]})";
-
-                            // Hiển thị tổng tiền vé
-                            decimal totalPrice = reader["TotalPrice"] != DBNull.Value ? Convert.ToDecimal(reader["TotalPrice"]) : 0;
-                            lblTotal.Text = $"Total Price: {totalPrice:C}"; // Hiển thị theo định dạng tiền tệ
-                        }
-                        else
-                        {
-                            MessageBox.Show("Not found tickets!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                }
+                MessageBox.Show("Not found tickets!", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
             }
-        }
 
+            lblBookingID.Text = $"Booking ID: {info.BookingID}";
+            lblShow.Text = $"Movie: {info.MovieTitle}";
+            lblTheater.Text = $"Theater: {info.TheaterName}";
+            lblTime.Text = $"Showtime: {info.ShowTime:dd/MM/yyyy HH:mm}";
+            lblSeats.Text = $"Seats: {info.Seats} ({info.SeatCategory})";
+            lblTotal.Text = $"Total Price: {info.TotalPrice:C}";
+        }
 
         private void TicketForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            this.Hide();
+            Hide();
         }
     }
 }
-

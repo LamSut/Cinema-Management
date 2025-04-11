@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Cinema
+namespace Cinema.Views.Staff
 {
     public partial class BookingForm : Form
     {
