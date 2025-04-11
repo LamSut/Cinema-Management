@@ -1,6 +1,6 @@
-﻿namespace Cinema
+﻿namespace Cinema.Views
 {
-    partial class AdminMainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdminMainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pBTitle = new System.Windows.Forms.PictureBox();
@@ -105,7 +105,6 @@
             this.btnDashboard.TabIndex = 2;
             this.btnDashboard.Text = " Dash board";
             this.btnDashboard.UseVisualStyleBackColor = false;
-            this.btnDashboard.Click += new System.EventHandler(this.btnDashboard_Click);
             // 
             // btnMovie
             // 
@@ -120,7 +119,6 @@
             this.btnMovie.TabIndex = 3;
             this.btnMovie.Text = "Movie";
             this.btnMovie.UseVisualStyleBackColor = false;
-            this.btnMovie.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnShow
             // 
@@ -135,7 +133,6 @@
             this.btnShow.TabIndex = 4;
             this.btnShow.Text = "Show";
             this.btnShow.UseVisualStyleBackColor = false;
-            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 
             // btnExit
             // 
@@ -151,7 +148,6 @@
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
-            this.btnExit.Click += new System.EventHandler(this.BtnExit_Click);
             // 
             // AdminMainForm
             // 

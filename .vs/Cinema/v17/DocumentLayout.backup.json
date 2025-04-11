@@ -3,32 +3,12 @@
   "WorkspaceRootPath": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\CinemaDB.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaDB.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}"
+      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\views\\auth\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\auth\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AdminMoviesForm.Designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\adminshowsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:adminshowsform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminShowsForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AdminShowsForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:AdminMoviesForm.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\adminmoviesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:adminmoviesform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\CinemaDB.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CinemaDB.sql||{CC5D8DF0-88F4-4BB2-9DBB-B48CEE65C30A}|CodeFrame"
+      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\controllers\\auth\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\controllers\\auth\\logincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,71 +26,29 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CinemaDB.sql ",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\CinemaDB.sql",
-              "RelativeDocumentMoniker": "CinemaDB.sql",
-              "ToolTip": "CinemaDB.sql ",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000826|",
-              "WhenOpened": "2025-03-26T14:13:31.61Z",
+              "DocumentIndex": 1,
+              "Title": "LoginController.cs",
+              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Controllers\\Auth\\LoginController.cs",
+              "RelativeDocumentMoniker": "Cinema\\Controllers\\Auth\\LoginController.cs",
+              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Controllers\\Auth\\LoginController.cs",
+              "RelativeToolTip": "Cinema\\Controllers\\Auth\\LoginController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T06:27:52.934Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AdminMoviesForm.Designer.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.Designer.cs",
-              "RelativeDocumentMoniker": "AdminMoviesForm.Designer.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.Designer.cs",
-              "RelativeToolTip": "AdminMoviesForm.Designer.cs",
-              "ViewState": "AgIAAH4AAAAAAAAAAAAcwI0AAAAAAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "LoginForm.cs",
+              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Auth\\LoginForm.cs",
+              "RelativeDocumentMoniker": "Cinema\\Views\\Auth\\LoginForm.cs",
+              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Auth\\LoginForm.cs",
+              "RelativeToolTip": "Cinema\\Views\\Auth\\LoginForm.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T14:09:57.566Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AdminShowsForm.cs [Design]",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminShowsForm.cs",
-              "RelativeDocumentMoniker": "AdminShowsForm.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminShowsForm.cs [Design]",
-              "RelativeToolTip": "AdminShowsForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T14:00:39.977Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AdminShowsForm.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminShowsForm.cs",
-              "RelativeDocumentMoniker": "AdminShowsForm.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminShowsForm.cs",
-              "RelativeToolTip": "AdminShowsForm.cs",
-              "ViewState": "AgIAAEUBAAAAAAAAAAAgwE4BAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T13:25:43.922Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "AdminMoviesForm.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.cs",
-              "RelativeDocumentMoniker": "AdminMoviesForm.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.cs",
-              "RelativeToolTip": "AdminMoviesForm.cs",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T12:34:44.002Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "AdminMoviesForm.cs [Design]",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.cs",
-              "RelativeDocumentMoniker": "AdminMoviesForm.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\AdminMoviesForm.cs [Design]",
-              "RelativeToolTip": "AdminMoviesForm.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T13:03:49.841Z"
+              "WhenOpened": "2025-04-11T06:27:13.985Z",
+              "EditorCaption": ""
             }
           ]
         }

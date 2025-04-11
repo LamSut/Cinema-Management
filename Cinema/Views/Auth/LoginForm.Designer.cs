@@ -1,4 +1,4 @@
-﻿namespace Cinema
+﻿namespace Cinema.Views
 {
     partial class LoginForm
     {

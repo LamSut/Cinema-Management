@@ -1,6 +1,6 @@
-﻿namespace Cinema
+﻿namespace Cinema.Views
 {
-    partial class AdminDashboardForm
+    partial class DashboardForm
     {
         /// <summary>
         /// Required designer variable.

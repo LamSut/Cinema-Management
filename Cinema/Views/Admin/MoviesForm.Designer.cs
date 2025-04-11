@@ -1,6 +1,6 @@
-﻿namespace Cinema
+﻿namespace Cinema.Views
 {
-    partial class AdminMoviesForm
+    partial class MoviesForm
     {
         /// <summary>
         /// Required designer variable.
@@ -167,7 +167,6 @@
             this.dateTimePickerRelease.Size = new System.Drawing.Size(286, 29);
             this.dateTimePickerRelease.TabIndex = 12;
             this.dateTimePickerRelease.Value = new System.DateTime(2025, 3, 25, 20, 6, 57, 0);
-            this.dateTimePickerRelease.ValueChanged += new System.EventHandler(this.dateTimePickerRelease_ValueChanged);
             // 
             // lblMovieID
             // 
@@ -306,7 +305,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AdminMoviesForm";
             this.Text = "AdminMoviesForm";
-            this.Load += new System.EventHandler(this.AdminMoviesForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewMovies)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericDuration)).EndInit();
             this.ResumeLayout(false);
