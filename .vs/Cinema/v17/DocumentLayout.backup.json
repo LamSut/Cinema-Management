@@ -3,32 +3,16 @@
   "WorkspaceRootPath": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\views\\auth\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\auth\\loginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\controllers\\staff\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\controllers\\staff\\ticketcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\views\\staff\\ticketform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\staff\\ticketform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\database.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\views\\staff\\bookingform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\staff\\bookingform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\views\\staff\\bookingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\staff\\bookingform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\views\\staff\\ticketform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\staff\\ticketform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\cinema\\views\\staff\\bookingform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\views\\staff\\bookingform.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|f:\\dai-hoc\\4-hk2\\pt-ung-dung-.net\\cinema\\cinema\\controllers\\staff\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70D108C8-8FD5-45A9-8948-C2164253DB7D}|Cinema\\Cinema.csproj|solutionrelative:cinema\\controllers\\staff\\bookingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -46,93 +30,41 @@
             },
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BookingController.cs",
+              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Controllers\\Staff\\BookingController.cs",
+              "RelativeDocumentMoniker": "Cinema\\Controllers\\Staff\\BookingController.cs",
+              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Controllers\\Staff\\BookingController.cs",
+              "RelativeToolTip": "Cinema\\Controllers\\Staff\\BookingController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-11T11:26:20.182Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "LoginForm.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Auth\\LoginForm.cs",
-              "RelativeDocumentMoniker": "Cinema\\Views\\Auth\\LoginForm.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Auth\\LoginForm.cs",
-              "RelativeToolTip": "Cinema\\Views\\Auth\\LoginForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAZAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T08:58:09.528Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Database.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Database.cs",
-              "RelativeDocumentMoniker": "Cinema\\Database.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Database.cs",
-              "RelativeToolTip": "Cinema\\Database.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAYwCgAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T08:57:21.769Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "BookingForm.cs",
               "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\BookingForm.cs",
               "RelativeDocumentMoniker": "Cinema\\Views\\Staff\\BookingForm.cs",
               "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\BookingForm.cs",
               "RelativeToolTip": "Cinema\\Views\\Staff\\BookingForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAAA8AAABpAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-11T08:53:14.191Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 1,
               "Title": "BookingForm.Designer.cs",
               "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\BookingForm.Designer.cs",
               "RelativeDocumentMoniker": "Cinema\\Views\\Staff\\BookingForm.Designer.cs",
               "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\BookingForm.Designer.cs",
               "RelativeToolTip": "Cinema\\Views\\Staff\\BookingForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAyAAAAAAAAAA==",
+              "ViewState": "AgIAAN0BAAAAAAAAAAAgwOoBAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-04-11T08:52:56.19Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "TicketForm.Designer.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\TicketForm.Designer.cs",
-              "RelativeDocumentMoniker": "Cinema\\Views\\Staff\\TicketForm.Designer.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\TicketForm.Designer.cs",
-              "RelativeToolTip": "Cinema\\Views\\Staff\\TicketForm.Designer.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAcAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T08:52:40.477Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "TicketController.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Controllers\\Staff\\TicketController.cs",
-              "RelativeDocumentMoniker": "Cinema\\Controllers\\Staff\\TicketController.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Controllers\\Staff\\TicketController.cs",
-              "RelativeToolTip": "Cinema\\Controllers\\Staff\\TicketController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAqwAkAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T08:56:27.087Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TicketForm.cs",
-              "DocumentMoniker": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\TicketForm.cs",
-              "RelativeDocumentMoniker": "Cinema\\Views\\Staff\\TicketForm.cs",
-              "ToolTip": "F:\\Dai-Hoc\\4-hk2\\PT-Ung-Dung-.NET\\Cinema\\Cinema\\Views\\Staff\\TicketForm.cs",
-              "RelativeToolTip": "Cinema\\Views\\Staff\\TicketForm.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAASAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-11T08:52:23.585Z",
               "EditorCaption": ""
             }
           ]
